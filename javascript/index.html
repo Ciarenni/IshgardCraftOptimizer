@@ -1,54 +1,51 @@
 <!DOCTYPE HTML>
 <html>
-  <link href="index.css" rel=stylesheet>
-<style>
-</style>
+  <link href="css/index.css" rel=stylesheet>
 <body>
-
-  <!-- <div id="materials-form-div"> -->
-    <div id="materals-div" class="materials-div">
-      <label for="lvl80Logs" id="lvl80LogsLabel" class="materials-label">Logs</label>
-      <input type="text" id="lvl80Logs" class="materials-input" placeholder="Logs">
-      
-      <label for="lvl80Wheat" class="materials-label">Wheat</label>
-      <input type="text" id="lvl80Wheat" class="materials-input" placeholder="Wheat">
-      
-      <label for="lvl80Bolls" class="materials-label">Bolls</label>
-      <input type="text" id="lvl80Bolls" class="materials-input" placeholder="Bolls">
-      
-      <label for="lvl80Resin" class="materials-label">Resin</label>
-      <input type="text" id="lvl80Resin" class="materials-input" placeholder="Resin">
-      
-      <label for="lvl80Tortoises" class="materials-label">Tortoises</label>
-      <input type="text" id="lvl80Tortoises" class="materials-input" placeholder="Tortoises">
-      
-      <label for="lvl80Bluespirit" class="materials-label">Bluespirit</label>
-      <input type="text" id="lvl80Bluespirit" class="materials-input" placeholder="Bluespirit">
-      
-      <label for="lvl80Gold" class="materials-label">Gold</label>
-      <input type="text" id="lvl80Gold" class="materials-input" placeholder="Gold">
-      
-      <label for="lvl80Sand" class="materials-label">Sand</label>
-      <input type="text" id="lvl80Sand" class="materials-input" placeholder="Sand">
-      
-      <label for="lvl80Water" class="materials-label">Water</label>
-      <input type="text" id="lvl80Water" class="materials-input" placeholder="Water">
-      
-      <label for="lvl80Salt" class="materials-label">Salt</label>
-      <input type="text" id="lvl80Salt" class="materials-input" placeholder="Salt">
-      
-      <input type="button" id="resetButton" value="Reset">
-      <input type="button" id="calculateButton" value="Calculate!">
-    </div>
-    <br>
-    <div id="errorTextAreaDiv" class="error-div">
-      <textarea id="errorTextArea" class="info-text-area" contenteditable="false" rows="10" cols="60"></textarea>
-    </div>
-    <br>
-    <div class="results-div">
-      <!-- I set the rows for this text area to 10, because it's a maximum of 8 crafters (all of them), plus 2 rows for the extra text -->
-      <textarea id="resultsTextarea" class="info-text-area" contenteditable="false" rows="10" cols="35"></textarea>
-    </div>
+  <h1 class="header">Ishgard Craft Optimizer</h1>
+  <div id="materals-div" class="materials-div">
+    <label for="lvl80Logs" id="lvl80LogsLabel" class="materials-label">Logs</label>
+    <input type="text" id="lvl80Logs" class="materials-input" placeholder="Logs">
+    
+    <label for="lvl80Wheat" class="materials-label">Wheat</label>
+    <input type="text" id="lvl80Wheat" class="materials-input" placeholder="Wheat">
+    
+    <label for="lvl80Bolls" class="materials-label">Bolls</label>
+    <input type="text" id="lvl80Bolls" class="materials-input" placeholder="Bolls">
+    
+    <label for="lvl80Resin" class="materials-label">Resin</label>
+    <input type="text" id="lvl80Resin" class="materials-input" placeholder="Resin">
+    
+    <label for="lvl80Tortoises" class="materials-label">Tortoises</label>
+    <input type="text" id="lvl80Tortoises" class="materials-input" placeholder="Tortoises">
+    
+    <label for="lvl80Bluespirit" class="materials-label">Bluespirit</label>
+    <input type="text" id="lvl80Bluespirit" class="materials-input" placeholder="Bluespirit">
+    
+    <label for="lvl80Gold" class="materials-label">Gold</label>
+    <input type="text" id="lvl80Gold" class="materials-input" placeholder="Gold">
+    
+    <label for="lvl80Sand" class="materials-label">Sand</label>
+    <input type="text" id="lvl80Sand" class="materials-input" placeholder="Sand">
+    
+    <label for="lvl80Water" class="materials-label">Water</label>
+    <input type="text" id="lvl80Water" class="materials-input" placeholder="Water">
+    
+    <label for="lvl80Salt" class="materials-label">Salt</label>
+    <input type="text" id="lvl80Salt" class="materials-input" placeholder="Salt">
+    
+    <input type="button" id="resetButton" value="Reset">
+    <input type="button" id="calculateButton" value="Calculate!">
+  </div>
+  <br>
+  <div id="errorTextAreaDiv" class="error-div">
+    <textarea id="errorTextArea" class="info-text-area" readonly rows="10" cols="60"></textarea>
+  </div>
+  <br>
+  <div class="results-div">
+    <!-- I set the rows for this text area to 10, because it's a maximum of 8 crafters (all of them), plus 2 rows for the extra text -->
+    <textarea id="resultsTextarea" class="info-text-area" readonly rows="10" cols="35"></textarea>
+  </div>
 
   <script src="js/ishgard_v1.js"></script>
 </body>
