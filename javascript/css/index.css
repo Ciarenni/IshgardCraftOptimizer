@@ -1,8 +1,26 @@
+.crafter-use-div {
+  margin: 0 auto;
+  width: max-content;
+  padding: 5px;
+  border-radius: 8px 8px;
+  display: grid;
+  grid-template-rows: max-content max-content;
+  column-gap: 5px;
+  font-weight: bold;
+  background-color: rgb(133, 133, 133);
+}
+
+.individual-crafter-use-div {
+  padding: 0px 5px 0px 0px;
+  background-color: rgb(185, 183, 183);
+  border: 10px black;
+  border-radius: 8px 8px;
+}
+
 .materials-div {
     text-align: right;
     width: 100%;
     display: grid;
-    grid-template-columns: max-content max-content;
     column-gap: 5px;
     justify-content: center;
   }

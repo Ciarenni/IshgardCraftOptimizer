@@ -2,40 +2,110 @@
 <html>
   <link href="css/index.css" rel=stylesheet>
 <body>
-  <h1 class="header">Ishgard Craft Optimizer</h1> 
-  <div id="materals-div" class="materials-div">
-    <label for="lvl80Logs" id="lvl80LogsLabel" class="materials-label">Logs</label>
-    <input type="text" id="lvl80Logs" class="materials-input" placeholder="Logs">
+  <h1 class="header">Ishgard Craft Optimizer</h1>
+  <div style="width: 100%;">
+
+    <div id="crafter-use-div" class="crafter-use-div">
+      <div style="grid-column: span 8; text-align: center;">
+        <label>Crafters to use (doesn't work yet, uses all)</label>
+      </div>
+      <div class="individual-crafter-use-div">
+        <input type="checkbox" id="checkboxUseCRP" checked>
+        <label for="checkboxUseCRP" id="checkboxUseCRPLabel">CRP</label>
+      </div>
+      
+      <div class="individual-crafter-use-div">
+        <input type="checkbox" id="checkboxUseBSM" checked>
+        <label for="checkboxUseBSM" id="checkboxUseBSMLabel">BSM</label>
+      </div>
+      
+      <div class="individual-crafter-use-div">
+        <input type="checkbox" id="checkboxUseARM" checked>
+        <label for="checkboxUseARM" id="checkboxUseARMLabel">ARM</label>
+      </div>
+      
+      <div class="individual-crafter-use-div">
+        <input type="checkbox" id="checkboxUseGSM" checked>
+        <label for="checkboxUseGSM" id="checkboxUseGSMLabel">GSM</label>
+      </div>
+      
+      <div class="individual-crafter-use-div">
+        <input type="checkbox" id="checkboxUseLTW" checked>
+        <label for="checkboxUseLTW" id="checkboxUseLTWLabel">LTW</label>
+      </div>
+      
+      <div class="individual-crafter-use-div">
+        <input type="checkbox" id="checkboxUseWVR" checked>
+        <label for="checkboxUseWVR" id="checkboxUseWVRLabel">WVR</label>
+      </div>
+      
+      <div class="individual-crafter-use-div">
+        <input type="checkbox" id="checkboxUseALC" checked>
+        <label for="checkboxUseALC" id="checkboxUseALCLabel">ALC</label>
+      </div>
+      
+      <div class="individual-crafter-use-div">
+        <input type="checkbox" id="checkboxUseCUL" checked>
+        <label for="checkboxUseCUL" id="checkboxUseCULLabel">CUL</label>
+      </div>
+    </div>
+  </div>
+  <br>
+  <div id="materials-div" class="materials-div">
+    <div>
+      <label for="lvl80Logs" id="lvl80LogsLabel" class="materials-label">Logs</label>
+      <input type="text" id="lvl80Logs" class="materials-input" placeholder="Logs">
+    </div>
     
-    <label for="lvl80Wheat" class="materials-label">Wheat</label>
-    <input type="text" id="lvl80Wheat" class="materials-input" placeholder="Wheat">
+    <div>
+      <label for="lvl80Wheat" class="materials-label">Wheat</label>
+      <input type="text" id="lvl80Wheat" class="materials-input" placeholder="Wheat">
+    </div>
     
-    <label for="lvl80Bolls" class="materials-label">Bolls</label>
-    <input type="text" id="lvl80Bolls" class="materials-input" placeholder="Bolls">
+    <div>
+      <label for="lvl80Bolls" class="materials-label">Bolls</label>
+      <input type="text" id="lvl80Bolls" class="materials-input" placeholder="Bolls">
+    </div>
     
-    <label for="lvl80Resin" class="materials-label">Resin</label>
-    <input type="text" id="lvl80Resin" class="materials-input" placeholder="Resin">
+    <div>
+      <label for="lvl80Resin" class="materials-label">Resin</label>
+      <input type="text" id="lvl80Resin" class="materials-input" placeholder="Resin">
+    </div>
     
-    <label for="lvl80Tortoises" class="materials-label">Tortoises</label>
-    <input type="text" id="lvl80Tortoises" class="materials-input" placeholder="Tortoises">
+    <div>
+      <label for="lvl80Tortoises" class="materials-label">Tortoises</label>
+      <input type="text" id="lvl80Tortoises" class="materials-input" placeholder="Tortoises">
+    </div>
     
-    <label for="lvl80Bluespirit" class="materials-label">Bluespirit</label>
-    <input type="text" id="lvl80Bluespirit" class="materials-input" placeholder="Bluespirit">
+    <div>
+      <label for="lvl80Bluespirit" class="materials-label">Bluespirit</label>
+      <input type="text" id="lvl80Bluespirit" class="materials-input" placeholder="Bluespirit">
+    </div>
     
-    <label for="lvl80Gold" class="materials-label">Gold</label>
-    <input type="text" id="lvl80Gold" class="materials-input" placeholder="Gold">
+    <div>
+      <label for="lvl80Gold" class="materials-label">Gold</label>
+      <input type="text" id="lvl80Gold" class="materials-input" placeholder="Gold">
+    </div>
     
-    <label for="lvl80Sand" class="materials-label">Sand</label>
-    <input type="text" id="lvl80Sand" class="materials-input" placeholder="Sand">
+    <div>
+      <label for="lvl80Sand" class="materials-label">Sand</label>
+      <input type="text" id="lvl80Sand" class="materials-input" placeholder="Sand">
+    </div>
     
-    <label for="lvl80Water" class="materials-label">Water</label>
-    <input type="text" id="lvl80Water" class="materials-input" placeholder="Water">
+    <div>
+      <label for="lvl80Water" class="materials-label">Water</label>
+      <input type="text" id="lvl80Water" class="materials-input" placeholder="Water">
+    </div>
     
-    <label for="lvl80Salt" class="materials-label">Salt</label>
-    <input type="text" id="lvl80Salt" class="materials-input" placeholder="Salt">
+    <div>
+      <label for="lvl80Salt" class="materials-label">Salt</label>
+      <input type="text" id="lvl80Salt" class="materials-input" placeholder="Salt">
+    </div>
     
-    <input type="button" id="resetButton" value="Reset">
-    <input type="button" id="calculateButton" value="Calculate!">
+    <div>
+      <input type="button" id="resetButton" value="Reset">
+      <input type="button" id="calculateButton" value="Calculate!">
+    </div>
   </div>
   <br>
   <div id="errorTextAreaDiv" class="error-div">

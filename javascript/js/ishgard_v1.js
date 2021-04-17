@@ -109,7 +109,7 @@ let _lvl80CrafterMatrix = [
 ];
 let _lvl80CraftingPathDictionary = [];//stores the various possible crafting permutations, used to find crafter priority
 let _lvl80CrafterPriorityDictionary = [];//stores which crafter has what priority, higher is better
-let _userCraftingInventory = {
+let _level80UserCraftingInventory = {
 
     "Logs": 0,
     "Wheat": 0,
@@ -123,7 +123,7 @@ let _userCraftingInventory = {
     "Salt": 0
 
 };
-let _craftsAvailablePerCrafter = {
+let _level80CraftsAvailablePerCrafter = {
     "CRP": 0,
     "BSM": 0,
     "ARM": 0,
@@ -133,8 +133,8 @@ let _craftsAvailablePerCrafter = {
     "ALC": 0,
     "CUL": 0
 }
-let _optimizedCraftingPlan = [];//stores the user's calculated crafting plan
-let _optimizedCraftingPlanString = "";
+let _level80OptimizedCraftingPlan = [];//stores the user's calculated crafting plan
+let _level80OptimizedCraftingPlanString = "";
 
 class Level80CraftingPath
 {
@@ -166,6 +166,15 @@ class Level80CraftingPath
 let _resultsTextarea = document.getElementById("resultsTextarea");
 let _errorTextarea = document.getElementById("errorTextArea");
 let _errorTextareaDiv = document.getElementById("errorTextAreaDiv");
+
+let _checkboxUseCRP = document.getElementById("checkboxUseCRP");
+let _checkboxUseBSM = document.getElementById("checkboxUseBSM");
+let _checkboxUseARM = document.getElementById("checkboxUseARM");
+let _checkboxUseGSM = document.getElementById("checkboxUseGSM");
+let _checkboxUseLTW = document.getElementById("checkboxUseLTW");
+let _checkboxUseWVR = document.getElementById("checkboxUseWVR");
+let _checkboxUseALC = document.getElementById("checkboxUseALC");
+let _checkboxUseCUL = document.getElementById("checkboxUseCUL");
 
 //#endregion
 
@@ -199,7 +208,7 @@ function OnLoad()
 function Level80CalculateButtonClick()
 {
     //clear out the crafting plan
-    _optimizedCraftingPlan = [];
+    _level80OptimizedCraftingPlan = [];
 
     if(!GetAndValidateUserInput())
     {
@@ -266,18 +275,18 @@ function Level80CalculateButtonClick()
         //update the user's inventory
         for(let i = 0; i < affectedMaterials.length; i++)
         {
-            if(_userCraftingInventory[affectedMaterials[i]] < maxCrafterAndCount.maxCount)
+            if(_level80UserCraftingInventory[affectedMaterials[i]] < maxCrafterAndCount.maxCount)
             {
                 //somehow a craft is trying to use more materials than are available for the craft, throw an error
             }
             else
             {
-                _userCraftingInventory[affectedMaterials[i]] -= maxCrafterAndCount.maxCount;
+                _level80UserCraftingInventory[affectedMaterials[i]] -= maxCrafterAndCount.maxCount;
             }
         }
 
         //add to the optimized path list
-        _optimizedCraftingPlan.push(
+        _level80OptimizedCraftingPlan.push(
         {
             "Crafter": maxCrafterAndCount.maxCrafter,
             "Count": maxCrafterAndCount.maxCount
@@ -288,16 +297,16 @@ function Level80CalculateButtonClick()
         maxCrafterAndCount = GetLevel80CrafterWithHighestCount();
     }
 
-    _optimizedCraftingPlanString = "Your optimized crafting plan is:\r\n";
+    _level80OptimizedCraftingPlanString = "Your optimized crafting plan is:\r\n";
     let finalCraftCount = 0;
-    for(let i = 0; i < _optimizedCraftingPlan.length; i++)
+    for(let i = 0; i < _level80OptimizedCraftingPlan.length; i++)
     {
-        _optimizedCraftingPlanString += "Craft " + _optimizedCraftingPlan[i].Crafter + " " + _optimizedCraftingPlan[i].Count + " time(s)\r\n";
-        finalCraftCount += _optimizedCraftingPlan[i].Count;
+        _level80OptimizedCraftingPlanString += "Craft " + _level80OptimizedCraftingPlan[i].Crafter + " " + _level80OptimizedCraftingPlan[i].Count + " time(s)\r\n";
+        finalCraftCount += _level80OptimizedCraftingPlan[i].Count;
     }
-    _optimizedCraftingPlanString += "for a total of " + finalCraftCount + " craft(s)";
+    _level80OptimizedCraftingPlanString += "for a total of " + finalCraftCount + " craft(s)";
 
-    resultsTextarea.textContent = _optimizedCraftingPlanString;
+    resultsTextarea.textContent = _level80OptimizedCraftingPlanString;
 }
 
 function GetAndValidateUserInput()
@@ -306,7 +315,7 @@ function GetAndValidateUserInput()
     let textboxValue = -1;
     let errorString = "The following fields are not positive whole numbers:\r\n";
 
-    for(let mat in _userCraftingInventory)
+    for(let mat in _level80UserCraftingInventory)
     {
         //this will return the value of the text box, or NaN if it contains non-numeric characters
         textboxValue = Number(document.getElementById("lvl80" + mat).value);
@@ -322,7 +331,7 @@ function GetAndValidateUserInput()
         {
             //get the value from the appropriate textbox, i.e. lvl80Logs
             //then reduce it to the number of crafts it can be used in by dividing by how many are used per craft
-            _userCraftingInventory[mat] = parseInt(textboxValue / PER_MATERIAL_COST);//using parseInt here forces integer division
+            _level80UserCraftingInventory[mat] = parseInt(textboxValue / PER_MATERIAL_COST);//using parseInt here forces integer division
         }
     }
 
@@ -530,12 +539,12 @@ function GetMaterialsUsedByLevel80Craft(crafterRow)
 function CalculateLevel80CraftingInventoryAndCounts()
 {
     let selectedCrafterRow = [];
-    for(let crafter in _craftsAvailablePerCrafter)
+    for(let crafter in _level80CraftsAvailablePerCrafter)
     {
         //TODO: add the logic for ignoring a crafter(s) specified by the user, do so by setting the crafts available to 0
 
         //set the crafts available for the given crafter to max, so that we will for sure find a value lower than it
-        _craftsAvailablePerCrafter[crafter] = Number.MAX_SAFE_INTEGER
+        _level80CraftsAvailablePerCrafter[crafter] = Number.MAX_SAFE_INTEGER
         
         //find the crafter row for the crafter we're calculating
         selectedCrafterRow = _lvl80CrafterMatrix.find(x => x.Crafter === crafter);
@@ -544,9 +553,9 @@ function CalculateLevel80CraftingInventoryAndCounts()
         let materialsUsed = GetMaterialsUsedByLevel80Craft(selectedCrafterRow);
         for(let i = 0; i < materialsUsed.length; i++)
         {
-            if(_userCraftingInventory[materialsUsed[i]] < _craftsAvailablePerCrafter[crafter])
+            if(_level80UserCraftingInventory[materialsUsed[i]] < _level80CraftsAvailablePerCrafter[crafter])
             {
-                _craftsAvailablePerCrafter[crafter] = _userCraftingInventory[materialsUsed[i]];
+                _level80CraftsAvailablePerCrafter[crafter] = _level80UserCraftingInventory[materialsUsed[i]];
             }
         }
     }
@@ -560,19 +569,19 @@ function GetLevel80CrafterWithHighestCount()
     let tiedCrafter = [];
     let previousMaxCrafter = "";
 
-    for(let craftName in _craftsAvailablePerCrafter)
+    for(let craftName in _level80CraftsAvailablePerCrafter)
     {
         //if the count for this crafter is higher, we have a new max
-        if(_craftsAvailablePerCrafter[craftName] > maxCount)
+        if(_level80CraftsAvailablePerCrafter[craftName] > maxCount)
         {
-            maxCount = _craftsAvailablePerCrafter[craftName];
+            maxCount = _level80CraftsAvailablePerCrafter[craftName];
             maxCrafter = craftName;
             tiedCrafter = [];//if there's a new max count, any ties we had need to be discarded
             //set the previous crafter to the current max-count crafter so we can add it to the list in case of ties
             previousMaxCrafter = craftName;
         }
         //if the counts are equal, we have a tie and need to apply priority for the tiebreaker
-        else if(_craftsAvailablePerCrafter[craftName] == maxCount)
+        else if(_level80CraftsAvailablePerCrafter[craftName] == maxCount)
         {
             if(previousMaxCrafter != "")
             {
