@@ -167,14 +167,14 @@ let _resultsTextarea = document.getElementById("resultsTextarea");
 let _errorTextarea = document.getElementById("errorTextArea");
 let _errorTextareaDiv = document.getElementById("errorTextAreaDiv");
 
-let _checkboxUseCRP = document.getElementById("checkboxUseCRP");
-let _checkboxUseBSM = document.getElementById("checkboxUseBSM");
-let _checkboxUseARM = document.getElementById("checkboxUseARM");
-let _checkboxUseGSM = document.getElementById("checkboxUseGSM");
-let _checkboxUseLTW = document.getElementById("checkboxUseLTW");
-let _checkboxUseWVR = document.getElementById("checkboxUseWVR");
-let _checkboxUseALC = document.getElementById("checkboxUseALC");
-let _checkboxUseCUL = document.getElementById("checkboxUseCUL");
+// let _checkboxUseCRP = document.getElementById("checkboxUseCRP");
+// let _checkboxUseBSM = document.getElementById("checkboxUseBSM");
+// let _checkboxUseARM = document.getElementById("checkboxUseARM");
+// let _checkboxUseGSM = document.getElementById("checkboxUseGSM");
+// let _checkboxUseLTW = document.getElementById("checkboxUseLTW");
+// let _checkboxUseWVR = document.getElementById("checkboxUseWVR");
+// let _checkboxUseALC = document.getElementById("checkboxUseALC");
+// let _checkboxUseCUL = document.getElementById("checkboxUseCUL");
 
 //#endregion
 
@@ -267,11 +267,13 @@ function Level80CalculateButtonClick()
 
     CalculateLevel80CraftingInventoryAndCounts();
 
+    let usedMaterialsDebug = "";
     let maxCrafterAndCount = GetLevel80CrafterWithHighestCount();
     while(maxCrafterAndCount.maxCount > 0)
     {
         //get the list of used materials
         let affectedMaterials = GetMaterialsUsedByLevel80Craft(_lvl80CrafterMatrix.find(x => x.Crafter === maxCrafterAndCount.maxCrafter));
+        usedMaterialsDebug += "(" + maxCrafterAndCount.maxCrafter + ") - ";
         //update the user's inventory
         for(let i = 0; i < affectedMaterials.length; i++)
         {
@@ -282,6 +284,7 @@ function Level80CalculateButtonClick()
             else
             {
                 _level80UserCraftingInventory[affectedMaterials[i]] -= maxCrafterAndCount.maxCount;
+                usedMaterialsDebug += affectedMaterials[i] + " " + maxCrafterAndCount.maxCount;
             }
         }
 
@@ -291,6 +294,8 @@ function Level80CalculateButtonClick()
             "Crafter": maxCrafterAndCount.maxCrafter,
             "Count": maxCrafterAndCount.maxCount
         });
+
+        usedMaterialsDebug += "\r\n";
         //recalculate available crafts
         CalculateLevel80CraftingInventoryAndCounts();
         //get highest crafter count
@@ -306,7 +311,7 @@ function Level80CalculateButtonClick()
     }
     _level80OptimizedCraftingPlanString += "for a total of " + finalCraftCount + " craft(s)";
 
-    resultsTextarea.textContent = _level80OptimizedCraftingPlanString;
+    resultsTextarea.textContent = _level80OptimizedCraftingPlanString;// + "\r\n" + usedMaterialsDebug;
 }
 
 function GetAndValidateUserInput()
@@ -541,10 +546,16 @@ function CalculateLevel80CraftingInventoryAndCounts()
     let selectedCrafterRow = [];
     for(let crafter in _level80CraftsAvailablePerCrafter)
     {
-        //TODO: add the logic for ignoring a crafter(s) specified by the user, do so by setting the crafts available to 0
-
         //set the crafts available for the given crafter to max, so that we will for sure find a value lower than it
-        _level80CraftsAvailablePerCrafter[crafter] = Number.MAX_SAFE_INTEGER
+        if(document.getElementById("checkboxUse" + crafter).checked)
+        {
+            _level80CraftsAvailablePerCrafter[crafter] = Number.MAX_SAFE_INTEGER;
+        }
+        else
+        {
+            _level80CraftsAvailablePerCrafter[crafter] = 0;
+            continue;//if we aren't using this crafter, just say it can't crafter anything and skip it
+        }
         
         //find the crafter row for the crafter we're calculating
         selectedCrafterRow = _lvl80CrafterMatrix.find(x => x.Crafter === crafter);
