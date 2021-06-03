@@ -49,31 +49,16 @@ namespace IshgardCraftOptimizer
         ///*ALC*/ { false,false,false,false,true, false,false,false,true, true },
         ///*CUL*/ { false,true, false,false,false,false,false,false,true, true }
         //};
-
-        //static DataTable _postFirstCraftMaterialCalcTable;
-        //static DataTable _postSecondCraftMaterialCalcTable;
-        //static Dictionary<Crafters, List<CraftingPath>> _craftingPathDictionary = new Dictionary<Crafters, List<CraftingPath>>();
-        //static Dictionary<Crafters, int> _crafterPriorityDict = new Dictionary<Crafters, int>();
-        //static List<KeyValuePair<Crafters, int>> _crafterPriority = new List<KeyValuePair<Crafters, int>>();
         
         static Dictionary<Materials, int> _craftingInventory = new Dictionary<Materials, int>();
-        //static Dictionary<Crafters, int> _craftsAvailablePerCrafter = new Dictionary<Crafters, int>();
         static int _perMaterialCost = 10;
 
-        //static List<KeyValuePair<Crafters, int>> _optimizedCraftingPath = new List<KeyValuePair<Crafters, int>>();
-
-        //static List<Crafters> _recursiveCrafterList = new List<Crafters>();
-        //static Dictionary<Crafters, List<Crafters>> _recursiveCrafterCountDictionary = new Dictionary<Crafters, List<Crafters>>();
-        static Dictionary<Crafters, List<KeyValuePair<Crafters, int>>> _recursiveCrafterCountDictionary2 = new Dictionary<Crafters, List<KeyValuePair<Crafters, int>>>();
-        static List<KeyValuePair<Crafters, int>> _recursiveCrafterList2 = new List<KeyValuePair<Crafters, int>>();
+        static Dictionary<Crafters, List<KeyValuePair<Crafters, int>>> _crafterCountDictionary = new Dictionary<Crafters, List<KeyValuePair<Crafters, int>>>();
+        static List<KeyValuePair<Crafters, int>> _recursiveCrafterList = new List<KeyValuePair<Crafters, int>>();
         static List<Crafters> _allowedCrafters = new List<Crafters>() { Crafters.CRP, Crafters.BSM, Crafters.ARM, Crafters.GSM, Crafters.LTW, Crafters.WVR, Crafters.ALC, Crafters.CUL };
 
         static void Main(string[] args)
         {
-            //zhu li, do the thing!
-            //InitalCraftingMatrixCreationAndCrafterPriorityCalculation();
-            
-
             //simulated user input 1
             //_craftingInventory.Add(Materials.LOGS, 100);
             //_craftingInventory.Add(Materials.WHEAT, 20);
@@ -119,80 +104,49 @@ namespace IshgardCraftOptimizer
             }
 
             //use these lines to remove specific crafters from the crafter pool
-            //_allowedCrafters.Remove(Crafters.CRP);
+            _allowedCrafters.Remove(Crafters.CRP);
             //_allowedCrafters.Remove(Crafters.BSM);
-            //_allowedCrafters.Remove(Crafters.ARM);
+            _allowedCrafters.Remove(Crafters.ARM);
             //_allowedCrafters.Remove(Crafters.GSM);
-            //_allowedCrafters.Remove(Crafters.LTW);
+            _allowedCrafters.Remove(Crafters.LTW);
             //_allowedCrafters.Remove(Crafters.WVR);
             //_allowedCrafters.Remove(Crafters.ALC);
             //_allowedCrafters.Remove(Crafters.CUL);
 
-            InitalCraftingMatrixCreationAndCrafterPriorityCalculationV3();
+            //zhu li, do the thing!
+            CreateDataTableAndFindCraftingPaths();
 
-            
-
-            foreach (var item in _recursiveCrafterCountDictionary2)//.Where(r => r.Value.Count == countMax))
+            var maxCount = 0;
+            foreach (var item in _crafterCountDictionary)
             {
                 var sum = item.Value.Sum(i => i.Value);
-                Console.WriteLine($"{item.Key} - {sum}");
-                foreach(var segment in item.Value)
+                if (sum > maxCount)
                 {
-                    Console.Write($"{segment.Key}-{segment.Value} -> ");
+                    maxCount = sum;
                 }
-                Console.WriteLine();
             }
 
-            //Console.WriteLine("Your optimized crafting path is:");
-            //var finalCraftCount = 0;
-            //foreach(var item in _optimizedCraftingPath)
-            //{
-            //    Console.WriteLine($"Craft {item.Key} {item.Value} time(s)");
-            //    finalCraftCount += item.Value;
-            //}
-            //Console.WriteLine($"for a total count of {finalCraftCount} crafts.");
+            var craftString = "";
+            //loop over the entries in the dictionary that have the same number of crafts as the maximum found, then make the output pretty. ish.
+            Console.WriteLine($"The optimal crafting path(s) that offer the max number of crafts, {maxCount}, are:");
+            foreach (var item in _crafterCountDictionary.Where(c => c.Value.Sum(s => s.Value) == maxCount))
+            {
+                craftString = "";
+
+                foreach(var segment in item.Value)
+                {
+                    craftString += $"{segment.Key}-{segment.Value} -> ";
+                }
+                //possible enhancement, display the crafts of each path in descending count. not putting in the effort because the final product is the javascript version
+                craftString = craftString.Substring(0, craftString.Length - 4);
+                Console.WriteLine(craftString);
+            }
+
             Console.ReadKey();
         }
 
-        //encapsulating this logic as it will not change based on user inputs
-        //private static void InitalCraftingMatrixCreationAndCrafterPriorityCalculation()
-        //{
-        //    //create the crafting matrix of which craft uses which materials
-        //    DataTableCreation();
-
-        //    //calculate the crafting paths for each Crafter
-        //    for (int i = 0; i < COUNT_OF_CRAFTERS; i++)
-        //    {
-        //        _craftingPathDictionary.Add((Crafters)i, new List<CraftingPath>());
-        //        CalculateCraftingPaths(i);
-        //    }
-
-        //    //based on path count for a Crafter, assign it a priority
-        //    foreach (var pathDictItem in _craftingPathDictionary)
-        //    {
-        //        //_crafterPriority.Add(new KeyValuePair<Crafters, int>(pathDictItem.Key, pathDictItem.Value.Count()));
-        //        _crafterPriorityDict.Add(pathDictItem.Key, pathDictItem.Value.Count());
-        //    }
-        //    //_crafterPriority.Sort((x, y) => y.Value.CompareTo(x.Value));//compare second element (y) to first (x) to get descending ordering
-        //}
-
-        //good idea, takes far too long to calculate for even 1 crafter
-        //private static void InitalCraftingMatrixCreationAndCrafterPriorityCalculationV2()
-        //{
-        //    //create the crafting matrix of which craft uses which materials
-        //    DataTableCreation();
-
-        //    //calculate the crafting paths for each Crafter
-        //    for (int i = 0; i < COUNT_OF_CRAFTERS; i++)
-        //    {
-        //        _recursiveCrafterCountDictionary.Add((Crafters)i, new List<Crafters>());
-
-                
-        //        RecursiveCrafterFinder((Crafters)i, (Crafters)i);
-        //    }
-        //}
-
-        private static void InitalCraftingMatrixCreationAndCrafterPriorityCalculationV3()
+        //method to call the data table creation and loop through each crafter and kick off the recursive loop to find its optimal crafting path
+        private static void CreateDataTableAndFindCraftingPaths()
         {
             //create the crafting matrix of which craft uses which materials
             DataTableCreation();
@@ -200,18 +154,26 @@ namespace IshgardCraftOptimizer
             //calculate the crafting paths for each Crafter
             foreach (var crafter in _allowedCrafters)
             {
-                _recursiveCrafterCountDictionary2.Add(crafter, new List<KeyValuePair<Crafters, int>>());
-                _recursiveCrafterList2.Clear();//shouldnt need, but just to be sure
-                CalculateCraftingPathsV2(crafter, crafter);
+                //add the initial dictionary entry for the crafter so it exists during the recursive loop
+                _crafterCountDictionary.Add(crafter, new List<KeyValuePair<Crafters, int>>());
+                _recursiveCrafterList.Clear();//shouldnt need, but just to be sure
+                CalculateCraftingPaths(crafter, crafter);
             }
         }
 
-        private static void CalculateCraftingPathsV2(Crafters firstCrafter, Crafters currentCrafter)
+        //recursive function to find/build the best crafting path for a given crafter (baseCrafter, the dictionary key)
+        //second parameter is the one being evaluated during each call of the method.
+        //we're going to remove materials from the inventory, add the crafter to the crafting path list, and then do the same check until we can craft anything else.
+        //once we hit the bottom, see if it provides a better count than the existing one for the base crafter. if it does, save it.
+        //finally, because most of the time this will not be the last crafter being evaluated, we need to remove the crafter from the list and add the materials used back to the inventory.
+        //this is a long-winded way to say I'm basically pushing and popping crafters and materials used for a given step
+        private static void CalculateCraftingPaths(Crafters baseCrafter, Crafters currentCrafter)
         {
             //identify which materials(columns) are affected by the craft
             List<Materials> usedMaterials = GetMaterialsAffectedByCrafter(currentCrafter);
             int lowestCount = Int32.MaxValue;
 
+            //find the material with the lowest count that is used by the craft (this will be the most we can craft for a given crafter at a given point)
             foreach(var mat in usedMaterials)
             {
                 if (_craftingInventory[mat] < lowestCount)
@@ -221,87 +183,51 @@ namespace IshgardCraftOptimizer
             }
 
             //add the craft to the list and remove the materials from the inventory
-            _recursiveCrafterList2.Add(new KeyValuePair<Crafters, int>(currentCrafter, lowestCount));
+            _recursiveCrafterList.Add(new KeyValuePair<Crafters, int>(currentCrafter, lowestCount));
             RemoveCrafterMaterials(currentCrafter, lowestCount);
 
             //get crafters that can still make stuff and loop over them
-            var remainingCrafters = GetCraftersRemainingV2();
+            var remainingCrafters = GetCraftersRemaining();
             if (remainingCrafters.Count > 0)
             {
                 foreach (var remainingCraft in remainingCrafters)
                 {
-                    CalculateCraftingPathsV2(firstCrafter, remainingCraft);
+                    CalculateCraftingPaths(baseCrafter, remainingCraft);
                 }
             }
             //or, if no crafters remain, check to see if this is a new best, save it if it is
             else
             {
-                var listSum = _recursiveCrafterList2.Sum(r => r.Value);
-                var currentSum = _recursiveCrafterCountDictionary2[firstCrafter].Sum(d => d.Value);
-
-                if(listSum > currentSum)
+                //get the count of both the path being evaluated and the current best
+                var listSum = _recursiveCrafterList.Sum(r => r.Value);
+                var currentSum = _crafterCountDictionary[baseCrafter].Sum(d => d.Value);
+                
+                //if the path being evaluated is better than the current count, or the current count is the same but uses fewer crafters in the paths, save it as the new best
+                if((listSum > currentSum) || (listSum == currentSum && _recursiveCrafterList.Count() < _crafterCountDictionary[baseCrafter].Count()))
                 {
-                    //_recursiveCrafterList2.CopyTo(_recursiveCrafterCountDictionary2[firstCrafter]);
-                    _recursiveCrafterCountDictionary2[firstCrafter] = new List<KeyValuePair<Crafters, int>>(_recursiveCrafterList2);
-                }
-                else if(listSum == currentSum && _recursiveCrafterList2.Count() < _recursiveCrafterCountDictionary2[firstCrafter].Count())
-                {
-                    _recursiveCrafterCountDictionary2[firstCrafter] = new List<KeyValuePair<Crafters, int>>(_recursiveCrafterList2);
+                    _crafterCountDictionary[baseCrafter] = new List<KeyValuePair<Crafters, int>>(_recursiveCrafterList);
                 }
             }
 
             //restore the materials to the inventory for the next loop and remove the craft from the list
             UnRemoveCrafterMaterials(currentCrafter, lowestCount);
-            _recursiveCrafterList2.RemoveAt(_recursiveCrafterList2.Count - 1);
+            _recursiveCrafterList.RemoveAt(_recursiveCrafterList.Count - 1);
         }
 
-        //private static void RecursiveCrafterFinder(Crafters originalCrafter, Crafters crafter)
-        //{
-        //    _recursiveCrafterList.Add(crafter);
-        //    //consume the materials for the passed-in crafter
-        //    RemoveCrafterMaterials(crafter);
-
-        //    //get the list of crafters that can make at least 1 craft
-        //    //for (int i = 0; i < COUNT_OF_CRAFTERS; i++)
-        //    //{
-        //    //_recursiveCrafterList.Add(crafter);
-        //    //RemoveCrafterMaterials((Crafters)i);
-
-        //    var craftersRemain = GetCraftersRemaining();
-        //    //if no crafts remain, get the length of the crafter chain. if its a new max, store that as the max for this crafter 
-        //    if (craftersRemain.Count > 0)
-        //    {
-        //        foreach (var nextCraft in craftersRemain)
-        //        {
-        //            RecursiveCrafterFinder(originalCrafter, nextCraft);
-        //        }
-        //    }
-        //    else
-        //    {
-        //        if (_recursiveCrafterList.Count() > _recursiveCrafterCountDictionary[originalCrafter].Count())
-        //        {
-        //            _recursiveCrafterCountDictionary[originalCrafter] = _recursiveCrafterList;
-        //        }
-        //    }
-
-        //    //unremove crafter materials
-        //    UnRemoveCrafterMaterials(crafter);
-
-        //    //remove the crafter from the recursive list
-        //    _recursiveCrafterList.RemoveAt(_recursiveCrafterList.Count - 1);
-        //    //}
-        //}
-
+        //find which materials are used by a crafter and remove the passed-in value from the inventory
+        //it is assumed the inventory has been reduced to 1 material per craft already
         private static void RemoveCrafterMaterials(Crafters crafter, int countToRemove)
         {
             var usedMaterials = GetMaterialsAffectedByCrafter(crafter);
 
             foreach (var mat in usedMaterials)
             {
-                _craftingInventory[mat]-= countToRemove;
+                _craftingInventory[mat] -= countToRemove;
             }
         }
 
+        //find which materials are used by a crafter and add back the passed-in value from the inventory
+        //once again, it is assumed the inventory has been reduced to 1 material per craft already
         private static void UnRemoveCrafterMaterials(Crafters crafter, int countToUnremove)
         {
             var usedMaterials = GetMaterialsAffectedByCrafter(crafter);
@@ -312,36 +238,8 @@ namespace IshgardCraftOptimizer
             }
         }
 
-        //private static List<Crafters> GetCraftersRemaining()
-        //{
-        //    var returnList = new List<Crafters>();
-        //    bool crafterStillAvailable;
-
-        //    //loop through the crafters so we can see which ones are still available
-        //    foreach (var crafter in _allowedCrafters)
-        //    {
-        //        crafterStillAvailable = true;
-
-        //        //check the count of each of the materials
-        //        foreach(var mat in GetMaterialsAffectedByCrafter(crafter))
-        //        {
-        //            if(_craftingInventory[mat] <= 0)
-        //            {
-        //                crafterStillAvailable = false;
-        //                break;
-        //            }
-        //        }
-
-        //        if(crafterStillAvailable)
-        //        {
-        //            returnList.Add(crafter);
-        //        }
-        //    }
-
-        //    return returnList;
-        //}
-
-        private static List<Crafters> GetCraftersRemainingV2()
+        //see what crafters can still craft using the current state of _craftingInventory. note that this is not passed in
+        private static List<Crafters> GetCraftersRemaining()
         {
             var returnList = new List<Crafters>();
             bool crafterStillAvailable;
@@ -370,6 +268,31 @@ namespace IshgardCraftOptimizer
             return returnList;
         }
 
+        //return a list of Materials that a given Crafter uses, based on _constCrafterMaterialTable 
+        private static List<Materials> GetMaterialsAffectedByCrafter(Crafters crafter)
+        {
+            var materialsList = new List<Materials>();
+            int materialsFound = 0;
+
+            for (int j = 0; j < COUNT_OF_MATERIALS; j++)
+            {
+                if ((bool)_constCrafterMaterialTable.Rows[(int)crafter][j])
+                {
+                    materialsFound++;
+                    materialsList.Add((Materials)j);
+
+                    //if we have found all the Materials for the craft, break out of the material loop early
+                    if (materialsFound == MAX_DIFFERENT_MATERIALS_PER_CRAFT)
+                    {
+                        break;
+                    }
+                }
+            }
+
+            return materialsList;
+        }
+
+        //create the data table of which Crafters use which Materials
         private static void DataTableCreation()
         {
             /*
@@ -604,184 +527,6 @@ namespace IshgardCraftOptimizer
             _constCrafterMaterialTable.Rows.Add(wvr);
             _constCrafterMaterialTable.Rows.Add(alc);
             _constCrafterMaterialTable.Rows.Add(cul);
-        }
-
-        //private static void CalculateCraftingPaths(int crafterId)
-        //{
-        //    bool[] possibleCraftAfterFirstCraft = new bool[] { true, true, true, true, true, true, true, true };
-        //    bool[] possibleCraftAfterSecondCraft = new bool[] { true, true, true, true, true, true, true, true };
-
-        //    var firstCrafter = (Crafters)crafterId;
-
-        //    //identify which materials(columns) are affected by the first craft
-        //    List<string> usedMaterials = new List<string>();
-
-        //    foreach (DataColumn col in _constCrafterMaterialTable.Columns)
-        //    {
-        //        if ((bool)_constCrafterMaterialTable.Rows[crafterId][col.ColumnName])
-        //        {
-        //            usedMaterials.Add(col.ColumnName);
-        //        }
-        //    }
-            
-        //    //now we need to see if there are possible crafts remaining, check each row and see if there are 3 materials available
-        //    _postFirstCraftMaterialCalcTable = _constCrafterMaterialTable.Copy();//because we're modifying the table being passed to this method, we need to use one other than the const
-        //    RemoveInvalidCrafts(_postFirstCraftMaterialCalcTable, usedMaterials, possibleCraftAfterFirstCraft);
-
-        //    //with invalid crafts removed, we need to store possible second crafts to be put into the path
-        //    var secondCraftList = new List<Crafters>();
-        //    for (int i = 0; i < possibleCraftAfterFirstCraft.Length; i++)
-        //    {
-        //        if (possibleCraftAfterFirstCraft[i])//if this is true, the craft is still doable, so add it
-        //        {
-        //            secondCraftList.Add((Crafters)i);
-        //        }
-        //    }
-
-        //    //with the second crafts identified, we now need to check each branch of those possible paths to see if a third is available
-        //    bool craftsRemain;
-        //    foreach(var secondCraft in secondCraftList)
-        //    {
-        //        usedMaterials.Clear();
-        //        //identify which materials are being used by the second craft
-        //        foreach (DataColumn col in _constCrafterMaterialTable.Columns)
-        //        {
-        //            if ((bool)_constCrafterMaterialTable.Rows[(int)secondCraft][col.ColumnName])
-        //            {
-        //                usedMaterials.Add(col.ColumnName);
-        //            }
-        //        }
-
-        //        //we need to see if there are possible crafts remaining 
-        //        _postSecondCraftMaterialCalcTable = _postFirstCraftMaterialCalcTable.Copy();
-        //        possibleCraftAfterFirstCraft.CopyTo(possibleCraftAfterSecondCraft, 0);
-        //        //even though this post-second craft table variable isn't being used later, we don't want to touch the post-first craft table because
-        //        //we need to use it for more than 1 craft and the following method will modify the passed-in table.
-        //        //there are other solutions, yes. i chose this one over adding a bunch of code to save minimal space in memory in a time when people have GBs of it
-        //        craftsRemain = RemoveInvalidCrafts(_postSecondCraftMaterialCalcTable, usedMaterials, possibleCraftAfterSecondCraft);
-
-        //        if (craftsRemain)
-        //        {
-        //            //with invalid crafts removed, we need to store possible final crafts to be put into the path
-        //            for (int i = 0; i < possibleCraftAfterSecondCraft.Length; i++)
-        //            {
-        //                if (possibleCraftAfterSecondCraft[i])//if this is true, the craft is still doable, so add it
-        //                {
-        //                    _craftingPathDictionary[firstCrafter].Add(new CraftingPath(firstCrafter, secondCraft, (Crafters)i));
-        //                }
-        //            }
-        //        }
-        //        else
-        //        {
-        //            //if there are no possible crafts after the second craft, we still need to make a path of those 2 crafts
-        //            _craftingPathDictionary[firstCrafter].Add(new CraftingPath(firstCrafter, secondCraft, null));
-        //        }
-        //    }
-        //}
-
-        //the primary function of this method is to remove crafts from the pool that are no longer possible based on the current state of the pool and
-        //the materials used by the previous craft. if no possible crafts remain, it will return false
-        private static bool RemoveInvalidCrafts(DataTable calcTable, List<string> usedMaterials, bool[] possibleCraft)
-        {
-            bool possibleCraftsRemain = false;
-            //remove all crafts that were affected by the materials used in the previous craft
-
-            //while this is effectively a foreach loop, i wanted the counting variable for the row number, so this is a for loop
-            for (int i = 0; i < calcTable.Rows.Count; i++)
-            {
-                //for the given row, in each column that was affected by the previous craft, set it to false
-                foreach (var colName in usedMaterials)
-                {
-                    if((bool)calcTable.Rows[i][colName])
-                    {
-                        //this row uses a column that was used by the previous craft, meaning this craft can no longer be used
-                        //remove it as a possible craft
-                        possibleCraft[i] = false;//<-- this is why i wanted the counting variable
-                    }
-
-                    //regardless of if it was initially true, this material(column) was used, so it needs to be set to false for every craft
-                    calcTable.Rows[i][colName] = false;
-                }
-
-                //possibleCraftsRemain is defaulted to false, but if any craft is listed as a possible craft, set it to true so we know there's more to do
-                if (possibleCraft[i])
-                {
-                    possibleCraftsRemain = true;
-                }
-            }
-
-            return possibleCraftsRemain;
-        }
-
-        //private static void CalculateCraftingInventoryAndCounts()
-        //{
-        //    for (int i = 0; i < COUNT_OF_CRAFTERS; i++)
-        //    {
-        //        //TODO: add the logic for ignoring a crafter(s) specified by the user, do so by setting the crafts available to 0
-
-        //        //set the crafts available for the given crafter to max, so that we will for sure find a value lower than it
-        //        if (_craftsAvailablePerCrafter.ContainsKey((Crafters)i))
-        //        {
-        //            _craftsAvailablePerCrafter[(Crafters)i] = int.MaxValue;
-        //        }
-        //        else
-        //        {
-        //            _craftsAvailablePerCrafter.Add((Crafters)i, int.MaxValue);
-        //        }
-
-        //        //get the Materials the Crafter uses and find the lowest count of those Materials, store that as crafts available
-        //        foreach(var mat in GetMaterialsAffectedByCrafter((Crafters)i))
-        //        {
-        //            if(_craftingInventory[mat] < _craftsAvailablePerCrafter[(Crafters)i])
-        //            {
-        //                _craftsAvailablePerCrafter[(Crafters)i] = _craftingInventory[mat];
-        //            }
-        //        }
-        //    }
-        //}
-
-        private static List<Materials> GetMaterialsAffectedByCrafter(Crafters crafter)
-        {
-            var materialsList = new List<Materials>();
-            int materialsFound = 0;
-
-            for (int j = 0; j < COUNT_OF_MATERIALS; j++)
-            {
-                if ((bool)_constCrafterMaterialTable.Rows[(int)crafter][j])
-                {
-                    materialsFound++;
-                    materialsList.Add((Materials)j);
-
-                    //if we have found all the Materials for the craft, break out of the material loop early
-                    if (materialsFound == MAX_DIFFERENT_MATERIALS_PER_CRAFT)
-                    {
-                        break;
-                    }
-                }
-            }
-
-            return materialsList;
-        }
-    }
-    
-    //This class is a single instance of a "path" through the Crafters, constructed based off which Crafters impact which others.
-    //The idea is to create a list of these CraftingPaths to have an idea of which Crafters are more beneficial to prioritize than others,
-    //that is to say which Crafters impact the fewest other Crafters have a higher priority, as that will yield more crafts overall.
-    //When the entire crafting matrix is run through the CalculateCraftingBranches method above, the end result should be a list of CraftingPaths.
-    //The number of CraftingPaths associated with a specific Crafter (stored as the First property of a CraftingPath) is effectively the priority
-    //for that Crafter, with higher numbers being better. however, the CraftingPaths only come into play in tiebreak scenarios.
-    //In general, picking the Crafter with the most amount of crafts possible and exhausting its materials will yield the best results
-    public class CraftingPath
-    {
-        public Crafters First { get; private set; }
-        public Crafters Second { get; private set; }
-        public Crafters? Final { get; private set; }
-
-        public CraftingPath(Crafters first, Crafters second, Crafters? final)
-        {
-            First = first;
-            Second = second;
-            Final = final;
         }
     }
 }
