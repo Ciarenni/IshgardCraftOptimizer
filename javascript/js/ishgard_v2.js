@@ -245,9 +245,16 @@ function Level80CalculateButtonClick()
     //loop over the entries in the dictionary that have the same number of crafts as the maximum found, then make the output pretty. ish.
     _level80RecursiveCrafterCountDictionary.filter(d => d.countSum === maxCount).forEach(maxCrafter =>
     {
+        //sort the crafts of each path in descending count
+        maxCrafter.craftingCountList = maxCrafter.craftingCountList.sort(
+            function(a,b)
+            {
+                return b.crafterCount - a.crafterCount;
+            }
+        );
+
         maxCrafter.craftingCountList.forEach(ccl => 
         {
-            //TODO display the crafts of each path in descending count
             craftString = (craftString + ccl.crafter + "-" + ccl.crafterCount +" -> ")
         });
         craftString = craftString.substring(0, craftString.length - 4) + "\r\n";
