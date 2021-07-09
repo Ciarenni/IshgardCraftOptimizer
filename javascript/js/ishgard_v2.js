@@ -181,16 +181,16 @@ function OnLoad()
     // document.getElementById("lvl80Salt").value = 110;
     
     //simulated user input #2
-    document.getElementById("lvl80Logs").value = 90;
-    document.getElementById("lvl80Wheat").value = 140;
-    document.getElementById("lvl80Bolls").value = 10;
-    document.getElementById("lvl80Resin").value = 60;
-    document.getElementById("lvl80Tortoises").value = 40;
-    document.getElementById("lvl80Bluespirit").value = 200;
-    document.getElementById("lvl80Gold").value = 170;
-    document.getElementById("lvl80Sand").value = 100;
-    document.getElementById("lvl80Water").value = 80;
-    document.getElementById("lvl80Salt").value = 190;
+    // document.getElementById("lvl80Logs").value = 90;
+    // document.getElementById("lvl80Wheat").value = 140;
+    // document.getElementById("lvl80Bolls").value = 10;
+    // document.getElementById("lvl80Resin").value = 60;
+    // document.getElementById("lvl80Tortoises").value = 40;
+    // document.getElementById("lvl80Bluespirit").value = 200;
+    // document.getElementById("lvl80Gold").value = 170;
+    // document.getElementById("lvl80Sand").value = 100;
+    // document.getElementById("lvl80Water").value = 80;
+    // document.getElementById("lvl80Salt").value = 190;
 
     //simulated user input #3
     // document.getElementById("lvl80Logs").value = 375;
@@ -252,6 +252,8 @@ function Level80CalculateButtonClick()
                 return b.crafterCount - a.crafterCount;
             }
         );
+
+        //TODO need to filter out duplicate rows that appear after the array is
 
         maxCrafter.craftingCountList.forEach(ccl => 
         {
