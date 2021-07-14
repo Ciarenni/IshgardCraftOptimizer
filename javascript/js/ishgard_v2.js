@@ -131,18 +131,41 @@ let _level80CraftsAvailablePerCrafter = {
     "ALC": 0,
     "CUL": 0
 }
-let _level80OptimizedCraftingPlan = [];//stores the user's calculated crafting plan
-let _level80OptimizedCraftingPlanString = "";
 
-let _level80RecursiveCrafterCountDictionary = [];
-        //baseCrafter: the TLA for the starting crafter
-        //craftingCountList: the list of crafters and counts for them, including the starting crafter. its for the _level80RecursiveCrafterList below
-        //countSum: the sum of the counts of all the crafters currently in the craftingCountList
-let _level80RecursiveCrafterList = [];
-        //crafter: crafter TLA
-        //crafterCount: the number of times to craft this craft
-        //sumToNow: the sum of all crafterCounts up to this point, only used in calculating paths, not shown to user
-let _level80AllowedCrafters = [];//crafter strings
+let _level80CrafterDictionary = [];//a list of CrafterDictionaryItems
+let _level80CrafterList = [];//a list of CrafterListItems, it will hold 
+let _level80AllowedCrafters = [];//crafter TLAs
+
+class CrafterListItem
+{
+    Crafter = "";//the TLA for the crafter
+    CrafterCount = 0;//the number of times to craft this craft
+    SumToNow = 0;//the sum of all crafterCounts up to this point, only used in calculating paths, not shown to user
+
+    constructor(crafter, count, sum)
+    {
+        this.Crafter = crafter;
+        this.CrafterCount = count;
+        this.SumToNow = sum;
+    }
+}
+
+//despite that this class has 3 items in it, i am still treating it as a dictionary because most of the time
+//i only care about the BaseCrafter (key), and the CrafterList (value)
+//the CountSum is just on there to make calculation easier/faster for which CrafterList on a given BaseCrafter is better
+class CrafterDictionaryItem
+{
+    BaseCrafter = "";//the TLA for the starting crafter
+    CrafterList = [];//a list of CrafterListItems
+    CountSum = 0;//the sum of the counts of all the crafters currently in the CrafterList
+
+    constructor(base, list, count)
+    {
+        this.BaseCrafter = base;
+        this.CrafterList = list;
+        this.CountSum = count;
+    }
+}
 
 //#region Web controls
 
@@ -225,9 +248,6 @@ function OnLoad()
 
 function Level80CalculateButtonClick()
 {
-    //clear out the crafting plan
-    _level80OptimizedCraftingPlan = [];
-
     if(!GetAndValidateLevel80UserInput())
     {
         return;
@@ -239,11 +259,11 @@ function Level80CalculateButtonClick()
 
     let maxCount = 0;
     //get the highest count from the crafting dictionary
-    _level80RecursiveCrafterCountDictionary.forEach(item =>
+    _level80CrafterDictionary.forEach(item =>
     {
-        if(item.countSum > maxCount)
+        if(item.CountSum > maxCount)
         {
-            maxCount = item.countSum;
+            maxCount = item.CountSum;
         }
     });
 
@@ -251,14 +271,14 @@ function Level80CalculateButtonClick()
     {
         var craftString = "The optimal crafting path(s) that offer the max number of crafts, " + maxCount + ", are:\r\n";
         //store all the crafters that tie for max count in their own array, with their crafting lists sorted
-        let maxCountLevel80CrafterDictionary = _level80RecursiveCrafterCountDictionary.filter(d => d.countSum === maxCount);
+        let maxCountLevel80CrafterDictionary = _level80CrafterDictionary.filter(d => d.CountSum === maxCount);
         maxCountLevel80CrafterDictionary.forEach(maxCrafter =>
         {
             //sort the crafts of each path in descending count
-            maxCrafter.craftingCountList = maxCrafter.craftingCountList.sort(
+            maxCrafter.CrafterList = maxCrafter.CrafterList.sort(
                 function(a,b)
                 {
-                    return b.crafterCount - a.crafterCount;
+                    return b.CrafterCount - a.CrafterCount;
                 }
             );
         });
@@ -278,8 +298,8 @@ function Level80CalculateButtonClick()
             //loop over the list of non-dupes to see if the crafting path already exists
             for(let i = 0; i < maxCountNoDupesLevel80CrafterDictionary.length; i++)
             {
-                let listBeingChecked = maxCountCrafter.craftingCountList;
-                let listToCheckAgainst = maxCountNoDupesLevel80CrafterDictionary[i].craftingCountList;
+                let listBeingChecked = maxCountCrafter.CrafterList;
+                let listToCheckAgainst = maxCountNoDupesLevel80CrafterDictionary[i].CrafterList;
 
                 //if the lists are equal, set the variable to skip adding it to the list and break out of the loop
                 if(CrafterListsAreEqual(listBeingChecked, listToCheckAgainst))
@@ -300,17 +320,16 @@ function Level80CalculateButtonClick()
         maxCountNoDupesLevel80CrafterDictionary = maxCountNoDupesLevel80CrafterDictionary.sort(
             function(a,b)
             {
-                return a.craftingCountList.length - b.craftingCountList.length;
+                return a.CrafterList.length - b.CrafterList.length;
             }
         );
 
         //loop over the entries in the dictionary that have the same number of crafts as the maximum found, then make the output pretty. ish.
         maxCountNoDupesLevel80CrafterDictionary.forEach(noDupeMaxCrafter => 
         {
-
-            noDupeMaxCrafter.craftingCountList.forEach(ccl => 
+            noDupeMaxCrafter.CrafterList.forEach(cl => 
             {
-                craftString = (craftString + ccl.crafter + "-" + ccl.crafterCount +" -> ")
+                craftString = (craftString + cl.Crafter + "-" + cl.CrafterCount +" -> ")
             });
             craftString = craftString.substring(0, craftString.length - 4) + "\r\n";
         });
@@ -401,19 +420,15 @@ function ResetLevel80Fields()
 function FindLevel80CraftingPaths()
 {
     //clear out the dictionary
-    _level80RecursiveCrafterCountDictionary = [];
+    _level80CrafterDictionary = [];
     
     _level80AllowedCrafters.forEach(baseCrafter =>
     {
         //add initial dictionary item
-        _level80RecursiveCrafterCountDictionary.push({
-            baseCrafter: baseCrafter,//the TLA for the starting crafter
-            craftingCountList: [],//the list of crafters and counts for them, including the starting crafter
-            countSum: 0 //the sum of the counts of all the crafters currently in the craftingCountList
-        });
+        _level80CrafterDictionary.push(new CrafterDictionaryItem(baseCrafter, [], 0));
 
         //clear current list, just to be sure
-        _level80RecursiveCrafterList = [];
+        _level80CrafterList = [];
 
         CalculateLevel80CraftingPaths(baseCrafter, baseCrafter, 0);
     });
@@ -426,15 +441,11 @@ function FindLevel80CraftingPaths()
 function CalculateLevel80CraftingPaths(baseCrafter, currentCrafter, recursiveSum)
 {
     //identify which materials(columns) are affected by the craft
-    var usedMaterials = GetMaterialsUsedByLevel80Craft(GetLevel80CrafterRowFromStringName(currentCrafter));
+    var usedMaterials = GetMaterialsUsedByCraft(GetLevel80CrafterRowFromStringName(currentCrafter));
     var lowestCount = GetLevel80LowestMaterialCountByMaterialList(usedMaterials);
 
     //add the craft to the list and remove the materials from the inventory
-    _level80RecursiveCrafterList.push({
-        crafter: currentCrafter,
-        crafterCount: lowestCount,
-        sumToNow: recursiveSum + lowestCount
-    });
+    _level80CrafterList.push(new CrafterListItem(currentCrafter, lowestCount, recursiveSum + lowestCount));
     RemoveLevel80CrafterMaterials(currentCrafter, lowestCount);
 
     //get crafters that can still make stuff and loop over them
@@ -449,24 +460,24 @@ function CalculateLevel80CraftingPaths(baseCrafter, currentCrafter, recursiveSum
     else
     {
         //the sum of the current crafting path being evaluated
-        let listSum = _level80RecursiveCrafterList[_level80RecursiveCrafterList.length - 1].sumToNow;
+        let listSum = _level80CrafterList[_level80CrafterList.length - 1].SumToNow;
         //the current best count for the base crafter
-        let currentSum = _level80RecursiveCrafterCountDictionary.find(d => d.baseCrafter === baseCrafter).countSum;
+        let currentSum = _level80CrafterDictionary.find(d => d.BaseCrafter === baseCrafter).CountSum;
         
         //if the path being evaluated is better than the current count, or the current count is the same but uses fewer crafters in the paths, save it as the new best
         if((listSum > currentSum) ||
-            (listSum == currentSum && _level80RecursiveCrafterList.length < _level80RecursiveCrafterCountDictionary.find(d => d.baseCrafter === baseCrafter).craftingCountList.length))
+            (listSum == currentSum && _level80CrafterList.length < _level80CrafterDictionary.find(d => d.BaseCrafter === baseCrafter).CrafterList.length))
         {
             //create a copy of the crafting list from the current recursion iteration into the dictionary as the new best
-            _level80RecursiveCrafterCountDictionary.find(d => d.baseCrafter === baseCrafter).craftingCountList = DeepCopyAnArray(_level80RecursiveCrafterList);
+            _level80CrafterDictionary.find(d => d.BaseCrafter === baseCrafter).CrafterList = DeepCopyAnArray(_level80CrafterList);
             //set the new best count
-            _level80RecursiveCrafterCountDictionary.find(d => d.baseCrafter === baseCrafter).countSum = listSum;
+            _level80CrafterDictionary.find(d => d.BaseCrafter === baseCrafter).CountSum = listSum;
         }
     }
 
     //restore the materials to the inventory for the next loop and remove the craft from the list
     UnRemoveLevel80CrafterMaterials(currentCrafter, lowestCount);
-    _level80RecursiveCrafterList.pop();
+    _level80CrafterList.pop();
 }
 
 //find which materials are used by a crafter and remove the passed-in value from the inventory
@@ -475,7 +486,7 @@ function CalculateLevel80CraftingPaths(baseCrafter, currentCrafter, recursiveSum
 //count (int): the number of materials to remove
 function RemoveLevel80CrafterMaterials(crafter, count)
 {
-    var usedMaterials = GetMaterialsUsedByLevel80Craft(GetLevel80CrafterRowFromStringName(crafter));
+    var usedMaterials = GetMaterialsUsedByCraft(GetLevel80CrafterRowFromStringName(crafter));
 
     usedMaterials.forEach(mat => {
             _level80UserCraftingInventory[mat] -= count;
@@ -488,7 +499,7 @@ function RemoveLevel80CrafterMaterials(crafter, count)
 //count (int): the number of materials to add back
 function UnRemoveLevel80CrafterMaterials(crafter, count)
 {
-    var usedMaterials = GetMaterialsUsedByLevel80Craft(GetLevel80CrafterRowFromStringName(crafter));
+    var usedMaterials = GetMaterialsUsedByCraft(GetLevel80CrafterRowFromStringName(crafter));
 
     usedMaterials.forEach(mat => {
         _level80UserCraftingInventory[mat] += count;
@@ -502,7 +513,7 @@ function GetLevel80CraftersRemaining()
     
     _level80AllowedCrafters.forEach(crafter => 
     {
-        let mats = GetMaterialsUsedByLevel80Craft(GetLevel80CrafterRowFromStringName(crafter));
+        let mats = GetMaterialsUsedByCraft(GetLevel80CrafterRowFromStringName(crafter));
         let lowest = GetLevel80LowestMaterialCountByMaterialList(mats);
         
         if(lowest > 0)
@@ -537,10 +548,14 @@ function GetLevel80LowestMaterialCountByMaterialList(materialList)
     return lowestCount;
 }
 
+//#endregion
+
+//#region Universal methods
+
 //takes in a crafter row returns a crafter row (the crafter TLA, which materials it uses) from the crafter matrix
 //returns a list of which materials the passed-in crafter row uses
 //crafterRow: a row from the crafter matrix
-function GetMaterialsUsedByLevel80Craft(crafterRow)
+function GetMaterialsUsedByCraft(crafterRow)
 {
     //the list of used materials to be returned by the function
     let returnList = [];
@@ -560,10 +575,6 @@ function GetMaterialsUsedByLevel80Craft(crafterRow)
     return returnList;
 }
 
-//#endregion
-
-//#region Universal methods
-
 //returns a copy of the passed-in array so we have a ByValue copy rather than a reference
 function DeepCopyAnArray(sourceArray)
 {
@@ -577,8 +588,8 @@ function DeepCopyAnArray(sourceArray)
 }
 
 //returns whether the passed in lists (which are expected to be sorted CrafterLists) hold the same value
-//firstList: a sorted crafterList, each element of the list containing a crafter TLA and the crafter count 
-//secondList: a sorted crafterList, each element of the list containing a crafter TLA and the crafter count 
+//firstList: a sorted CrafterList
+//secondList: a sorted CrafterList
 function CrafterListsAreEqual(firstList, secondList)
 {
     //if the lengths are different, they're clearly not the same
@@ -589,9 +600,9 @@ function CrafterListsAreEqual(firstList, secondList)
 
     for(let i = 0; i< firstList.length; i++)
     {
-        if(firstList[i].crafter === secondList[i].crafter)
+        if(firstList[i].Crafter === secondList[i].Crafter)
         {
-            if(firstList[i].crafterCount === secondList[i].crafterCount)
+            if(firstList[i].CrafterCount === secondList[i].CrafterCount)
             {
                 //if the crafter and the count are the same, the indexes are identical, check the next one
                 //if they're different, it should hit the return false at the bottom of the loop block
