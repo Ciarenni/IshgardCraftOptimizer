@@ -134,8 +134,14 @@ let _level80CraftsAvailablePerCrafter = {
 let _level80OptimizedCraftingPlan = [];//stores the user's calculated crafting plan
 let _level80OptimizedCraftingPlanString = "";
 
-let _level80RecursiveCrafterCountDictionary = [];//baseCrafter, List<KeyValuePair<CrafterTLA, int>>, countSum 
-let _level80RecursiveCrafterList = [];//List<KeyValuePair<crafterTLA, int>>
+let _level80RecursiveCrafterCountDictionary = [];
+        //baseCrafter: the TLA for the starting crafter
+        //craftingCountList: the list of crafters and counts for them, including the starting crafter. its for the _level80RecursiveCrafterList below
+        //countSum: the sum of the counts of all the crafters currently in the craftingCountList
+let _level80RecursiveCrafterList = [];
+        //crafter: crafter TLA
+        //crafterCount: the number of times to craft this craft
+        //sumToNow: the sum of all crafterCounts up to this point, only used in calculating paths, not shown to user
 let _level80AllowedCrafters = [];//crafter strings
 
 //#region Web controls
@@ -234,34 +240,87 @@ function Level80CalculateButtonClick()
     let maxCount = 0;
     //get the highest count from the crafting dictionary
     _level80RecursiveCrafterCountDictionary.forEach(item =>
+    {
+        if(item.countSum > maxCount)
         {
-            if(item.countSum > maxCount)
+            maxCount = item.countSum;
+        }
+    });
+
+    if(maxCount != 0)
+    {
+        var craftString = "The optimal crafting path(s) that offer the max number of crafts, " + maxCount + ", are:\r\n";
+        //store all the crafters that tie for max count in their own array, with their crafting lists sorted
+        let maxCountLevel80CrafterDictionary = _level80RecursiveCrafterCountDictionary.filter(d => d.countSum === maxCount);
+        maxCountLevel80CrafterDictionary.forEach(maxCrafter =>
+        {
+            //sort the crafts of each path in descending count
+            maxCrafter.craftingCountList = maxCrafter.craftingCountList.sort(
+                function(a,b)
+                {
+                    return b.crafterCount - a.crafterCount;
+                }
+            );
+        });
+                
+        //now that the crafting lists are sorted, the duplicate paths will be more apparent and should be removed
+        let maxCountNoDupesLevel80CrafterDictionary = []
+        //put the first crafting path from the max count dictionary in the no-dupe list, because it can't be a dupe and we need something to compare against.
+        //this will result in the first check in the for-each below always being a duplicate, but the code to avoid that isn't as readable
+        //and i dont need to care about performance much for this. not yet, at least.
+        maxCountNoDupesLevel80CrafterDictionary.push(maxCountLevel80CrafterDictionary[0]);
+        
+        let notADupe = true;
+        maxCountLevel80CrafterDictionary.forEach(maxCountCrafter =>
+        {
+            notADupe = true;
+
+            //loop over the list of non-dupes to see if the crafting path already exists
+            for(let i = 0; i < maxCountNoDupesLevel80CrafterDictionary.length; i++)
             {
-                maxCount = item.countSum;
+                let listBeingChecked = maxCountCrafter.craftingCountList;
+                let listToCheckAgainst = maxCountNoDupesLevel80CrafterDictionary[i].craftingCountList;
+
+                //if the lists are equal, set the variable to skip adding it to the list and break out of the loop
+                if(CrafterListsAreEqual(listBeingChecked, listToCheckAgainst))
+                {
+                    notADupe = false;
+                    break;
+                }
+            }
+
+            //if it was not found in the current list of not-dupes, add it to the list of not-dupes
+            if(notADupe)
+            {
+                maxCountNoDupesLevel80CrafterDictionary.push(maxCountCrafter);
             }
         });
 
-    var craftString = "The optimal crafting path(s) that offer the max number of crafts, " + maxCount + ", are:\r\n";
-    //loop over the entries in the dictionary that have the same number of crafts as the maximum found, then make the output pretty. ish.
-    _level80RecursiveCrafterCountDictionary.filter(d => d.countSum === maxCount).forEach(maxCrafter =>
-    {
-        //sort the crafts of each path in descending count
-        maxCrafter.craftingCountList = maxCrafter.craftingCountList.sort(
+        //sort the non-dupes by the number of crafters they use, in ascending order. people probably want to use the fewer number of different crafters first
+        maxCountNoDupesLevel80CrafterDictionary = maxCountNoDupesLevel80CrafterDictionary.sort(
             function(a,b)
             {
-                return b.crafterCount - a.crafterCount;
+                return a.craftingCountList.length - b.craftingCountList.length;
             }
         );
 
-        //TODO need to filter out duplicate rows that appear after the array is
-
-        maxCrafter.craftingCountList.forEach(ccl => 
+        //loop over the entries in the dictionary that have the same number of crafts as the maximum found, then make the output pretty. ish.
+        maxCountNoDupesLevel80CrafterDictionary.forEach(noDupeMaxCrafter => 
         {
-            craftString = (craftString + ccl.crafter + "-" + ccl.crafterCount +" -> ")
+
+            noDupeMaxCrafter.craftingCountList.forEach(ccl => 
+            {
+                craftString = (craftString + ccl.crafter + "-" + ccl.crafterCount +" -> ")
+            });
+            craftString = craftString.substring(0, craftString.length - 4) + "\r\n";
         });
-        craftString = craftString.substring(0, craftString.length - 4) + "\r\n";
-    });
-    resultsTextarea.textContent = craftString;
+
+        resultsTextarea.textContent = craftString;
+    }
+    else
+    {
+        resultsTextarea.textContent = "No crafting paths were found with the given materials and selected crafters."
+    }
 }
 
 function GetAndValidateLevel80UserInput()
@@ -515,6 +574,35 @@ function DeepCopyAnArray(sourceArray)
     }
 
     return returnArray;
+}
+
+//returns whether the passed in lists (which are expected to be sorted CrafterLists) hold the same value
+//firstList: a sorted crafterList, each element of the list containing a crafter TLA and the crafter count 
+//secondList: a sorted crafterList, each element of the list containing a crafter TLA and the crafter count 
+function CrafterListsAreEqual(firstList, secondList)
+{
+    //if the lengths are different, they're clearly not the same
+    if(firstList.length != secondList.length)
+    {
+        return false;
+    }
+
+    for(let i = 0; i< firstList.length; i++)
+    {
+        if(firstList[i].crafter === secondList[i].crafter)
+        {
+            if(firstList[i].crafterCount === secondList[i].crafterCount)
+            {
+                //if the crafter and the count are the same, the indexes are identical, check the next one
+                //if they're different, it should hit the return false at the bottom of the loop block
+                continue;
+            }
+        }
+        //if at any point the same indexes dont have the same crafter, the lists are distinct
+        return false;
+    }
+
+    return true;
 }
 
 //#endregion
