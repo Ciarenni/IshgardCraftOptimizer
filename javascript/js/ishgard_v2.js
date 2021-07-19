@@ -295,6 +295,9 @@ function Level80CalculateButtonClick()
         {
             notADupe = true;
 
+            //TODO is it worth trying to order crafters with the same count so that "duplicates" as well as duplicates are removed?
+            //i.e. CRP (5) -> ARM (5) is effectively the same as ARM (5) -> CRP (5) for the user, even though its not a duplicate by my current logic
+
             //loop over the list of non-dupes to see if the crafting path already exists
             for(let i = 0; i < maxCountNoDupesLevel80CrafterDictionary.length; i++)
             {
@@ -344,9 +347,11 @@ function Level80CalculateButtonClick()
 
 function GetAndValidateLevel80UserInput()
 {
-    let errorExists = false;
+    let invalidValueErrorExists = false;
+    let tooLargeErrorExists = false;
     let textboxValue = -1;
-    let errorString = "The following fields are not positive whole numbers:\r\n";
+    let invalidValueErrorString = "The following fields are not positive whole numbers:\r\n";
+    let tooLargeErrorString = "The following fields are too large.\r\nWhy do you have more than 100,000 of these:\r\n";
 
     for(let mat in _level80UserCraftingInventory)
     {
@@ -356,11 +361,16 @@ function GetAndValidateLevel80UserInput()
         //if the textbox value isn't a positive whole number
         if(Number.isNaN(textboxValue) || textboxValue < 0 || !Number.isInteger(textboxValue))
         {
-            errorString += mat + "\r\n";
-            errorExists = true;
+            invalidValueErrorString += mat + "\r\n";
+            invalidValueErrorExists = true;   
+        }
+        else if(textboxValue > 100000)
+        {
+            tooLargeErrorString += mat + "\r\n";
+            tooLargeErrorExists = true;
         }
         //the value is valid, but check if there are existing errors. no need to do calculations or assign variables if there are
-        else if(!errorExists)
+        else if(!invalidValueErrorExists && !tooLargeErrorExists)
         {
             //get the value from the appropriate textbox, i.e. lvl80Logs
             //then reduce it to the number of crafts it can be used in by dividing by how many are used per craft
@@ -380,9 +390,16 @@ function GetAndValidateLevel80UserInput()
     });
 
     //if an error exists, hide the results and show the error content
-    if(errorExists)
+    if(invalidValueErrorExists || tooLargeErrorExists)
     {
-        _errorTextarea.textContent = errorString;
+        if(invalidValueErrorExists)
+        {
+            _errorTextarea.textContent = invalidValueErrorString;
+        }
+        else if(tooLargeErrorExists)
+        {
+            _errorTextarea.textContent = tooLargeErrorString;
+        }
         _errorTextareaDiv.style.display = "block";
         _resultsTextarea.style.visibility = "hidden";
         return false;
