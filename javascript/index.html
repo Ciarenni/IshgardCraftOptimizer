@@ -7,7 +7,13 @@
 
     <div id="crafter-use-div" class="crafter-use-div">
       <div style="grid-column: span 8; text-align: center;">
-        <label>Crafters to use</label>
+        <div style="display: inline-block;">
+          <label style="grid-column: span 7; padding-right: 5px;">Crafters to use</label>
+          <div class="individual-crafter-use-div" style="float: right;">
+            <input type="checkbox" id="checkboxUseAll" checked>
+            <label for="checkboxUseAll" id="checkboxUseAllLabel">All</label>
+          </div>
+        </div>
       </div>
       <div class="individual-crafter-use-div">
         <input type="checkbox" id="checkboxUseCRP" checked>
@@ -108,13 +114,13 @@
     </div>
   </div>
   <br>
-  <div id="errorTextAreaDiv" class="error-div">
-    <textarea id="errorTextArea" class="info-text-area" readonly rows="10" cols="60"></textarea>
+  <div id="lvl80ErrorTextAreaDiv" class="error-div">
+    <textarea id="lvl80ErrorTextArea" class="info-text-area" readonly rows="10" cols="60"></textarea>
   </div>
   <br>
   <div class="results-div">
     <!-- I set the rows for this text area to 10, because it's a maximum of 8 crafters (all of them), plus 2 rows for the extra text -->
-    <textarea id="resultsTextarea" class="info-text-area" readonly rows="10" cols="50"></textarea>
+    <textarea id="lvl80ResultsTextarea" class="info-text-area" readonly rows="10" cols="50"></textarea>
   </div>
 
   <script src="js/ishgard_v2.js"></script>

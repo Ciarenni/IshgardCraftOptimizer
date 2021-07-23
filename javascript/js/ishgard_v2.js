@@ -1,6 +1,7 @@
 //#region Members
 let COUNT_OF_CRAFTERS = 8;//constant
 let PER_MATERIAL_COST = 10;//constant
+let CRAFTERS = [ "CRP", "BSM", "ARM", "GSM", "LTW", "WVR", "ALC", "CUL" ]//constant
 let _level80CrafterMatrix = [
     {
         "Crafter": "CRP",
@@ -169,9 +170,10 @@ class CrafterDictionaryItem
 
 //#region Web controls
 
-let _resultsTextarea = document.getElementById("resultsTextarea");
-let _errorTextarea = document.getElementById("errorTextArea");
-let _errorTextareaDiv = document.getElementById("errorTextAreaDiv");
+let _lvl80ResultsTextarea = document.getElementById("lvl80ResultsTextarea");
+let _lvl80ErrorTextarea = document.getElementById("lvl80ErrorTextArea");
+let _lvl80ErrorTextareaDiv = document.getElementById("lvl80ErrorTextAreaDiv");
+let _useAllCraftersCheckbox = document.getElementById("checkboxUseAll");
 
 // let _checkboxUseCRP = document.getElementById("checkboxUseCRP");
 // let _checkboxUseBSM = document.getElementById("checkboxUseBSM");
@@ -192,9 +194,14 @@ function OnLoad()
 {
     document.getElementById("calculateButton").onclick = Level80CalculateButtonClick;
     document.getElementById("resetButton").onclick = ResetLevel80Fields;
+    _useAllCraftersCheckbox.onclick = ToggleAllCrafterCheckboxes;
+    for(let i = 0; i < CRAFTERS.length; i++)
+    {
+        document.getElementById("checkboxUse" + CRAFTERS[i]).onclick = UpdateUseAllCraftersCheckbox;   
+    }
     
-    _errorTextareaDiv.style.display = "none";
-    _resultsTextarea.style.visibility = "hidden";
+    _lvl80ErrorTextareaDiv.style.display = "none";
+    _lvl80ResultsTextarea.style.visibility = "hidden";
     
     //put values in the text boxes for testing because im not typing that over and over
     //simulated user input #1
@@ -253,7 +260,7 @@ function Level80CalculateButtonClick()
         return;
     }
 
-    _resultsTextarea.style.borderWidth = "1px";
+    _lvl80ResultsTextarea.style.borderWidth = "1px";
 
     FindLevel80CraftingPaths();
 
@@ -382,10 +389,10 @@ function GetAndValidateLevel80UserInput()
     _level80AllowedCrafters = [];
 
     //update the list of crafters the user is able to use
-    _level80CrafterMatrix.forEach(matrix => {
-        if(document.getElementById("checkboxUse" + matrix.Crafter).checked)
+    CRAFTERS.forEach(crafter => {
+        if(document.getElementById("checkboxUse" + crafter).checked)
         {
-            _level80AllowedCrafters.push(matrix.Crafter);
+            _level80AllowedCrafters.push(crafter);
         }
     });
 
@@ -394,29 +401,29 @@ function GetAndValidateLevel80UserInput()
     {
         if(invalidValueErrorExists)
         {
-            _errorTextarea.textContent = invalidValueErrorString;
+            _lvl80ErrorTextarea.textContent = invalidValueErrorString;
         }
         else if(tooLargeErrorExists)
         {
-            _errorTextarea.textContent = tooLargeErrorString;
+            _lvl80ErrorTextarea.textContent = tooLargeErrorString;
         }
-        _errorTextareaDiv.style.display = "block";
-        _resultsTextarea.style.visibility = "hidden";
+        _lvl80ErrorTextareaDiv.style.display = "block";
+        _lvl80ResultsTextarea.style.visibility = "hidden";
         return false;
     }
     
     //if there's not an error, hide the error and show the results
-    _errorTextarea.textContent = "";
-    _errorTextareaDiv.style.display = "none";
-    _resultsTextarea.style.visibility = "visible";
+    _lvl80ErrorTextarea.textContent = "";
+    _lvl80ErrorTextareaDiv.style.display = "none";
+    _lvl80ResultsTextarea.style.visibility = "visible";
     return true;
 }
 
 function ResetLevel80Fields()
 {
-    _errorTextarea.textContent = "";
-    _errorTextareaDiv.style.display = "none";
-    _resultsTextarea.style.visibility = "hidden";
+    _lvl80ErrorTextarea.textContent = "";
+    _lvl80ErrorTextareaDiv.style.display = "none";
+    _lvl80ResultsTextarea.style.visibility = "hidden";
 
     //im not making variable names for these because im only addressing them here
     document.getElementById("lvl80Logs").value = "";
@@ -429,6 +436,31 @@ function ResetLevel80Fields()
     document.getElementById("lvl80Sand").value = "";
     document.getElementById("lvl80Water").value = "";
     document.getElementById("lvl80Salt").value = "";
+}
+
+function ToggleAllCrafterCheckboxes()
+{
+    CRAFTERS.forEach(crafter => {
+        document.getElementById("checkboxUse" + crafter).checked = _useAllCraftersCheckbox.checked
+    });
+}
+
+function UpdateUseAllCraftersCheckbox()
+{
+    let allChecked = true;
+
+    //loop over all the checkboxes and if one is not checked, set the allChecked to false
+    for(let i = 0; i < CRAFTERS.length; i++)
+    {
+        if(!document.getElementById("checkboxUse" + CRAFTERS[i]).checked)
+        {
+            allChecked = false;
+            break;
+        }
+    }
+
+    //update the checkboxUseAll based on the state of the variable
+    _useAllCraftersCheckbox.checked = allChecked;
 }
 
 //#region Level 80 Recursive Crafter calculations
