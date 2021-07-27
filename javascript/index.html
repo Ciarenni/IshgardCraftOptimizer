@@ -57,70 +57,100 @@
     </div>
   </div>
   <br>
-  <div id="materials-div" class="materials-div">
-    <div>
-      <label for="lvl80Logs" id="lvl80LogsLabel" class="materials-label">Logs</label>
-      <input type="text" id="lvl80Logs" class="materials-input" placeholder="Logs">
+  <div id="materials-tab-control" class="tab_container">
+      <div id="materials-tab-header-area" class="tab_button_bar">
+        <button class="tab_button tab_button--active" data-for-tab="1">Level 80</button>
+        <button class="tab_button" data-for-tab="2">Level 70</button>
+        <button class="tab_button" data-for-tab="3">Level 60</button>
+        <button class="tab_button" data-for-tab="4">Level 40</button>
+        <button class="tab_button" data-for-tab="5">Level 20</button>
+      </div>
+    <div class="tab_content tab_content--active" data-tab="1">
+      <div id="materials-div" class="materials-div">
+        <div>
+          <label for="lvl80Logs" id="lvl80LogsLabel" class="materials-label">Logs</label>
+          <input type="text" id="lvl80Logs" class="materials-input" placeholder="Logs">
+        </div>
+        
+        <div>
+          <label for="lvl80Wheat" class="materials-label">Wheat</label>
+          <input type="text" id="lvl80Wheat" class="materials-input" placeholder="Wheat">
+        </div>
+        
+        <div>
+          <label for="lvl80Bolls" class="materials-label">Bolls</label>
+          <input type="text" id="lvl80Bolls" class="materials-input" placeholder="Bolls">
+        </div>
+        
+        <div>
+          <label for="lvl80Resin" class="materials-label">Resin</label>
+          <input type="text" id="lvl80Resin" class="materials-input" placeholder="Resin">
+        </div>
+        
+        <div>
+          <label for="lvl80Tortoises" class="materials-label">Tortoises</label>
+          <input type="text" id="lvl80Tortoises" class="materials-input" placeholder="Tortoises">
+        </div>
+        
+        <div>
+          <label for="lvl80Bluespirit" class="materials-label">Bluespirit</label>
+          <input type="text" id="lvl80Bluespirit" class="materials-input" placeholder="Bluespirit">
+        </div>
+        
+        <div>
+          <label for="lvl80Gold" class="materials-label">Gold</label>
+          <input type="text" id="lvl80Gold" class="materials-input" placeholder="Gold">
+        </div>
+        
+        <div>
+          <label for="lvl80Sand" class="materials-label">Sand</label>
+          <input type="text" id="lvl80Sand" class="materials-input" placeholder="Sand">
+        </div>
+        
+        <div>
+          <label for="lvl80Water" class="materials-label">Water</label>
+          <input type="text" id="lvl80Water" class="materials-input" placeholder="Water">
+        </div>
+        
+        <div>
+          <label for="lvl80Salt" class="materials-label">Salt</label>
+          <input type="text" id="lvl80Salt" class="materials-input" placeholder="Salt">
+        </div>
+        
+        <div>
+          <input type="button" id="resetButton" value="Reset">
+          <input type="button" id="calculateButton" value="Calculate!">
+        </div>
+      </div>
+      <br>  
+      <div id="lvl80InfoTextAreaDiv" class="info-div">
+        <textarea id="lvl80InfoTextArea" class="info-text-area" readonly rows="10" cols="60"></textarea>
+      </div>
     </div>
-    
-    <div>
-      <label for="lvl80Wheat" class="materials-label">Wheat</label>
-      <input type="text" id="lvl80Wheat" class="materials-input" placeholder="Wheat">
+
+    <div class="tab_content" data-tab="2">
+      <p>
+        Level 70 optimization is under construction.
+      </p>
     </div>
-    
-    <div>
-      <label for="lvl80Bolls" class="materials-label">Bolls</label>
-      <input type="text" id="lvl80Bolls" class="materials-input" placeholder="Bolls">
+
+    <div class="tab_content" data-tab="3">
+      <p>
+        Level 60 optimization is under construction.
+      </p>
     </div>
-    
-    <div>
-      <label for="lvl80Resin" class="materials-label">Resin</label>
-      <input type="text" id="lvl80Resin" class="materials-input" placeholder="Resin">
+
+    <div class="tab_content" data-tab="4">
+      <p>
+        Level 40 optimization is under construction.
+      </p>
     </div>
-    
-    <div>
-      <label for="lvl80Tortoises" class="materials-label">Tortoises</label>
-      <input type="text" id="lvl80Tortoises" class="materials-input" placeholder="Tortoises">
+
+    <div class="tab_content" data-tab="5">
+      <p>
+        Level 20 optimization is under construction.
+      </p>
     </div>
-    
-    <div>
-      <label for="lvl80Bluespirit" class="materials-label">Bluespirit</label>
-      <input type="text" id="lvl80Bluespirit" class="materials-input" placeholder="Bluespirit">
-    </div>
-    
-    <div>
-      <label for="lvl80Gold" class="materials-label">Gold</label>
-      <input type="text" id="lvl80Gold" class="materials-input" placeholder="Gold">
-    </div>
-    
-    <div>
-      <label for="lvl80Sand" class="materials-label">Sand</label>
-      <input type="text" id="lvl80Sand" class="materials-input" placeholder="Sand">
-    </div>
-    
-    <div>
-      <label for="lvl80Water" class="materials-label">Water</label>
-      <input type="text" id="lvl80Water" class="materials-input" placeholder="Water">
-    </div>
-    
-    <div>
-      <label for="lvl80Salt" class="materials-label">Salt</label>
-      <input type="text" id="lvl80Salt" class="materials-input" placeholder="Salt">
-    </div>
-    
-    <div>
-      <input type="button" id="resetButton" value="Reset">
-      <input type="button" id="calculateButton" value="Calculate!">
-    </div>
-  </div>
-  <br>
-  <div id="lvl80ErrorTextAreaDiv" class="error-div">
-    <textarea id="lvl80ErrorTextArea" class="info-text-area" readonly rows="10" cols="60"></textarea>
-  </div>
-  <br>
-  <div class="results-div">
-    <!-- I set the rows for this text area to 10, because it's a maximum of 8 crafters (all of them), plus 2 rows for the extra text -->
-    <textarea id="lvl80ResultsTextarea" class="info-text-area" readonly rows="10" cols="50"></textarea>
   </div>
 
   <script src="js/ishgard_v2.js"></script>

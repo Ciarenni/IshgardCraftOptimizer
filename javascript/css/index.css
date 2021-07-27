@@ -18,53 +18,97 @@
 }
 
 .materials-div {
-    text-align: right;
-    width: 100%;
-    display: grid;
-    column-gap: 5px;
-    justify-content: center;
-  }
+  text-align: right;
+  width: 100%;
+  display: grid;
+  column-gap: 5px;
+  justify-content: center;
+}
 
-  .materials-div::before {
-    content: "";
-    background-image: url("../resources/background-kupo-of-fortune.jpg");
-    position: absolute;
-    top: 0px;
-    left: 0px;
-    width: 100%;
-    height: 100%;
-    z-index: -1;
-    opacity: 0.5;
-    background-size: cover;
-  }
+.crafter-use-div::before {
+  content: "";
+  background-image: url("../resources/background-kupo-of-fortune.jpg");
+  position: absolute;
+  top: 0px;
+  left: 0px;
+  width: 100%;
+  height: 100%;
+  z-index: -1;
+  opacity: 0.5;
+  background-size: cover;
+}
 
-  .header {
-    text-align: center;
-  }
+.header {
+  text-align: center;
+}
 
-  .error-div {
-    text-align: center;
-    display: none;
-  }
+.info-div {
+  width: 100%;
+  text-align: center;
+  display: none;
+}
 
-  .results-div {
-    width: 100%;
-    text-align: center;
-  }
+.info-text-area {
+  border-width: 0px;
+  resize: none;
+  text-align: center;
+  font-family: Arial, Helvetica, sans-serif;
+}
 
-  .info-text-area {
-    border-width: 0px;
-    resize: none;
-    text-align: center;
-    font-family: Arial, Helvetica, sans-serif;
-  }
+.materials-label {
+  font-weight: bold;
+}
 
-  .materials-label {
-    font-weight: bold;
-  }
+.materials-input {
+  margin: 1px;
+  width: 75px;
+  
+}
 
-  .materials-input {
-    margin: 1px;
-    width: 75px;
-    
-  }
+.tab_container {
+  overflow: hidden;
+  width: max-content;
+  margin: 0 auto;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.tab_button_bar {
+  width: auto; 
+  background: #cccccc;
+  margin: 0 auto;
+  display: table;
+}
+
+.tab_button {
+  margin: 0 auto;
+  padding: 10px 5px;
+  background: #eeeeee;
+  border: none;
+  outline: none;
+  cursor: pointer;
+}
+
+.tab_button:active {
+  background: #dddddd;
+}
+
+.tab_button:not(:last-of-type) {
+  border-right: 1px solid #cccccc;
+}
+
+.tab_button--active {
+  font-weight: bold;
+  border-bottom: 2px solid #009879;
+  background: #dddddd;
+}
+
+.tab_content {
+  padding: 15px;
+  display: none;
+}
+
+.tab_content--active {
+  display: block;
+}

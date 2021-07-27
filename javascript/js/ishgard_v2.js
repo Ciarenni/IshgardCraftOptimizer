@@ -170,9 +170,8 @@ class CrafterDictionaryItem
 
 //#region Web controls
 
-let _lvl80ResultsTextarea = document.getElementById("lvl80ResultsTextarea");
-let _lvl80ErrorTextarea = document.getElementById("lvl80ErrorTextArea");
-let _lvl80ErrorTextareaDiv = document.getElementById("lvl80ErrorTextAreaDiv");
+let _lvl80InfoTextarea = document.getElementById("lvl80InfoTextArea");
+let _lvl80InfoTextareaDiv = document.getElementById("lvl80InfoTextAreaDiv");
 let _useAllCraftersCheckbox = document.getElementById("checkboxUseAll");
 
 // let _checkboxUseCRP = document.getElementById("checkboxUseCRP");
@@ -200,8 +199,9 @@ function OnLoad()
         document.getElementById("checkboxUse" + CRAFTERS[i]).onclick = UpdateUseAllCraftersCheckbox;   
     }
     
-    _lvl80ErrorTextareaDiv.style.display = "none";
-    _lvl80ResultsTextarea.style.visibility = "hidden";
+    _lvl80InfoTextareaDiv.style.display = "none";
+
+    SetUpTabs();
     
     //put values in the text boxes for testing because im not typing that over and over
     //simulated user input #1
@@ -253,6 +253,29 @@ function OnLoad()
     // document.getElementById("lvl80Salt").value = 100;
 }
 
+function SetUpTabs()
+{
+    document.querySelectorAll(".tab_button").forEach(button => {
+        button.addEventListener("click", () => {
+            const tabBar = button.parentElement;
+            const tabContainer = tabBar.parentElement;
+            const tabNumber = button.dataset.forTab;
+            const tabToActivate = tabContainer.querySelector(`.tab_content[data-tab="${tabNumber}"]`);
+
+            tabBar.querySelectorAll(".tab_button").forEach(button2 => {
+                button2.classList.remove("tab_button--active");
+            });
+
+            tabContainer.querySelectorAll(".tab_content").forEach(tab => {
+                tab.classList.remove("tab_content--active");
+            });
+
+            button.classList.add("tab_button--active");
+            tabToActivate.classList.add("tab_content--active");
+        });
+    });
+}
+
 function Level80CalculateButtonClick()
 {
     if(!GetAndValidateLevel80UserInput())
@@ -260,7 +283,7 @@ function Level80CalculateButtonClick()
         return;
     }
 
-    _lvl80ResultsTextarea.style.borderWidth = "1px";
+    _lvl80InfoTextarea.style.borderWidth = "1px";
 
     FindLevel80CraftingPaths();
 
@@ -276,7 +299,7 @@ function Level80CalculateButtonClick()
 
     if(maxCount != 0)
     {
-        var craftString = "The optimal crafting path(s) that offer the max number of crafts, " + maxCount + ", are:\r\n";
+        var craftString = "The crafting path(s) that offer the max number of crafts, " + maxCount + ", are:\r\n";
         //store all the crafters that tie for max count in their own array, with their crafting lists sorted
         let maxCountLevel80CrafterDictionary = _level80CrafterDictionary.filter(d => d.CountSum === maxCount);
         maxCountLevel80CrafterDictionary.forEach(maxCrafter =>
@@ -344,11 +367,11 @@ function Level80CalculateButtonClick()
             craftString = craftString.substring(0, craftString.length - 4) + "\r\n";
         });
 
-        resultsTextarea.textContent = craftString;
+        _lvl80InfoTextarea.textContent = craftString;
     }
     else
     {
-        resultsTextarea.textContent = "No crafting paths were found with the given materials and selected crafters."
+        _lvl80InfoTextarea.textContent = "No crafting paths were found with the given materials and selected crafters."
     }
 }
 
@@ -396,34 +419,31 @@ function GetAndValidateLevel80UserInput()
         }
     });
 
-    //if an error exists, hide the results and show the error content
+    //if an error exists, set the error content and ensure the field is shown
     if(invalidValueErrorExists || tooLargeErrorExists)
     {
         if(invalidValueErrorExists)
         {
-            _lvl80ErrorTextarea.textContent = invalidValueErrorString;
+            _lvl80InfoTextarea.textContent = invalidValueErrorString;
         }
         else if(tooLargeErrorExists)
         {
-            _lvl80ErrorTextarea.textContent = tooLargeErrorString;
+            _lvl80InfoTextarea.textContent = tooLargeErrorString;
         }
-        _lvl80ErrorTextareaDiv.style.display = "block";
-        _lvl80ResultsTextarea.style.visibility = "hidden";
+
+        _lvl80InfoTextareaDiv.style.display = "block";
         return false;
     }
     
-    //if there's not an error, hide the error and show the results
-    _lvl80ErrorTextarea.textContent = "";
-    _lvl80ErrorTextareaDiv.style.display = "none";
-    _lvl80ResultsTextarea.style.visibility = "visible";
+    //if there's not an error, still need to ensure the field is shown after a reset
+    _lvl80InfoTextareaDiv.style.display = "block";
     return true;
 }
 
 function ResetLevel80Fields()
 {
-    _lvl80ErrorTextarea.textContent = "";
-    _lvl80ErrorTextareaDiv.style.display = "none";
-    _lvl80ResultsTextarea.style.visibility = "hidden";
+    _lvl80InfoTextarea.textContent = "";
+    _lvl80InfoTextareaDiv.style.display = "none";
 
     //im not making variable names for these because im only addressing them here
     document.getElementById("lvl80Logs").value = "";
