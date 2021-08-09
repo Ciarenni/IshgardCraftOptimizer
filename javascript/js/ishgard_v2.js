@@ -1,8 +1,297 @@
 //#region Members
+
+//#region Constants
+
 let COUNT_OF_CRAFTERS = 8;//constant
-let PER_MATERIAL_COST = 10;//constant
+let LEVEL_80_MATERIAL_COST = 10;
+let LEVEL_70_MATERIAL_COST = 10;
+let LEVEL_60_MATERIAL_COST = 5;
+let LEVEL_40_MATERIAL_COST = 5;
+let LEVEL_20_MATERIAL_COST = 5;
 let CRAFTERS = [ "CRP", "BSM", "ARM", "GSM", "LTW", "WVR", "ALC", "CUL" ]//constant
+
+//#endregion
+
+//#region Level 80 variables
+
 let _level80CrafterMatrix = [
+    {
+        "Crafter": "CRP",
+        "CedarLogs": true,
+        "Wheat": true,
+        "CottonBolls": true,
+        "Resin": false,
+        "Tortoises": false,
+        "BluespiritOre": false,
+        "GoldOre": false,
+        "MineralSand": false,
+        "TruespringWater": false,
+        "RockSalt": false
+    },
+    {
+        "Crafter": "BSM",
+        "CedarLogs": true,
+        "Wheat": false,
+        "CottonBolls": false,
+        "Resin": false,
+        "Tortoises": false,
+        "BluespiritOre": true,
+        "GoldOre": true,
+        "MineralSand": false,
+        "TruespringWater": false,
+        "RockSalt": false
+    },
+    {
+        "Crafter": "ARM",
+        "CedarLogs": false,
+        "Wheat": false,
+        "CottonBolls": false,
+        "Resin": false,
+        "Tortoises": false,
+        "BluespiritOre": true,
+        "GoldOre": true,
+        "MineralSand": true,
+        "TruespringWater": false,
+        "RockSalt": false
+    },
+    {
+        "Crafter": "GSM",
+        "CedarLogs": false,
+        "Wheat": false,
+        "CottonBolls": false,
+        "Resin": true,
+        "Tortoises": false,
+        "BluespiritOre": true,
+        "GoldOre": false,
+        "MineralSand": true,
+        "TruespringWater": false,
+        "RockSalt": false
+    },
+    {
+        "Crafter": "LTW",
+        "CedarLogs": true,
+        "Wheat": false,
+        "CottonBolls": true,
+        "Resin": false,
+        "Tortoises": true,
+        "BluespiritOre": false,
+        "GoldOre": false,
+        "MineralSand": false,
+        "TruespringWater": false,
+        "RockSalt": false
+    },
+    {
+        "Crafter": "WVR",
+        "CedarLogs": false,
+        "Wheat": false,
+        "CottonBolls": true,
+        "Resin": true,
+        "Tortoises": false,
+        "BluespiritOre": false,
+        "GoldOre": false,
+        "MineralSand": false,
+        "TruespringWater": true,
+        "RockSalt": false
+    },
+    {
+        "Crafter": "ALC",
+        "CedarLogs": false,
+        "Wheat": false,
+        "CottonBolls": false,
+        "Resin": false,
+        "Tortoises": true,
+        "BluespiritOre": false,
+        "GoldOre": false,
+        "MineralSand": false,
+        "TruespringWater": true,
+        "RockSalt": true
+    },
+    {
+        "Crafter": "CUL",
+        "CedarLogs": false,
+        "Wheat": true,
+        "CottonBolls": false,
+        "Resin": false,
+        "Tortoises": false,
+        "BluespiritOre": false,
+        "GoldOre": false,
+        "MineralSand": false,
+        "TruespringWater": true,
+        "RockSalt": true
+    }
+];
+let _level80UserCraftingInventory = {
+
+    "CedarLogs": 0,
+    "Wheat": 0,
+    "CottonBolls": 0,
+    "Resin": 0,
+    "Tortoises": 0,
+    "BluespiritOre": 0,
+    "GoldOre": 0,
+    "MineralSand": 0,
+    "TruespringWater": 0,
+    "RockSalt": 0
+
+};
+let _level80CraftsAvailablePerCrafter = {
+    "CRP": 0,
+    "BSM": 0,
+    "ARM": 0,
+    "GSM": 0,
+    "LTW": 0,
+    "WVR": 0,
+    "ALC": 0,
+    "CUL": 0
+}
+
+let _level80CrafterDictionary = [];//a list of CrafterDictionaryItems
+let _level80CrafterList = [];//a list of CrafterListItems, it will hold 
+let _level80AllowedCrafters = [];//crafter TLAs
+
+//#endregion
+
+//#region Level 70 variables - update values
+
+let _level70CrafterMatrix = [
+    {
+        "Crafter": "CRP",
+        "SpruceLogs": false,
+        "Mistletoe": false,
+        "TeaLeaves": false,
+        "Vines": false,
+        "Toads": false,
+        "ElectrumOre": false,
+        "Alumen": false,
+        "SpringWater": false,
+        "GoldSand": false,
+        "Ragstone": false
+    },
+    {
+        "Crafter": "BSM",
+        "SpruceLogs": false,
+        "Mistletoe": false,
+        "TeaLeaves": false,
+        "Vines": false,
+        "Toads": false,
+        "ElectrumOre": false,
+        "Alumen": false,
+        "SpringWater": false,
+        "GoldSand": false,
+        "Ragstone": false
+    },
+    {
+        "Crafter": "ARM",
+        "SpruceLogs": false,
+        "Mistletoe": false,
+        "TeaLeaves": false,
+        "Vines": false,
+        "Toads": false,
+        "ElectrumOre": false,
+        "Alumen": false,
+        "SpringWater": false,
+        "GoldSand": false,
+        "Ragstone": false
+    },
+    {
+        "Crafter": "GSM",
+        "SpruceLogs": false,
+        "Mistletoe": false,
+        "TeaLeaves": false,
+        "Vines": false,
+        "Toads": false,
+        "ElectrumOre": false,
+        "Alumen": false,
+        "SpringWater": false,
+        "GoldSand": false,
+        "Ragstone": false
+    },
+    {
+        "Crafter": "LTW",
+        "SpruceLogs": false,
+        "Mistletoe": false,
+        "TeaLeaves": false,
+        "Vines": false,
+        "Toads": false,
+        "ElectrumOre": false,
+        "Alumen": false,
+        "SpringWater": false,
+        "GoldSand": false,
+        "Ragstone": false
+    },
+    {
+        "Crafter": "WVR",
+        "SpruceLogs": false,
+        "Mistletoe": false,
+        "TeaLeaves": false,
+        "Vines": false,
+        "Toads": false,
+        "ElectrumOre": false,
+        "Alumen": false,
+        "SpringWater": false,
+        "GoldSand": false,
+        "Ragstone": false
+    },
+    {
+        "Crafter": "ALC",
+        "SpruceLogs": false,
+        "Mistletoe": false,
+        "TeaLeaves": false,
+        "Vines": false,
+        "Toads": false,
+        "ElectrumOre": false,
+        "Alumen": false,
+        "SpringWater": false,
+        "GoldSand": false,
+        "Ragstone": false
+    },
+    {
+        "Crafter": "CUL",
+        "SpruceLogs": false,
+        "Mistletoe": false,
+        "TeaLeaves": false,
+        "Vines": false,
+        "Toads": false,
+        "ElectrumOre": false,
+        "Alumen": false,
+        "SpringWater": false,
+        "GoldSand": false,
+        "Ragstone": false
+    }
+];
+let _level70UserCraftingInventory = {
+
+    "SpruceLogs": 0,
+    "Mistletoe": 0,
+    "TeaLeaves": 0,
+    "Vines": 0,
+    "Toads": 0,
+    "ElectrumOre": 0,
+    "Alumen": 0,
+    "SpringWater": 0,
+    "GoldSand": 0,
+    "Ragstone": 0
+};
+let _level70CraftsAvailablePerCrafter = {
+    "CRP": 0,
+    "BSM": 0,
+    "ARM": 0,
+    "GSM": 0,
+    "LTW": 0,
+    "WVR": 0,
+    "ALC": 0,
+    "CUL": 0
+}
+
+let _level70CrafterDictionary = [];//a list of CrafterDictionaryItems
+let _level70CrafterList = [];//a list of CrafterListItems, it will hold 
+let _level70AllowedCrafters = [];//crafter TLAs
+
+//#endregion
+
+//#region Level 60 variables - update values
+
+let _level60CrafterMatrix = [
     {
         "Crafter": "CRP",
         "Logs": true,
@@ -108,21 +397,21 @@ let _level80CrafterMatrix = [
         "Salt": true
     }
 ];
-let _level80UserCraftingInventory = {
+let _level60UserCraftingInventory = {
 
-    "Logs": 10,
-    "Wheat": 10,
-    "Bolls": 10,
-    "Resin": 10,
-    "Tortoises": 10,
-    "Bluespirit": 10,
-    "Gold": 10,
-    "Sand": 10,
-    "Water": 10,
-    "Salt": 10
+    "Logs": 0,
+    "Wheat": 0,
+    "Bolls": 0,
+    "Resin": 0,
+    "Tortoises": 0,
+    "Bluespirit": 0,
+    "Gold": 0,
+    "Sand": 0,
+    "Water": 0,
+    "Salt": 0
 
 };
-let _level80CraftsAvailablePerCrafter = {
+let _level60CraftsAvailablePerCrafter = {
     "CRP": 0,
     "BSM": 0,
     "ARM": 0,
@@ -133,9 +422,289 @@ let _level80CraftsAvailablePerCrafter = {
     "CUL": 0
 }
 
-let _level80CrafterDictionary = [];//a list of CrafterDictionaryItems
-let _level80CrafterList = [];//a list of CrafterListItems, it will hold 
-let _level80AllowedCrafters = [];//crafter TLAs
+let _level60CrafterDictionary = [];//a list of CrafterDictionaryItems
+let _level60CrafterList = [];//a list of CrafterListItems, it will hold 
+let _level60AllowedCrafters = [];//crafter TLAs
+
+//#endregion
+
+//#region Level 40 variables - update values
+
+let _level40CrafterMatrix = [
+    {
+        "Crafter": "CRP",
+        "Logs": true,
+        "Wheat": true,
+        "Bolls": true,
+        "Resin": false,
+        "Tortoises": false,
+        "Bluespirit": false,
+        "Gold": false,
+        "Sand": false,
+        "Water": false,
+        "Salt": false
+    },
+    {
+        "Crafter": "BSM",
+        "Logs": true,
+        "Wheat": false,
+        "Bolls": false,
+        "Resin": false,
+        "Tortoises": false,
+        "Bluespirit": true,
+        "Gold": true,
+        "Sand": false,
+        "Water": false,
+        "Salt": false
+    },
+    {
+        "Crafter": "ARM",
+        "Logs": false,
+        "Wheat": false,
+        "Bolls": false,
+        "Resin": false,
+        "Tortoises": false,
+        "Bluespirit": true,
+        "Gold": true,
+        "Sand": true,
+        "Water": false,
+        "Salt": false
+    },
+    {
+        "Crafter": "GSM",
+        "Logs": false,
+        "Wheat": false,
+        "Bolls": false,
+        "Resin": true,
+        "Tortoises": false,
+        "Bluespirit": true,
+        "Gold": false,
+        "Sand": true,
+        "Water": false,
+        "Salt": false
+    },
+    {
+        "Crafter": "LTW",
+        "Logs": true,
+        "Wheat": false,
+        "Bolls": true,
+        "Resin": false,
+        "Tortoises": true,
+        "Bluespirit": false,
+        "Gold": false,
+        "Sand": false,
+        "Water": false,
+        "Salt": false
+    },
+    {
+        "Crafter": "WVR",
+        "Logs": false,
+        "Wheat": false,
+        "Bolls": true,
+        "Resin": true,
+        "Tortoises": false,
+        "Bluespirit": false,
+        "Gold": false,
+        "Sand": false,
+        "Water": true,
+        "Salt": false
+    },
+    {
+        "Crafter": "ALC",
+        "Logs": false,
+        "Wheat": false,
+        "Bolls": false,
+        "Resin": false,
+        "Tortoises": true,
+        "Bluespirit": false,
+        "Gold": false,
+        "Sand": false,
+        "Water": true,
+        "Salt": true
+    },
+    {
+        "Crafter": "CUL",
+        "Logs": false,
+        "Wheat": true,
+        "Bolls": false,
+        "Resin": false,
+        "Tortoises": false,
+        "Bluespirit": false,
+        "Gold": false,
+        "Sand": false,
+        "Water": true,
+        "Salt": true
+    }
+];
+let _level40UserCraftingInventory = {
+
+    "Logs": 0,
+    "Wheat": 0,
+    "Bolls": 0,
+    "Resin": 0,
+    "Tortoises": 0,
+    "Bluespirit": 0,
+    "Gold": 0,
+    "Sand": 0,
+    "Water": 0,
+    "Salt": 0
+
+};
+let _level40CraftsAvailablePerCrafter = {
+    "CRP": 0,
+    "BSM": 0,
+    "ARM": 0,
+    "GSM": 0,
+    "LTW": 0,
+    "WVR": 0,
+    "ALC": 0,
+    "CUL": 0
+}
+
+let _level40CrafterDictionary = [];//a list of CrafterDictionaryItems
+let _level40CrafterList = [];//a list of CrafterListItems, it will hold 
+let _level40AllowedCrafters = [];//crafter TLAs
+
+//#endregion
+
+//#region Level 20 variables - update values
+
+let _level20CrafterMatrix = [
+    {
+        "Crafter": "CRP",
+        "Logs": true,
+        "Wheat": true,
+        "Bolls": true,
+        "Resin": false,
+        "Tortoises": false,
+        "Bluespirit": false,
+        "Gold": false,
+        "Sand": false,
+        "Water": false,
+        "Salt": false
+    },
+    {
+        "Crafter": "BSM",
+        "Logs": true,
+        "Wheat": false,
+        "Bolls": false,
+        "Resin": false,
+        "Tortoises": false,
+        "Bluespirit": true,
+        "Gold": true,
+        "Sand": false,
+        "Water": false,
+        "Salt": false
+    },
+    {
+        "Crafter": "ARM",
+        "Logs": false,
+        "Wheat": false,
+        "Bolls": false,
+        "Resin": false,
+        "Tortoises": false,
+        "Bluespirit": true,
+        "Gold": true,
+        "Sand": true,
+        "Water": false,
+        "Salt": false
+    },
+    {
+        "Crafter": "GSM",
+        "Logs": false,
+        "Wheat": false,
+        "Bolls": false,
+        "Resin": true,
+        "Tortoises": false,
+        "Bluespirit": true,
+        "Gold": false,
+        "Sand": true,
+        "Water": false,
+        "Salt": false
+    },
+    {
+        "Crafter": "LTW",
+        "Logs": true,
+        "Wheat": false,
+        "Bolls": true,
+        "Resin": false,
+        "Tortoises": true,
+        "Bluespirit": false,
+        "Gold": false,
+        "Sand": false,
+        "Water": false,
+        "Salt": false
+    },
+    {
+        "Crafter": "WVR",
+        "Logs": false,
+        "Wheat": false,
+        "Bolls": true,
+        "Resin": true,
+        "Tortoises": false,
+        "Bluespirit": false,
+        "Gold": false,
+        "Sand": false,
+        "Water": true,
+        "Salt": false
+    },
+    {
+        "Crafter": "ALC",
+        "Logs": false,
+        "Wheat": false,
+        "Bolls": false,
+        "Resin": false,
+        "Tortoises": true,
+        "Bluespirit": false,
+        "Gold": false,
+        "Sand": false,
+        "Water": true,
+        "Salt": true
+    },
+    {
+        "Crafter": "CUL",
+        "Logs": false,
+        "Wheat": true,
+        "Bolls": false,
+        "Resin": false,
+        "Tortoises": false,
+        "Bluespirit": false,
+        "Gold": false,
+        "Sand": false,
+        "Water": true,
+        "Salt": true
+    }
+];
+let _level20UserCraftingInventory = {
+
+    "Logs": 0,
+    "Wheat": 0,
+    "Bolls": 0,
+    "Resin": 0,
+    "Tortoises": 0,
+    "Bluespirit": 0,
+    "Gold": 0,
+    "Sand": 0,
+    "Water": 0,
+    "Salt": 0
+
+};
+let _level20CraftsAvailablePerCrafter = {
+    "CRP": 0,
+    "BSM": 0,
+    "ARM": 0,
+    "GSM": 0,
+    "LTW": 0,
+    "WVR": 0,
+    "ALC": 0,
+    "CUL": 0
+}
+
+let _level20CrafterDictionary = [];//a list of CrafterDictionaryItems
+let _level20CrafterList = [];//a list of CrafterListItems, it will hold 
+let _level20AllowedCrafters = [];//crafter TLAs
+
+//#endregion
 
 class CrafterListItem
 {
@@ -205,52 +774,52 @@ function OnLoad()
     
     //put values in the text boxes for testing because im not typing that over and over
     //simulated user input #1
-    // document.getElementById("lvl80Logs").value = 100;
+    // document.getElementById("lvl80CedarLogs").value = 100;
     // document.getElementById("lvl80Wheat").value = 20;
-    // document.getElementById("lvl80Bolls").value = 90;
+    // document.getElementById("lvl80CottonBolls").value = 90;
     // document.getElementById("lvl80Resin").value = 80;
     // document.getElementById("lvl80Tortoises").value = 30;
-    // document.getElementById("lvl80Bluespirit").value = 70;
-    // document.getElementById("lvl80Gold").value = 90;
-    // document.getElementById("lvl80Sand").value = 40;
-    // document.getElementById("lvl80Water").value = 120;
-    // document.getElementById("lvl80Salt").value = 110;
+    // document.getElementById("lvl80BluespiritOre").value = 70;
+    // document.getElementById("lvl80GoldOre").value = 90;
+    // document.getElementById("lvl80MineralSand").value = 40;
+    // document.getElementById("lvl80TruespringWater").value = 120;
+    // document.getElementById("lvl80RockSalt").value = 110;
     
     //simulated user input #2
-    // document.getElementById("lvl80Logs").value = 90;
+    // document.getElementById("lvl80CedarLogs").value = 90;
     // document.getElementById("lvl80Wheat").value = 140;
-    // document.getElementById("lvl80Bolls").value = 10;
+    // document.getElementById("lvl80CottonBolls").value = 10;
     // document.getElementById("lvl80Resin").value = 60;
     // document.getElementById("lvl80Tortoises").value = 40;
-    // document.getElementById("lvl80Bluespirit").value = 200;
-    // document.getElementById("lvl80Gold").value = 170;
-    // document.getElementById("lvl80Sand").value = 100;
-    // document.getElementById("lvl80Water").value = 80;
-    // document.getElementById("lvl80Salt").value = 190;
+    // document.getElementById("lvl80BluespiritOre").value = 200;
+    // document.getElementById("lvl80GoldOre").value = 170;
+    // document.getElementById("lvl80MineralSand").value = 100;
+    // document.getElementById("lvl80TruespringWater").value = 80;
+    // document.getElementById("lvl80RockSalt").value = 190;
 
     //simulated user input #3
-    // document.getElementById("lvl80Logs").value = 375;
+    // document.getElementById("lvl80CedarLogs").value = 375;
     // document.getElementById("lvl80Wheat").value = 410;
-    // document.getElementById("lvl80Bolls").value = 861;
+    // document.getElementById("lvl80CottonBolls").value = 861;
     // document.getElementById("lvl80Resin").value = 1415;
     // document.getElementById("lvl80Tortoises").value = 345;
-    // document.getElementById("lvl80Bluespirit").value = 400;
-    // document.getElementById("lvl80Gold").value = 300;
-    // document.getElementById("lvl80Sand").value = 285;
-    // document.getElementById("lvl80Water").value = 330;
-    // document.getElementById("lvl80Salt").value = 300;
+    // document.getElementById("lvl80BluespiritOre").value = 400;
+    // document.getElementById("lvl80GoldOre").value = 300;
+    // document.getElementById("lvl80MineralSand").value = 285;
+    // document.getElementById("lvl80TruespringWater").value = 330;
+    // document.getElementById("lvl80RockSalt").value = 300;
 
     //simulated user input #4
-    // document.getElementById("lvl80Logs").value = 100;
+    // document.getElementById("lvl80CedarLogs").value = 100;
     // document.getElementById("lvl80Wheat").value = 100;
-    // document.getElementById("lvl80Bolls").value = 100;
+    // document.getElementById("lvl80CottonBolls").value = 100;
     // document.getElementById("lvl80Resin").value = 100;
     // document.getElementById("lvl80Tortoises").value = 100;
-    // document.getElementById("lvl80Bluespirit").value = 100;
-    // document.getElementById("lvl80Gold").value = 100;
-    // document.getElementById("lvl80Sand").value = 100;
-    // document.getElementById("lvl80Water").value = 100;
-    // document.getElementById("lvl80Salt").value = 100;
+    // document.getElementById("lvl80BluespiritOre").value = 100;
+    // document.getElementById("lvl80GoldOre").value = 100;
+    // document.getElementById("lvl80MineralSand").value = 100;
+    // document.getElementById("lvl80TruespringWater").value = 100;
+    // document.getElementById("lvl80RockSalt").value = 100;
 }
 
 function SetUpTabs()
@@ -404,7 +973,7 @@ function GetAndValidateLevel80UserInput()
         {
             //get the value from the appropriate textbox, i.e. lvl80Logs
             //then reduce it to the number of crafts it can be used in by dividing by how many are used per craft
-            _level80UserCraftingInventory[mat] = parseInt(textboxValue / PER_MATERIAL_COST);//using parseInt here forces integer division
+            _level80UserCraftingInventory[mat] = parseInt(textboxValue / LEVEL_80_MATERIAL_COST);//using parseInt here forces integer division
         }
     }
 
@@ -446,16 +1015,16 @@ function ResetLevel80Fields()
     _lvl80InfoTextareaDiv.style.display = "none";
 
     //im not making variable names for these because im only addressing them here
-    document.getElementById("lvl80Logs").value = "";
+    document.getElementById("lvl80CedarLogs").value = "";
     document.getElementById("lvl80Wheat").value = "";
-    document.getElementById("lvl80Bolls").value = "";
+    document.getElementById("lvl80CottonBolls").value = "";
     document.getElementById("lvl80Resin").value = "";
     document.getElementById("lvl80Tortoises").value = "";
-    document.getElementById("lvl80Bluespirit").value = "";
-    document.getElementById("lvl80Gold").value = "";
-    document.getElementById("lvl80Sand").value = "";
-    document.getElementById("lvl80Water").value = "";
-    document.getElementById("lvl80Salt").value = "";
+    document.getElementById("lvl80BluespiritOre").value = "";
+    document.getElementById("lvl80GoldOre").value = "";
+    document.getElementById("lvl80MineralSand").value = "";
+    document.getElementById("lvl80TruespringWater").value = "";
+    document.getElementById("lvl80RockSalt").value = "";
 }
 
 function ToggleAllCrafterCheckboxes()
