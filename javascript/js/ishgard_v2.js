@@ -151,18 +151,18 @@ let _level80AllowedCrafters = [];//crafter TLAs
 
 //#endregion
 
-//#region Level 70 variables - update values
+//#region Level 70 variables
 
 let _level70CrafterMatrix = [
     {
         "Crafter": "CRP",
-        "SpruceLogs": false,
+        "SpruceLogs": true,
         "Mistletoe": false,
         "TeaLeaves": false,
-        "Vines": false,
+        "Vines": true,
         "Toads": false,
         "ElectrumOre": false,
-        "Alumen": false,
+        "Alumen": true,
         "SpringWater": false,
         "GoldSand": false,
         "Ragstone": false
@@ -174,11 +174,11 @@ let _level70CrafterMatrix = [
         "TeaLeaves": false,
         "Vines": false,
         "Toads": false,
-        "ElectrumOre": false,
+        "ElectrumOre": true,
         "Alumen": false,
         "SpringWater": false,
-        "GoldSand": false,
-        "Ragstone": false
+        "GoldSand": true,
+        "Ragstone": true
     },
     {
         "Crafter": "ARM",
@@ -187,11 +187,11 @@ let _level70CrafterMatrix = [
         "TeaLeaves": false,
         "Vines": false,
         "Toads": false,
-        "ElectrumOre": false,
+        "ElectrumOre": true,
         "Alumen": false,
         "SpringWater": false,
-        "GoldSand": false,
-        "Ragstone": false
+        "GoldSand": true,
+        "Ragstone": true
     },
     {
         "Crafter": "GSM",
@@ -201,18 +201,18 @@ let _level70CrafterMatrix = [
         "Vines": false,
         "Toads": false,
         "ElectrumOre": false,
-        "Alumen": false,
+        "Alumen": true,
         "SpringWater": false,
-        "GoldSand": false,
-        "Ragstone": false
+        "GoldSand": true,
+        "Ragstone": true
     },
     {
         "Crafter": "LTW",
         "SpruceLogs": false,
         "Mistletoe": false,
-        "TeaLeaves": false,
-        "Vines": false,
-        "Toads": false,
+        "TeaLeaves": true,
+        "Vines": true,
+        "Toads": true,
         "ElectrumOre": false,
         "Alumen": false,
         "SpringWater": false,
@@ -222,21 +222,21 @@ let _level70CrafterMatrix = [
     {
         "Crafter": "WVR",
         "SpruceLogs": false,
-        "Mistletoe": false,
+        "Mistletoe": true,
         "TeaLeaves": false,
-        "Vines": false,
+        "Vines": true,
         "Toads": false,
         "ElectrumOre": false,
         "Alumen": false,
-        "SpringWater": false,
+        "SpringWater": true,
         "GoldSand": false,
         "Ragstone": false
     },
     {
         "Crafter": "ALC",
-        "SpruceLogs": false,
-        "Mistletoe": false,
-        "TeaLeaves": false,
+        "SpruceLogs": true,
+        "Mistletoe": true,
+        "TeaLeaves": true,
         "Vines": false,
         "Toads": false,
         "ElectrumOre": false,
@@ -249,12 +249,12 @@ let _level70CrafterMatrix = [
         "Crafter": "CUL",
         "SpruceLogs": false,
         "Mistletoe": false,
-        "TeaLeaves": false,
+        "TeaLeaves": true,
         "Vines": false,
-        "Toads": false,
+        "Toads": true,
         "ElectrumOre": false,
         "Alumen": false,
-        "SpringWater": false,
+        "SpringWater": true,
         "GoldSand": false,
         "Ragstone": false
     }
@@ -289,126 +289,126 @@ let _level70AllowedCrafters = [];//crafter TLAs
 
 //#endregion
 
-//#region Level 60 variables - update values
+//#region Level 60 variables
 
 let _level60CrafterMatrix = [
     {
         "Crafter": "CRP",
-        "Logs": true,
-        "Wheat": true,
-        "Bolls": true,
-        "Resin": false,
-        "Tortoises": false,
-        "Bluespirit": false,
-        "Gold": false,
-        "Sand": false,
-        "Water": false,
-        "Salt": false
+        "SpruceLogs": true,
+        "Mistletoe": false,
+        "TeaLeaves": false,
+        "Vines": false,
+        "Toads": false,
+        "ElectrumOre": false,
+        "Alumen": true,
+        "SpringWater": false,
+        "GoldSand": false,
+        "Ragstone": true
     },
     {
         "Crafter": "BSM",
-        "Logs": true,
-        "Wheat": false,
-        "Bolls": false,
-        "Resin": false,
-        "Tortoises": false,
-        "Bluespirit": true,
-        "Gold": true,
-        "Sand": false,
-        "Water": false,
-        "Salt": false
+        "SpruceLogs": false,
+        "Mistletoe": false,
+        "TeaLeaves": false,
+        "Vines": false,
+        "Toads": false,
+        "ElectrumOre": true,
+        "Alumen": false,
+        "SpringWater": false,
+        "GoldSand": true,
+        "Ragstone": true
     },
     {
         "Crafter": "ARM",
-        "Logs": false,
-        "Wheat": false,
-        "Bolls": false,
-        "Resin": false,
-        "Tortoises": false,
-        "Bluespirit": true,
-        "Gold": true,
-        "Sand": true,
-        "Water": false,
-        "Salt": false
+        "SpruceLogs": true,
+        "Mistletoe": false,
+        "TeaLeaves": false,
+        "Vines": false,
+        "Toads": false,
+        "ElectrumOre": true,
+        "Alumen": true,
+        "SpringWater": false,
+        "GoldSand": false,
+        "Ragstone": false
     },
     {
         "Crafter": "GSM",
-        "Logs": false,
-        "Wheat": false,
-        "Bolls": false,
-        "Resin": true,
-        "Tortoises": false,
-        "Bluespirit": true,
-        "Gold": false,
-        "Sand": true,
-        "Water": false,
-        "Salt": false
+        "SpruceLogs": false,
+        "Mistletoe": false,
+        "TeaLeaves": false,
+        "Vines": true,
+        "Toads": false,
+        "ElectrumOre": true,
+        "Alumen": false,
+        "SpringWater": false,
+        "GoldSand": true,
+        "Ragstone": false
     },
     {
         "Crafter": "LTW",
-        "Logs": true,
-        "Wheat": false,
-        "Bolls": true,
-        "Resin": false,
-        "Tortoises": true,
-        "Bluespirit": false,
-        "Gold": false,
-        "Sand": false,
-        "Water": false,
-        "Salt": false
+        "SpruceLogs": false,
+        "Mistletoe": false,
+        "TeaLeaves": true,
+        "Vines": false,
+        "Toads": true,
+        "ElectrumOre": false,
+        "Alumen": false,
+        "SpringWater": true,
+        "GoldSand": false,
+        "Ragstone": false
     },
     {
         "Crafter": "WVR",
-        "Logs": false,
-        "Wheat": false,
-        "Bolls": true,
-        "Resin": true,
-        "Tortoises": false,
-        "Bluespirit": false,
-        "Gold": false,
-        "Sand": false,
-        "Water": true,
-        "Salt": false
+        "SpruceLogs": true,
+        "Mistletoe": true,
+        "TeaLeaves": false,
+        "Vines": true,
+        "Toads": false,
+        "ElectrumOre": false,
+        "Alumen": false,
+        "SpringWater": false,
+        "GoldSand": false,
+        "Ragstone": false
     },
     {
         "Crafter": "ALC",
-        "Logs": false,
-        "Wheat": false,
-        "Bolls": false,
-        "Resin": false,
-        "Tortoises": true,
-        "Bluespirit": false,
-        "Gold": false,
-        "Sand": false,
-        "Water": true,
-        "Salt": true
+        "SpruceLogs": false,
+        "Mistletoe": true,
+        "TeaLeaves": false,
+        "Vines": false,
+        "Toads": true,
+        "ElectrumOre": false,
+        "Alumen": false,
+        "SpringWater": true,
+        "GoldSand": false,
+        "Ragstone": false
     },
     {
         "Crafter": "CUL",
-        "Logs": false,
-        "Wheat": true,
-        "Bolls": false,
-        "Resin": false,
-        "Tortoises": false,
-        "Bluespirit": false,
-        "Gold": false,
-        "Sand": false,
-        "Water": true,
-        "Salt": true
+        "SpruceLogs": false,
+        "Mistletoe": true,
+        "TeaLeaves": true,
+        "Vines": false,
+        "Toads": false,
+        "ElectrumOre": false,
+        "Alumen": false,
+        "SpringWater": true,
+        "GoldSand": false,
+        "Ragstone": false
     }
 ];
 let _level60UserCraftingInventory = {
 
-    "Logs": 0,
-    "Wheat": 0,
-    "Bolls": 0,
-    "Resin": 0,
-    "Tortoises": 0,
-    "Bluespirit": 0,
-    "Gold": 0,
-    "Sand": 0,
-    "Water": 0,
-    "Salt": 0
+    "SpruceLogs": 0,
+    "Mistletoe": 0,
+    "TeaLeaves": 0,
+    "Vines": 0,
+    "Toads": 0,
+    "ElectrumOre": 0,
+    "Alumen": 0,
+    "SpringWater": 0,
+    "GoldSand": 0,
+    "Ragstone": 0
 
 };
 let _level60CraftsAvailablePerCrafter = {
@@ -428,126 +428,90 @@ let _level60AllowedCrafters = [];//crafter TLAs
 
 //#endregion
 
-//#region Level 40 variables - update values
+//#region Level 40 variables
 
 let _level40CrafterMatrix = [
     {
         "Crafter": "CRP",
-        "Logs": true,
-        "Wheat": true,
-        "Bolls": true,
-        "Resin": false,
-        "Tortoises": false,
-        "Bluespirit": false,
-        "Gold": false,
-        "Sand": false,
-        "Water": false,
-        "Salt": false
+        "MahoganyLogs": true,
+        "CottonBolls": false,
+        "Sesame": false,
+        "Ore": false,
+        "RockSalt": true,
+        "MythriteSand": false
     },
     {
         "Crafter": "BSM",
-        "Logs": true,
-        "Wheat": false,
-        "Bolls": false,
-        "Resin": false,
-        "Tortoises": false,
-        "Bluespirit": true,
-        "Gold": true,
-        "Sand": false,
-        "Water": false,
-        "Salt": false
+        "MahoganyLogs": false,
+        "CottonBolls": false,
+        "Sesame": false,
+        "Ore": true,
+        "RockSalt": false,
+        "MythriteSand": true
     },
     {
         "Crafter": "ARM",
-        "Logs": false,
-        "Wheat": false,
-        "Bolls": false,
-        "Resin": false,
-        "Tortoises": false,
-        "Bluespirit": true,
-        "Gold": true,
-        "Sand": true,
-        "Water": false,
-        "Salt": false
+        "MahoganyLogs": false,
+        "CottonBolls": false,
+        "Sesame": false,
+        "Ore": true,
+        "RockSalt": false,
+        "MythriteSand": true
     },
     {
         "Crafter": "GSM",
-        "Logs": false,
-        "Wheat": false,
-        "Bolls": false,
-        "Resin": true,
-        "Tortoises": false,
-        "Bluespirit": true,
-        "Gold": false,
-        "Sand": true,
-        "Water": false,
-        "Salt": false
+        "MahoganyLogs": false,
+        "CottonBolls": false,
+        "Sesame": false,
+        "Ore": true,
+        "RockSalt": false,
+        "MythriteSand": true
     },
     {
         "Crafter": "LTW",
-        "Logs": true,
-        "Wheat": false,
-        "Bolls": true,
-        "Resin": false,
-        "Tortoises": true,
-        "Bluespirit": false,
-        "Gold": false,
-        "Sand": false,
-        "Water": false,
-        "Salt": false
+        "MahoganyLogs": true,
+        "CottonBolls": true,
+        "Sesame": false,
+        "Ore": false,
+        "RockSalt": false,
+        "MythriteSand": false
     },
     {
         "Crafter": "WVR",
-        "Logs": false,
-        "Wheat": false,
-        "Bolls": true,
-        "Resin": true,
-        "Tortoises": false,
-        "Bluespirit": false,
-        "Gold": false,
-        "Sand": false,
-        "Water": true,
-        "Salt": false
+        "MahoganyLogs": false,
+        "CottonBolls": true,
+        "Sesame": true,
+        "Ore": false,
+        "RockSalt": false,
+        "MythriteSand": false
     },
     {
         "Crafter": "ALC",
-        "Logs": false,
-        "Wheat": false,
-        "Bolls": false,
-        "Resin": false,
-        "Tortoises": true,
-        "Bluespirit": false,
-        "Gold": false,
-        "Sand": false,
-        "Water": true,
-        "Salt": true
+        "MahoganyLogs": false,
+        "CottonBolls": false,
+        "Sesame": true,
+        "Ore": false,
+        "RockSalt": true,
+        "MythriteSand": false
     },
     {
         "Crafter": "CUL",
-        "Logs": false,
-        "Wheat": true,
-        "Bolls": false,
-        "Resin": false,
-        "Tortoises": false,
-        "Bluespirit": false,
-        "Gold": false,
-        "Sand": false,
-        "Water": true,
-        "Salt": true
+        "MahoganyLogs": false,
+        "CottonBolls": false,
+        "Sesame": true,
+        "Ore": false,
+        "RockSalt": true,
+        "MythriteSand": false
     }
 ];
 let _level40UserCraftingInventory = {
 
-    "Logs": 0,
-    "Wheat": 0,
-    "Bolls": 0,
-    "Resin": 0,
-    "Tortoises": 0,
-    "Bluespirit": 0,
-    "Gold": 0,
-    "Sand": 0,
-    "Water": 0,
-    "Salt": 0
+    "MahoganyLogs": 0,
+    "CottonBolls": 0,
+    "Sesame": 0,
+    "Ore": 0,
+    "RockSalt": 0,
+    "MythriteSand": 0
 
 };
 let _level40CraftsAvailablePerCrafter = {
@@ -567,127 +531,72 @@ let _level40AllowedCrafters = [];//crafter TLAs
 
 //#endregion
 
-//#region Level 20 variables - update values
+//#region Level 20 variables
 
 let _level20CrafterMatrix = [
     {
         "Crafter": "CRP",
-        "Logs": true,
-        "Wheat": true,
-        "Bolls": true,
-        "Resin": false,
-        "Tortoises": false,
-        "Bluespirit": false,
-        "Gold": false,
-        "Sand": false,
-        "Water": false,
-        "Salt": false
+        "Switch": true,
+        "Hemp": false,
+        "IronOre": false,
+        "IronSand": false
     },
     {
         "Crafter": "BSM",
-        "Logs": true,
-        "Wheat": false,
-        "Bolls": false,
-        "Resin": false,
-        "Tortoises": false,
-        "Bluespirit": true,
-        "Gold": true,
-        "Sand": false,
-        "Water": false,
-        "Salt": false
+        "Switch": false,
+        "Hemp": false,
+        "IronOre": true,
+        "IronSand": false
     },
     {
         "Crafter": "ARM",
-        "Logs": false,
-        "Wheat": false,
-        "Bolls": false,
-        "Resin": false,
-        "Tortoises": false,
-        "Bluespirit": true,
-        "Gold": true,
-        "Sand": true,
-        "Water": false,
-        "Salt": false
+        "Switch": false,
+        "Hemp": false,
+        "IronOre": true,
+        "IronSand": false
     },
     {
         "Crafter": "GSM",
-        "Logs": false,
-        "Wheat": false,
-        "Bolls": false,
-        "Resin": true,
-        "Tortoises": false,
-        "Bluespirit": true,
-        "Gold": false,
-        "Sand": true,
-        "Water": false,
-        "Salt": false
+        "Switch": false,
+        "Hemp": false,
+        "IronOre": false,
+        "IronSand": true
     },
     {
         "Crafter": "LTW",
-        "Logs": true,
-        "Wheat": false,
-        "Bolls": true,
-        "Resin": false,
-        "Tortoises": true,
-        "Bluespirit": false,
-        "Gold": false,
-        "Sand": false,
-        "Water": false,
-        "Salt": false
+        "Switch": true,
+        "Hemp": false,
+        "IronOre": false,
+        "IronSand": false
     },
     {
         "Crafter": "WVR",
-        "Logs": false,
-        "Wheat": false,
-        "Bolls": true,
-        "Resin": true,
-        "Tortoises": false,
-        "Bluespirit": false,
-        "Gold": false,
-        "Sand": false,
-        "Water": true,
-        "Salt": false
+        "Switch": false,
+        "Hemp": true,
+        "IronOre": false,
+        "IronSand": false
     },
     {
         "Crafter": "ALC",
-        "Logs": false,
-        "Wheat": false,
-        "Bolls": false,
-        "Resin": false,
-        "Tortoises": true,
-        "Bluespirit": false,
-        "Gold": false,
-        "Sand": false,
-        "Water": true,
-        "Salt": true
+        "Switch": false,
+        "Hemp": false,
+        "IronOre": false,
+        "IronSand": true
     },
     {
         "Crafter": "CUL",
-        "Logs": false,
-        "Wheat": true,
-        "Bolls": false,
-        "Resin": false,
-        "Tortoises": false,
-        "Bluespirit": false,
-        "Gold": false,
-        "Sand": false,
-        "Water": true,
-        "Salt": true
+        "Switch": false,
+        "Hemp": true,
+        "IronOre": false,
+        "IronSand": false
     }
 ];
 let _level20UserCraftingInventory = {
 
-    "Logs": 0,
-    "Wheat": 0,
-    "Bolls": 0,
-    "Resin": 0,
-    "Tortoises": 0,
-    "Bluespirit": 0,
-    "Gold": 0,
-    "Sand": 0,
-    "Water": 0,
-    "Salt": 0
-
+    "Switch": 0,
+    "Hemp": 0,
+    "IronOre": 0,
+    "IronSand": 0
 };
 let _level20CraftsAvailablePerCrafter = {
     "CRP": 0,
@@ -760,8 +669,8 @@ OnLoad();//i know i could just have this method's contents here, since i only ca
 
 function OnLoad()
 {
-    document.getElementById("calculateButton").onclick = Level80CalculateButtonClick;
-    document.getElementById("resetButton").onclick = ResetLevel80Fields;
+    document.getElementById("lvl80calculateButton").onclick = Level80CalculateButtonClick;
+    document.getElementById("lvl80resetButton").onclick = ResetLevel80Fields;
     _useAllCraftersCheckbox.onclick = ToggleAllCrafterCheckboxes;
     for(let i = 0; i < CRAFTERS.length; i++)
     {
@@ -951,6 +860,7 @@ function GetAndValidateLevel80UserInput()
     let textboxValue = -1;
     let invalidValueErrorString = "The following fields are not positive whole numbers:\r\n";
     let tooLargeErrorString = "The following fields are too large.\r\nWhy do you have more than 100,000 of these:\r\n";
+    let friendlyMatName = "";
 
     for(let mat in _level80UserCraftingInventory)
     {
@@ -960,12 +870,14 @@ function GetAndValidateLevel80UserInput()
         //if the textbox value isn't a positive whole number
         if(Number.isNaN(textboxValue) || textboxValue < 0 || !Number.isInteger(textboxValue))
         {
-            invalidValueErrorString += mat + "\r\n";
+            friendlyMatName = GetFriendlyMatName(mat);
+            invalidValueErrorString += friendlyMatName + "\r\n";
             invalidValueErrorExists = true;   
         }
         else if(textboxValue > 100000)
         {
-            tooLargeErrorString += mat + "\r\n";
+            friendlyMatName = GetFriendlyMatName(mat);
+            tooLargeErrorString += friendlyMatName + "\r\n";
             tooLargeErrorExists = true;
         }
         //the value is valid, but check if there are existing errors. no need to do calculations or assign variables if there are
@@ -1025,31 +937,6 @@ function ResetLevel80Fields()
     document.getElementById("lvl80MineralSand").value = "";
     document.getElementById("lvl80TruespringWater").value = "";
     document.getElementById("lvl80RockSalt").value = "";
-}
-
-function ToggleAllCrafterCheckboxes()
-{
-    CRAFTERS.forEach(crafter => {
-        document.getElementById("checkboxUse" + crafter).checked = _useAllCraftersCheckbox.checked
-    });
-}
-
-function UpdateUseAllCraftersCheckbox()
-{
-    let allChecked = true;
-
-    //loop over all the checkboxes and if one is not checked, set the allChecked to false
-    for(let i = 0; i < CRAFTERS.length; i++)
-    {
-        if(!document.getElementById("checkboxUse" + CRAFTERS[i]).checked)
-        {
-            allChecked = false;
-            break;
-        }
-    }
-
-    //update the checkboxUseAll based on the state of the variable
-    _useAllCraftersCheckbox.checked = allChecked;
 }
 
 //#region Level 80 Recursive Crafter calculations
@@ -1189,6 +1076,92 @@ function GetLevel80LowestMaterialCountByMaterialList(materialList)
 //#endregion
 
 //#region Universal methods
+
+//takes in the name of a material (that is in Pascal case) and injects spaces before the capital letters to create a friendly name
+//returns the name of the material with spaces before each capital (except at the start of the name)
+//matName: the name of the material in Pascal case
+function GetFriendlyMatName(matName)
+{
+    //list of friendly words to become the friendly name
+    let wordList = [];
+    //variable for building a friendly word
+    let nextWord = "";
+    //variable to return the full friendly name of the material
+    let returnName = "";
+
+    //loop over the material name one character at a time
+    for(let i = 0; i < matName.length; i++)
+    {
+        //if the character is uppercase, begin creating a new word for the friendly name
+        if(IsUpperCase(matName.charAt(i)))
+        {
+            //add the character to the friendly word
+            nextWord = matName.charAt(i);
+            //increment i since the character has been processed
+            i++;
+
+            //loop over the rest of the name until an uppercase letter is found, indicating the end of the friendly word
+            for(let j = i; j < matName.length && !IsUpperCase(matName.charAt(j)); j++)
+            {
+                //add the character to the friendly word
+                nextWord += matName.charAt(j);
+                //increment i since the character has been processed
+                i++;
+            }
+
+            //decrement i because it was just incremented at the end of the loop (the index is now on an uppercase character)
+            //and it is about to be incremented again (outer for loop)
+            i--;
+
+            //add the friendly word to the list that will become the friendly name
+            wordList.push(nextWord);
+        }
+    }
+
+    //concatenate the friendly words in the list, along with a space, into the friendly name
+    wordList.forEach(wl => {
+        returnName = returnName + wl + " ";
+    });
+
+    //remove the trailing space added in the above for-each loop
+    returnName = returnName.substring(0, returnName.length - 1);
+
+    return returnName;
+}
+
+//returns whether a character is uppercase or not
+//char: the character to be checked
+function IsUpperCase(char)    
+{    
+    return (char >= 'A') && (char <= 'Z');
+}
+
+//toggles all the crafter checkboxes based on the state of the "use all crafters" checkbox
+function ToggleAllCrafterCheckboxes()
+{
+    CRAFTERS.forEach(crafter => {
+        document.getElementById("checkboxUse" + crafter).checked = _useAllCraftersCheckbox.checked
+    });
+}
+
+//update the "use all crafters" checkbox based on the state of the rest of the crafter checkboxes
+function UpdateUseAllCraftersCheckbox()
+{
+    let allChecked = true;
+
+    //loop over all the checkboxes and if one is not checked, set the allChecked to false
+    for(let i = 0; i < CRAFTERS.length; i++)
+    {
+        if(!document.getElementById("checkboxUse" + CRAFTERS[i]).checked)
+        {
+            allChecked = false;
+            break;
+        }
+    }
+
+    //update the checkboxUseAll based on the state of the variable
+    _useAllCraftersCheckbox.checked = allChecked;
+}
 
 //takes in a crafter row returns a crafter row (the crafter TLA, which materials it uses) from the crafter matrix
 //returns a list of which materials the passed-in crafter row uses

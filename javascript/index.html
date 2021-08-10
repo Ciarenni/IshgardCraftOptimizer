@@ -65,61 +65,43 @@
         <button class="tab_button" data-for-tab="4">Level 40</button>
         <button class="tab_button" data-for-tab="5">Level 20</button>
       </div>
-    <div class="tab_content tab_content--active" data-tab="1">
-      <div id="materials-div" class="materials-div">
-        <div>
-          <label for="lvl80CedarLogs" class="materials-label">Cedar Logs</label>
-          <input type="text" id="lvl80CedarLogs" class="materials-input" placeholder="Logs">
-        </div>
+    <div id="lvl80tab-div" class="tab_content tab_content--active" data-tab="1">
+      <div id="lvl80materials-div" class="materials-div">
+        <label for="lvl80CedarLogs" class="materials-label">Cedar Logs</label>
+        <input type="text" id="lvl80CedarLogs" class="materials-input" placeholder="Logs">
+      
+        <label for="lvl80Wheat" class="materials-label">Wheat</label>
+        <input type="text" id="lvl80Wheat" class="materials-input" placeholder="Wheat">
+      
+        <label for="lvl80CottonBolls" class="materials-label">Cotton Bolls</label>
+        <input type="text" id="lvl80CottonBolls" class="materials-input" placeholder="Bolls">
+      
+        <label for="lvl80Resin" class="materials-label">Resin</label>
+        <input type="text" id="lvl80Resin" class="materials-input" placeholder="Resin">
+      
+        <label for="lvl80Tortoises" class="materials-label">Tortoises</label>
+        <input type="text" id="lvl80Tortoises" class="materials-input" placeholder="Tortoises">
+      
+        <label for="lvl80BluespiritOre" class="materials-label">Bluespirit Ore</label>
+        <input type="text" id="lvl80BluespiritOre" class="materials-input" placeholder="Bluespirit">
+      
+        <label for="lvl80GoldOre" class="materials-label">Gold Ore</label>
+        <input type="text" id="lvl80GoldOre" class="materials-input" placeholder="Gold">
+      
+        <label for="lvl80MineralSand" class="materials-label">Mineral Sand</label>
+        <input type="text" id="lvl80MineralSand" class="materials-input" placeholder="Sand">
+      
+        <label for="lvl80TruespringWater" class="materials-label">Truespring Water</label>
+        <input type="text" id="lvl80TruespringWater" class="materials-input" placeholder="Water">
+      
+        <label for="lvl80RockSalt" class="materials-label">Rock Salt</label>
+        <input type="text" id="lvl80RockSalt" class="materials-input" placeholder="Salt">
         
         <div>
-          <label for="lvl80Wheat" class="materials-label">Wheat</label>
-          <input type="text" id="lvl80Wheat" class="materials-input" placeholder="Wheat">
+          <input type="button" id="lvl80resetButton" value="Reset" class="reset-button">
         </div>
-        
         <div>
-          <label for="lvl80CottonBolls" class="materials-label">Cotton Bolls</label>
-          <input type="text" id="lvl80CottonBolls" class="materials-input" placeholder="Bolls">
-        </div>
-        
-        <div>
-          <label for="lvl80Resin" class="materials-label">Resin</label>
-          <input type="text" id="lvl80Resin" class="materials-input" placeholder="Resin">
-        </div>
-        
-        <div>
-          <label for="lvl80Tortoises" class="materials-label">Tortoises</label>
-          <input type="text" id="lvl80Tortoises" class="materials-input" placeholder="Tortoises">
-        </div>
-        
-        <div>
-          <label for="lvl80BluespiritOre" class="materials-label">Bluespirit Ore</label>
-          <input type="text" id="lvl80BluespiritOre" class="materials-input" placeholder="Bluespirit">
-        </div>
-        
-        <div>
-          <label for="lvl80GoldOre" class="materials-label">Gold Ore</label>
-          <input type="text" id="lvl80GoldOre" class="materials-input" placeholder="Gold">
-        </div>
-        
-        <div>
-          <label for="lvl80MineralSand" class="materials-label">Mineral Sand</label>
-          <input type="text" id="lvl80MineralSand" class="materials-input" placeholder="Sand">
-        </div>
-        
-        <div>
-          <label for="lvl80TruespringWater" class="materials-label">Truespring Water</label>
-          <input type="text" id="lvl80TruespringWater" class="materials-input" placeholder="Water">
-        </div>
-        
-        <div>
-          <label for="lvl80RockSalt" class="materials-label">Rock Salt</label>
-          <input type="text" id="lvl80RockSalt" class="materials-input" placeholder="Salt">
-        </div>
-        
-        <div>
-          <input type="button" id="resetButton" value="Reset">
-          <input type="button" id="calculateButton" value="Calculate!">
+          <input type="button" id="lvl80calculateButton" value="Calculate!" class="calculate-button">
         </div>
       </div>
       <br>  
@@ -128,28 +110,167 @@
       </div>
     </div>
 
-    <div class="tab_content" data-tab="2">
-      <p>
-        Level 70 optimization is under construction.
-      </p>
+    <div id="lvl70tab-div" class="tab_content" data-tab="2">
+      <div id="lvl70materials-div" class="materials-div">
+        <label for="lvl70SpruceLogs" class="materials-label">Spruce Logs</label>
+        <input type="text" id="lvl70SpruceLogs" class="materials-input" placeholder="Logs">
+      
+        <label for="lvl70Mistletoe" class="materials-label">Mistletoe</label>
+        <input type="text" id="lvl70Mistletoe" class="materials-input" placeholder="Mistletoe">
+      
+        <label for="lvl70TeaLeaves" class="materials-label">Tea Leaves</label>
+        <input type="text" id="lvl70TeaLeaves" class="materials-input" placeholder="Tea Leaves">
+      
+        <label for="lvl70Vines" class="materials-label">Vines</label>
+        <input type="text" id="lvl70Vines" class="materials-input" placeholder="Vines">
+      
+        <label for="lvl70Toads" class="materials-label">Toads</label>
+        <input type="text" id="lvl70Toads" class="materials-input" placeholder="Toads">
+      
+        <label for="lvl70ElectrumOre" class="materials-label">Electrum Ore</label>
+        <input type="text" id="lvl70ElectrumOre" class="materials-input" placeholder="Electrum">
+      
+        <label for="lvl70Alumen" class="materials-label">Alumen</label>
+        <input type="text" id="lvl70Alumen" class="materials-input" placeholder="Alumen">
+      
+        <label for="lvl70SpringWater" class="materials-label">Spring Water</label>
+        <input type="text" id="lvl70SpringWater" class="materials-input" placeholder="Water">
+      
+        <label for="lvl70GoldSand" class="materials-label">Gold Sand</label>
+        <input type="text" id="lvl70GoldSand" class="materials-input" placeholder="Sand">
+      
+        <label for="lvl70Ragstone" class="materials-label">Ragstone</label>
+        <input type="text" id="lvl70Ragstone" class="materials-input" placeholder="Ragstone">
+
+        <p style="grid-column: span 2; text-align: center;">
+          Level 70 optimization is under construction.
+        </p>
+        <!-- even if you uncomment this, it's not wired up, but nice try!
+        <div>
+          <input type="button" id="lvl70resetButton" value="Reset" class="reset-button">
+        </div>
+        <div>
+          <input type="button" id="lvl70calculateButton" value="Calculate!" class="calculate-button">
+        </div> -->
+      </div>
+      <br>  
+      <div id="lvl70InfoTextAreaDiv" class="info-div">
+        <textarea id="lvl70InfoTextArea" class="info-text-area" readonly rows="10" cols="60"></textarea>
+      </div>
     </div>
 
-    <div class="tab_content" data-tab="3">
-      <p>
-        Level 60 optimization is under construction.
-      </p>
+    <div id="lvl60tab-div" class="tab_content" data-tab="3">
+      <div id="lvl60materials-div" class="materials-div">
+        <label for="lvl60SpruceLogs" class="materials-label">Spruce Logs</label>
+        <input type="text" id="lvl60SpruceLogs" class="materials-input" placeholder="Logs">
+      
+        <label for="lvl60Mistletoe" class="materials-label">Mistletoe</label>
+        <input type="text" id="lvl60Mistletoe" class="materials-input" placeholder="Mistletoe">
+      
+        <label for="lvl60TeaLeaves" class="materials-label">Tea Leaves</label>
+        <input type="text" id="lvl60TeaLeaves" class="materials-input" placeholder="Tea Leaves">
+      
+        <label for="lvl60Vines" class="materials-label">Vines</label>
+        <input type="text" id="lvl60Vines" class="materials-input" placeholder="Vines">
+      
+        <label for="lvl60Toads" class="materials-label">Toads</label>
+        <input type="text" id="lvl60Toads" class="materials-input" placeholder="Toads">
+      
+        <label for="lvl60ElectrumOre" class="materials-label">Electrum Ore</label>
+        <input type="text" id="lvl60ElectrumOre" class="materials-input" placeholder="Electrum">
+      
+        <label for="lvl60Alumen" class="materials-label">Alumen</label>
+        <input type="text" id="lvl60Alumen" class="materials-input" placeholder="Alumen">
+      
+        <label for="lvl60SpringWater" class="materials-label">Spring Water</label>
+        <input type="text" id="lvl60SpringWater" class="materials-input" placeholder="Water">
+      
+        <label for="lvl60GoldSand" class="materials-label">Gold Sand</label>
+        <input type="text" id="lvl60GoldSand" class="materials-input" placeholder="Sand">
+      
+        <label for="lvl60Ragstone" class="materials-label">Ragstone</label>
+        <input type="text" id="lvl60Ragstone" class="materials-input" placeholder="Ragstone">
+        
+        <p style="grid-column: span 2; text-align: center;">
+          Level 60 optimization is under construction.
+        </p>
+        <!-- <div>
+          <input type="button" id="lvl60resetButton" value="Reset" class="reset-button">
+        </div>
+        <div>
+          <input type="button" id="lvl60calculateButton" value="Calculate!" class="calculate-button">
+        </div> -->
+      </div>
+      <br>  
+      <div id="lvl60InfoTextAreaDiv" class="info-div">
+        <textarea id="lvl60InfoTextArea" class="info-text-area" readonly rows="10" cols="60"></textarea>
+      </div>
     </div>
 
-    <div class="tab_content" data-tab="4">
-      <p>
-        Level 40 optimization is under construction.
-      </p>
+    <div id="lvl40tab-div" class="tab_content" data-tab="4">
+      <div id="lvl40materials-div" class="materials-div">
+        <label for="lvl40MahoganyLogs" class="materials-label">Mahogany Logs</label>
+        <input type="text" id="lvl40MahoganyLogs" class="materials-input" placeholder="Logs">
+      
+        <label for="lvl40CottonBolls" class="materials-label">Cotton Bolls</label>
+        <input type="text" id="lvl40CottonBolls" class="materials-input" placeholder="Bolls">
+      
+        <label for="lvl40Sesame" class="materials-label">Sesame</label>
+        <input type="text" id="lvl40Sesame" class="materials-input" placeholder="Sesame">
+      
+        <label for="lvl40Ore" class="materials-label">Ore</label>
+        <input type="text" id="lvl40Ore" class="materials-input" placeholder="Ore">
+      
+        <label for="lvl40RockSalt" class="materials-label">Rock Salt</label>
+        <input type="text" id="lvl40RockSalt" class="materials-input" placeholder="Rock Salt">
+      
+        <label for="lvl40MythriteSand" class="materials-label">Mythrite Sand</label>
+        <input type="text" id="lvl40MythriteSand" class="materials-input" placeholder="Mythrite">
+        
+        <p style="grid-column: span 2; text-align: center;">
+          Level 40 optimization is under construction.
+        </p>
+        <!-- <div>
+          <input type="button" id="lvl40resetButton" value="Reset" class="reset-button">
+        </div>
+        <div>
+          <input type="button" id="lvl40calculateButton" value="Calculate!" class="calculate-button">
+        </div> -->
+      </div>
+      <br>  
+      <div id="lvl40InfoTextAreaDiv" class="info-div">
+        <textarea id="lvl40InfoTextArea" class="info-text-area" readonly rows="10" cols="60"></textarea>
+      </div>
     </div>
 
-    <div class="tab_content" data-tab="5">
-      <p>
-        Level 20 optimization is under construction.
-      </p>
+    <div id="lvl20tab-div" class="tab_content" data-tab="5">
+      <div id="lvl20materials-div" class="materials-div">
+        <label for="lvl20Switch" class="materials-label">Switch</label>
+        <input type="text" id="lvl20Switch" class="materials-input" placeholder="Switch">
+      
+        <label for="lvl20Hemp" class="materials-label">Hemp</label>
+        <input type="text" id="lvl20Hemp" class="materials-input" placeholder="Hemp">
+      
+        <label for="lvl20IronOre" class="materials-label">Iron Ore</label>
+        <input type="text" id="lvl20IronOre" class="materials-input" placeholder="Iron Ore">
+      
+        <label for="lvl20IronSand" class="materials-label">Iron Sand</label>
+        <input type="text" id="lvl20IronSand" class="materials-input" placeholder="Iron Sand">
+        
+        <p style="grid-column: span 2; text-align: center;">
+          Level 20 optimization is under construction.
+        </p>
+        <!-- <div>
+          <input type="button" id="lvl20resetButton" value="Reset" class="reset-button">
+        </div>
+        <div>
+          <input type="button" id="lvl20calculateButton" value="Calculate!" class="calculate-button">
+        </div> -->
+      </div>
+      <br>  
+      <div id="lvl20InfoTextAreaDiv" class="info-div">
+        <textarea id="lvl20InfoTextArea" class="info-text-area" readonly rows="10" cols="60"></textarea>
+      </div>
     </div>
   </div>
 
