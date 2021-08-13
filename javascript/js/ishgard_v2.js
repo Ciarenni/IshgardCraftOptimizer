@@ -2,13 +2,13 @@
 
 //#region Constants
 
-let COUNT_OF_CRAFTERS = 8;//constant
+let COUNT_OF_CRAFTERS = 8;
 let LEVEL_80_MATERIAL_COST = 10;
 let LEVEL_70_MATERIAL_COST = 10;
 let LEVEL_60_MATERIAL_COST = 5;
 let LEVEL_40_MATERIAL_COST = 5;
 let LEVEL_20_MATERIAL_COST = 5;
-let CRAFTERS = [ "CRP", "BSM", "ARM", "GSM", "LTW", "WVR", "ALC", "CUL" ]//constant
+let CRAFTERS = [ "CRP", "BSM", "ARM", "GSM", "LTW", "WVR", "ALC", "CUL" ]
 
 //#endregion
 
@@ -17,137 +17,123 @@ let CRAFTERS = [ "CRP", "BSM", "ARM", "GSM", "LTW", "WVR", "ALC", "CUL" ]//const
 let _level80CrafterMatrix = [
     {
         "Crafter": "CRP",
-        "CedarLogs": true,
+        "WhiteCedarLogs": true,
+        "PrimordialResin": false,
         "Wheat": true,
-        "CottonBolls": true,
-        "Resin": false,
+        "GossamerCottonBolls": true,
         "Tortoises": false,
-        "BluespiritOre": false,
         "GoldOre": false,
-        "MineralSand": false,
+        "FinestRockSalt": false,
         "TruespringWater": false,
-        "RockSalt": false
+        "MineralSand": false,
+        "BluespiritOre": false
     },
     {
         "Crafter": "BSM",
-        "CedarLogs": true,
+        "WhiteCedarLogs": true,
+        "PrimordialResin": false,
         "Wheat": false,
-        "CottonBolls": false,
-        "Resin": false,
+        "GossamerCottonBolls": false,
         "Tortoises": false,
-        "BluespiritOre": true,
         "GoldOre": true,
-        "MineralSand": false,
+        "FinestRockSalt": false,
         "TruespringWater": false,
-        "RockSalt": false
+        "MineralSand": false,
+        "BluespiritOre": true
     },
     {
         "Crafter": "ARM",
-        "CedarLogs": false,
+        "WhiteCedarLogs": false,
+        "PrimordialResin": false,
         "Wheat": false,
-        "CottonBolls": false,
-        "Resin": false,
+        "GossamerCottonBolls": false,
         "Tortoises": false,
-        "BluespiritOre": true,
         "GoldOre": true,
-        "MineralSand": true,
+        "FinestRockSalt": false,
         "TruespringWater": false,
-        "RockSalt": false
+        "MineralSand": true,
+        "BluespiritOre": true
     },
     {
         "Crafter": "GSM",
-        "CedarLogs": false,
+        "WhiteCedarLogs": false,
+        "PrimordialResin": true,
         "Wheat": false,
-        "CottonBolls": false,
-        "Resin": true,
+        "GossamerCottonBolls": false,
         "Tortoises": false,
-        "BluespiritOre": true,
         "GoldOre": false,
-        "MineralSand": true,
+        "FinestRockSalt": false,
         "TruespringWater": false,
-        "RockSalt": false
+        "MineralSand": true,
+        "BluespiritOre": true
     },
     {
         "Crafter": "LTW",
-        "CedarLogs": true,
+        "WhiteCedarLogs": true,
+        "PrimordialResin": false,
         "Wheat": false,
-        "CottonBolls": true,
-        "Resin": false,
+        "GossamerCottonBolls": true,
         "Tortoises": true,
-        "BluespiritOre": false,
         "GoldOre": false,
-        "MineralSand": false,
+        "FinestRockSalt": false,
         "TruespringWater": false,
-        "RockSalt": false
+        "MineralSand": false,
+        "BluespiritOre": false
     },
     {
         "Crafter": "WVR",
-        "CedarLogs": false,
+        "WhiteCedarLogs": false,
+        "PrimordialResin": true,
         "Wheat": false,
-        "CottonBolls": true,
-        "Resin": true,
+        "GossamerCottonBolls": true,
         "Tortoises": false,
-        "BluespiritOre": false,
         "GoldOre": false,
-        "MineralSand": false,
+        "FinestRockSalt": false,
         "TruespringWater": true,
-        "RockSalt": false
+        "MineralSand": false,
+        "BluespiritOre": false
     },
     {
         "Crafter": "ALC",
-        "CedarLogs": false,
+        "WhiteCedarLogs": false,
+        "PrimordialResin": false,
         "Wheat": false,
-        "CottonBolls": false,
-        "Resin": false,
+        "GossamerCottonBolls": false,
         "Tortoises": true,
-        "BluespiritOre": false,
         "GoldOre": false,
-        "MineralSand": false,
+        "FinestRockSalt": true,
         "TruespringWater": true,
-        "RockSalt": true
+        "MineralSand": false,
+        "BluespiritOre": false
     },
     {
         "Crafter": "CUL",
-        "CedarLogs": false,
+        "WhiteCedarLogs": false,
+        "PrimordialResin": false,
         "Wheat": true,
-        "CottonBolls": false,
-        "Resin": false,
+        "GossamerCottonBolls": false,
         "Tortoises": false,
-        "BluespiritOre": false,
         "GoldOre": false,
-        "MineralSand": false,
+        "FinestRockSalt": true,
         "TruespringWater": true,
-        "RockSalt": true
+        "MineralSand": false,
+        "BluespiritOre": false
     }
 ];
 let _level80UserCraftingInventory = {
 
-    "CedarLogs": 0,
+    "WhiteCedarLogs": 0,
+    "PrimordialResin": 0,
     "Wheat": 0,
-    "CottonBolls": 0,
-    "Resin": 0,
+    "GossamerCottonBolls": 0,
     "Tortoises": 0,
-    "BluespiritOre": 0,
     "GoldOre": 0,
-    "MineralSand": 0,
+    "FinestRockSalt": 0,
     "TruespringWater": 0,
-    "RockSalt": 0
+    "MineralSand": 0,
+    "BluespiritOre": 0
 
 };
-let _level80CraftsAvailablePerCrafter = {
-    "CRP": 0,
-    "BSM": 0,
-    "ARM": 0,
-    "GSM": 0,
-    "LTW": 0,
-    "WVR": 0,
-    "ALC": 0,
-    "CUL": 0
-}
-
-let _level80CrafterDictionary = [];//a list of CrafterDictionaryItems
-let _level80CrafterList = [];//a list of CrafterListItems, it will hold 
-let _level80AllowedCrafters = [];//crafter TLAs
 
 //#endregion
 
@@ -272,20 +258,6 @@ let _level70UserCraftingInventory = {
     "GoldSand": 0,
     "Ragstone": 0
 };
-let _level70CraftsAvailablePerCrafter = {
-    "CRP": 0,
-    "BSM": 0,
-    "ARM": 0,
-    "GSM": 0,
-    "LTW": 0,
-    "WVR": 0,
-    "ALC": 0,
-    "CUL": 0
-}
-
-let _level70CrafterDictionary = [];//a list of CrafterDictionaryItems
-let _level70CrafterList = [];//a list of CrafterListItems, it will hold 
-let _level70AllowedCrafters = [];//crafter TLAs
 
 //#endregion
 
@@ -411,20 +383,6 @@ let _level60UserCraftingInventory = {
     "Ragstone": 0
 
 };
-let _level60CraftsAvailablePerCrafter = {
-    "CRP": 0,
-    "BSM": 0,
-    "ARM": 0,
-    "GSM": 0,
-    "LTW": 0,
-    "WVR": 0,
-    "ALC": 0,
-    "CUL": 0
-}
-
-let _level60CrafterDictionary = [];//a list of CrafterDictionaryItems
-let _level60CrafterList = [];//a list of CrafterListItems, it will hold 
-let _level60AllowedCrafters = [];//crafter TLAs
 
 //#endregion
 
@@ -514,20 +472,6 @@ let _level40UserCraftingInventory = {
     "MythriteSand": 0
 
 };
-let _level40CraftsAvailablePerCrafter = {
-    "CRP": 0,
-    "BSM": 0,
-    "ARM": 0,
-    "GSM": 0,
-    "LTW": 0,
-    "WVR": 0,
-    "ALC": 0,
-    "CUL": 0
-}
-
-let _level40CrafterDictionary = [];//a list of CrafterDictionaryItems
-let _level40CrafterList = [];//a list of CrafterListItems, it will hold 
-let _level40AllowedCrafters = [];//crafter TLAs
 
 //#endregion
 
@@ -598,22 +542,12 @@ let _level20UserCraftingInventory = {
     "IronOre": 0,
     "IronSand": 0
 };
-let _level20CraftsAvailablePerCrafter = {
-    "CRP": 0,
-    "BSM": 0,
-    "ARM": 0,
-    "GSM": 0,
-    "LTW": 0,
-    "WVR": 0,
-    "ALC": 0,
-    "CUL": 0
-}
-
-let _level20CrafterDictionary = [];//a list of CrafterDictionaryItems
-let _level20CrafterList = [];//a list of CrafterListItems, it will hold 
-let _level20AllowedCrafters = [];//crafter TLAs
 
 //#endregion
+
+let _allowedCrafters = [];//crafter TLAs
+let _crafterDictionary = [];//a list of CrafterDictionaryItems
+let _crafterListForCalculation = [];//a list of CrafterListItems
 
 class CrafterListItem
 {
@@ -648,6 +582,8 @@ class CrafterDictionaryItem
 
 //#region Web controls
 
+let _currentTabLevelBracket = "80";
+
 let _lvl80InfoTextarea = document.getElementById("lvl80InfoTextArea");
 let _lvl80InfoTextareaDiv = document.getElementById("lvl80InfoTextAreaDiv");
 let _useAllCraftersCheckbox = document.getElementById("checkboxUseAll");
@@ -669,7 +605,7 @@ OnLoad();//i know i could just have this method's contents here, since i only ca
 
 function OnLoad()
 {
-    document.getElementById("lvl80calculateButton").onclick = Level80CalculateButtonClick;
+    document.getElementById("lvl80calculateButton").onclick = CalculateButtonClick;
     document.getElementById("lvl80resetButton").onclick = ResetLevel80Fields;
     _useAllCraftersCheckbox.onclick = ToggleAllCrafterCheckboxes;
     for(let i = 0; i < CRAFTERS.length; i++)
@@ -683,52 +619,52 @@ function OnLoad()
     
     //put values in the text boxes for testing because im not typing that over and over
     //simulated user input #1
-    // document.getElementById("lvl80CedarLogs").value = 100;
+    // document.getElementById("lvl80WhiteCedarLogs").value = 100;
+    // document.getElementById("lvl80PrimordialResin").value = 80;
     // document.getElementById("lvl80Wheat").value = 20;
-    // document.getElementById("lvl80CottonBolls").value = 90;
-    // document.getElementById("lvl80Resin").value = 80;
+    // document.getElementById("lvl80GossamerCottonBolls").value = 90;
     // document.getElementById("lvl80Tortoises").value = 30;
-    // document.getElementById("lvl80BluespiritOre").value = 70;
     // document.getElementById("lvl80GoldOre").value = 90;
-    // document.getElementById("lvl80MineralSand").value = 40;
+    // document.getElementById("lvl80FinestRockSalt").value = 110;
     // document.getElementById("lvl80TruespringWater").value = 120;
-    // document.getElementById("lvl80RockSalt").value = 110;
+    // document.getElementById("lvl80MineralSand").value = 40;
+    // document.getElementById("lvl80BluespiritOre").value = 70;
     
     //simulated user input #2
-    // document.getElementById("lvl80CedarLogs").value = 90;
+    // document.getElementById("lvl80WhiteCedarLogs").value = 90;
+    // document.getElementById("lvl80PrimordialResin").value = 60;
     // document.getElementById("lvl80Wheat").value = 140;
-    // document.getElementById("lvl80CottonBolls").value = 10;
-    // document.getElementById("lvl80Resin").value = 60;
+    // document.getElementById("lvl80GossamerCottonBolls").value = 10;
     // document.getElementById("lvl80Tortoises").value = 40;
-    // document.getElementById("lvl80BluespiritOre").value = 200;
     // document.getElementById("lvl80GoldOre").value = 170;
-    // document.getElementById("lvl80MineralSand").value = 100;
+    // document.getElementById("lvl80FinestRockSalt").value = 190;
     // document.getElementById("lvl80TruespringWater").value = 80;
-    // document.getElementById("lvl80RockSalt").value = 190;
+    // document.getElementById("lvl80MineralSand").value = 100;
+    // document.getElementById("lvl80BluespiritOre").value = 200;
 
     //simulated user input #3
-    // document.getElementById("lvl80CedarLogs").value = 375;
+    // document.getElementById("lvl80WhiteCedarLogs").value = 375;
+    // document.getElementById("lvl80PrimordialResin").value = 1415;
     // document.getElementById("lvl80Wheat").value = 410;
-    // document.getElementById("lvl80CottonBolls").value = 861;
-    // document.getElementById("lvl80Resin").value = 1415;
+    // document.getElementById("lvl80GossamerCottonBolls").value = 861;
     // document.getElementById("lvl80Tortoises").value = 345;
-    // document.getElementById("lvl80BluespiritOre").value = 400;
     // document.getElementById("lvl80GoldOre").value = 300;
-    // document.getElementById("lvl80MineralSand").value = 285;
+    // document.getElementById("lvl80FinestRockSalt").value = 300;
     // document.getElementById("lvl80TruespringWater").value = 330;
-    // document.getElementById("lvl80RockSalt").value = 300;
+    // document.getElementById("lvl80MineralSand").value = 285;
+    // document.getElementById("lvl80BluespiritOre").value = 400;
 
     //simulated user input #4
-    // document.getElementById("lvl80CedarLogs").value = 100;
+    // document.getElementById("lvl80WhiteCedarLogs").value = 100;
+    // document.getElementById("lvl80PrimordialResin").value = 100;
     // document.getElementById("lvl80Wheat").value = 100;
-    // document.getElementById("lvl80CottonBolls").value = 100;
-    // document.getElementById("lvl80Resin").value = 100;
+    // document.getElementById("lvl80GossamerCottonBolls").value = 100;
     // document.getElementById("lvl80Tortoises").value = 100;
-    // document.getElementById("lvl80BluespiritOre").value = 100;
     // document.getElementById("lvl80GoldOre").value = 100;
-    // document.getElementById("lvl80MineralSand").value = 100;
+    // document.getElementById("lvl80FinestRockSalt").value = 100;
     // document.getElementById("lvl80TruespringWater").value = 100;
-    // document.getElementById("lvl80RockSalt").value = 100;
+    // document.getElementById("lvl80MineralSand").value = 100;
+    // document.getElementById("lvl80BluespiritOre").value = 100;
 }
 
 function SetUpTabs()
@@ -738,6 +674,7 @@ function SetUpTabs()
             const tabBar = button.parentElement;
             const tabContainer = tabBar.parentElement;
             const tabNumber = button.dataset.forTab;
+            _currentTabLevelBracket = tabNumber;
             const tabToActivate = tabContainer.querySelector(`.tab_content[data-tab="${tabNumber}"]`);
 
             tabBar.querySelectorAll(".tab_button").forEach(button2 => {
@@ -750,24 +687,32 @@ function SetUpTabs()
 
             button.classList.add("tab_button--active");
             tabToActivate.classList.add("tab_content--active");
+            
         });
     });
 }
 
-function Level80CalculateButtonClick()
+function CalculateButtonClick()
 {
-    if(!GetAndValidateLevel80UserInput())
+    let infoTextArea;
+    
+    if(_currentTabLevelBracket === "80")
+    {
+        infoTextArea = _lvl80InfoTextarea;
+    }
+
+    if(!GetAndValidateUserInput())
     {
         return;
     }
 
-    _lvl80InfoTextarea.style.borderWidth = "1px";
+    FindCraftingPaths();
 
-    FindLevel80CraftingPaths();
+    infoTextArea.style.borderWidth = "1px";
 
     let maxCount = 0;
     //get the highest count from the crafting dictionary
-    _level80CrafterDictionary.forEach(item =>
+    _crafterDictionary.forEach(item =>
     {
         if(item.CountSum > maxCount)
         {
@@ -779,8 +724,8 @@ function Level80CalculateButtonClick()
     {
         var craftString = "The crafting path(s) that offer the max number of crafts, " + maxCount + ", are:\r\n";
         //store all the crafters that tie for max count in their own array, with their crafting lists sorted
-        let maxCountLevel80CrafterDictionary = _level80CrafterDictionary.filter(d => d.CountSum === maxCount);
-        maxCountLevel80CrafterDictionary.forEach(maxCrafter =>
+        let maxCountCrafterDictionary = _crafterDictionary.filter(d => d.CountSum === maxCount);
+        maxCountCrafterDictionary.forEach(maxCrafter =>
         {
             //sort the crafts of each path in descending count
             maxCrafter.CrafterList = maxCrafter.CrafterList.sort(
@@ -792,14 +737,14 @@ function Level80CalculateButtonClick()
         });
                 
         //now that the crafting lists are sorted, the duplicate paths will be more apparent and should be removed
-        let maxCountNoDupesLevel80CrafterDictionary = []
+        let maxCountNoDupesCrafterDictionary = []
         //put the first crafting path from the max count dictionary in the no-dupe list, because it can't be a dupe and we need something to compare against.
         //this will result in the first check in the for-each below always being a duplicate, but the code to avoid that isn't as readable
         //and i dont need to care about performance much for this. not yet, at least.
-        maxCountNoDupesLevel80CrafterDictionary.push(maxCountLevel80CrafterDictionary[0]);
+        maxCountNoDupesCrafterDictionary.push(maxCountCrafterDictionary[0]);
         
         let notADupe = true;
-        maxCountLevel80CrafterDictionary.forEach(maxCountCrafter =>
+        maxCountCrafterDictionary.forEach(maxCountCrafter =>
         {
             notADupe = true;
 
@@ -807,10 +752,10 @@ function Level80CalculateButtonClick()
             //i.e. CRP (5) -> ARM (5) is effectively the same as ARM (5) -> CRP (5) for the user, even though its not a duplicate by my current logic
 
             //loop over the list of non-dupes to see if the crafting path already exists
-            for(let i = 0; i < maxCountNoDupesLevel80CrafterDictionary.length; i++)
+            for(let i = 0; i < maxCountNoDupesCrafterDictionary.length; i++)
             {
                 let listBeingChecked = maxCountCrafter.CrafterList;
-                let listToCheckAgainst = maxCountNoDupesLevel80CrafterDictionary[i].CrafterList;
+                let listToCheckAgainst = maxCountNoDupesCrafterDictionary[i].CrafterList;
 
                 //if the lists are equal, set the variable to skip adding it to the list and break out of the loop
                 if(CrafterListsAreEqual(listBeingChecked, listToCheckAgainst))
@@ -823,12 +768,12 @@ function Level80CalculateButtonClick()
             //if it was not found in the current list of not-dupes, add it to the list of not-dupes
             if(notADupe)
             {
-                maxCountNoDupesLevel80CrafterDictionary.push(maxCountCrafter);
+                maxCountNoDupesCrafterDictionary.push(maxCountCrafter);
             }
         });
 
         //sort the non-dupes by the number of crafters they use, in ascending order. people probably want to use the fewer number of different crafters first
-        maxCountNoDupesLevel80CrafterDictionary = maxCountNoDupesLevel80CrafterDictionary.sort(
+        maxCountNoDupesCrafterDictionary = maxCountNoDupesCrafterDictionary.sort(
             function(a,b)
             {
                 return a.CrafterList.length - b.CrafterList.length;
@@ -836,7 +781,7 @@ function Level80CalculateButtonClick()
         );
 
         //loop over the entries in the dictionary that have the same number of crafts as the maximum found, then make the output pretty. ish.
-        maxCountNoDupesLevel80CrafterDictionary.forEach(noDupeMaxCrafter => 
+        maxCountNoDupesCrafterDictionary.forEach(noDupeMaxCrafter => 
         {
             noDupeMaxCrafter.CrafterList.forEach(cl => 
             {
@@ -845,15 +790,15 @@ function Level80CalculateButtonClick()
             craftString = craftString.substring(0, craftString.length - 4) + "\r\n";
         });
 
-        _lvl80InfoTextarea.textContent = craftString;
+        infoTextArea.textContent = craftString;
     }
     else
     {
-        _lvl80InfoTextarea.textContent = "No crafting paths were found with the given materials and selected crafters."
+        infoTextArea.textContent = "No crafting paths were found with the given materials and selected crafters."
     }
 }
 
-function GetAndValidateLevel80UserInput()
+function GetAndValidateUserInput()
 {
     let invalidValueErrorExists = false;
     let tooLargeErrorExists = false;
@@ -862,10 +807,24 @@ function GetAndValidateLevel80UserInput()
     let tooLargeErrorString = "The following fields are too large.\r\nWhy do you have more than 100,000 of these:\r\n";
     let friendlyMatName = "";
 
-    for(let mat in _level80UserCraftingInventory)
+    let userCraftingInventory;
+    let levelBracketPrefix = "lvl" + _currentTabLevelBracket;
+    let materialCost;
+    let infoTextarea;
+    let infoTextareaDiv;
+
+    if(_currentTabLevelBracket === "80")
+    {
+        userCraftingInventory = _level80UserCraftingInventory;
+        materialCost = LEVEL_80_MATERIAL_COST;
+        infoTextarea = _lvl80InfoTextarea;
+        infoTextareaDiv = _lvl80InfoTextareaDiv;
+    }
+
+    for(let mat in userCraftingInventory)
     {
         //this will return the value of the text box, or NaN if it contains non-numeric characters
-        textboxValue = Number(document.getElementById("lvl80" + mat).value);
+        textboxValue = Number(document.getElementById(levelBracketPrefix + mat).value);
         
         //if the textbox value isn't a positive whole number
         if(Number.isNaN(textboxValue) || textboxValue < 0 || !Number.isInteger(textboxValue))
@@ -885,18 +844,18 @@ function GetAndValidateLevel80UserInput()
         {
             //get the value from the appropriate textbox, i.e. lvl80Logs
             //then reduce it to the number of crafts it can be used in by dividing by how many are used per craft
-            _level80UserCraftingInventory[mat] = parseInt(textboxValue / LEVEL_80_MATERIAL_COST);//using parseInt here forces integer division
+            userCraftingInventory[mat] = parseInt(textboxValue / materialCost);//using parseInt here forces integer division
         }
     }
 
     //clear the list of allowed crafters
-    _level80AllowedCrafters = [];
+    _allowedCrafters = [];
 
     //update the list of crafters the user is able to use
     CRAFTERS.forEach(crafter => {
         if(document.getElementById("checkboxUse" + crafter).checked)
         {
-            _level80AllowedCrafters.push(crafter);
+            _allowedCrafters.push(crafter);
         }
     });
 
@@ -905,57 +864,58 @@ function GetAndValidateLevel80UserInput()
     {
         if(invalidValueErrorExists)
         {
-            _lvl80InfoTextarea.textContent = invalidValueErrorString;
+            infoTextarea.textContent = invalidValueErrorString;
         }
         else if(tooLargeErrorExists)
         {
-            _lvl80InfoTextarea.textContent = tooLargeErrorString;
+            infoTextarea.textContent = tooLargeErrorString;
         }
 
-        _lvl80InfoTextareaDiv.style.display = "block";
+        infoTextareaDiv.style.display = "block";
         return false;
     }
     
     //if there's not an error, still need to ensure the field is shown after a reset
-    _lvl80InfoTextareaDiv.style.display = "block";
+    infoTextareaDiv.style.display = "block";
     return true;
 }
 
+//i could definitely make this function level-agnostic, but it doesnt seem worth it for multiple reasons
 function ResetLevel80Fields()
 {
     _lvl80InfoTextarea.textContent = "";
     _lvl80InfoTextareaDiv.style.display = "none";
 
     //im not making variable names for these because im only addressing them here
-    document.getElementById("lvl80CedarLogs").value = "";
+    document.getElementById("lvl80WhiteCedarLogs").value = "";
+    document.getElementById("lvl80PrimordialResin").value = "";
     document.getElementById("lvl80Wheat").value = "";
-    document.getElementById("lvl80CottonBolls").value = "";
-    document.getElementById("lvl80Resin").value = "";
+    document.getElementById("lvl80GossamerCottonBolls").value = "";
     document.getElementById("lvl80Tortoises").value = "";
     document.getElementById("lvl80BluespiritOre").value = "";
     document.getElementById("lvl80GoldOre").value = "";
     document.getElementById("lvl80MineralSand").value = "";
     document.getElementById("lvl80TruespringWater").value = "";
-    document.getElementById("lvl80RockSalt").value = "";
+    document.getElementById("lvl80FinestRockSalt").value = "";
 }
 
 //#region Level 80 Recursive Crafter calculations
 
 //kicks off the recursive search for each of the crafters with selected checkboxes
-function FindLevel80CraftingPaths()
+function FindCraftingPaths()
 {
     //clear out the dictionary
-    _level80CrafterDictionary = [];
+    _crafterDictionary = [];
     
-    _level80AllowedCrafters.forEach(baseCrafter =>
+    _allowedCrafters.forEach(baseCrafter =>
     {
         //add initial dictionary item
-        _level80CrafterDictionary.push(new CrafterDictionaryItem(baseCrafter, [], 0));
+        _crafterDictionary.push(new CrafterDictionaryItem(baseCrafter, [], 0));
 
         //clear current list, just to be sure
-        _level80CrafterList = [];
+        _crafterListForCalculation = [];
 
-        CalculateLevel80CraftingPaths(baseCrafter, baseCrafter, 0);
+        CalculateCraftingPaths(baseCrafter, baseCrafter, 0);
     });
 }
 
@@ -963,83 +923,86 @@ function FindLevel80CraftingPaths()
 //baseCrafter: a crafter TLA, does not get changed. it is used to reference the dictionary
 //currentCrafter: a crafter TLA, provides the crafter that is currently being recursed on
 //recursiveSum (int): the current sum of crafting counts in the recursion
-function CalculateLevel80CraftingPaths(baseCrafter, currentCrafter, recursiveSum)
+function CalculateCraftingPaths(baseCrafter, currentCrafter, recursiveSum)
 {
     //identify which materials(columns) are affected by the craft
-    var usedMaterials = GetMaterialsUsedByCraft(GetLevel80CrafterRowFromStringName(currentCrafter));
-    var lowestCount = GetLevel80LowestMaterialCountByMaterialList(usedMaterials);
+    var usedMaterials = GetMaterialsUsedByCraft(GetCrafterRowFromStringName(currentCrafter));
+    var lowestCount = GetLowestMaterialCountByMaterialList(usedMaterials);
 
     //add the craft to the list and remove the materials from the inventory
-    _level80CrafterList.push(new CrafterListItem(currentCrafter, lowestCount, recursiveSum + lowestCount));
-    RemoveLevel80CrafterMaterials(currentCrafter, lowestCount);
+    _crafterListForCalculation.push(new CrafterListItem(currentCrafter, lowestCount, recursiveSum + lowestCount));
+    RemoveOrUnremoveCrafterMaterials(currentCrafter, lowestCount, true);
 
     //get crafters that can still make stuff and loop over them
-    var remainingCrafters = GetLevel80CraftersRemaining();
+    var remainingCrafters = GetCraftersRemaining();
     if(remainingCrafters.length > 0)
     {
         remainingCrafters.forEach(remainingCraft => {
-            CalculateLevel80CraftingPaths(baseCrafter, remainingCraft, recursiveSum + lowestCount);
+            CalculateCraftingPaths(baseCrafter, remainingCraft, recursiveSum + lowestCount);
         });
     }
     //or, if no crafters remain, check to see if this is a new best, save it if it is
     else
     {
         //the sum of the current crafting path being evaluated
-        let listSum = _level80CrafterList[_level80CrafterList.length - 1].SumToNow;
+        let listSum = _crafterListForCalculation[_crafterListForCalculation.length - 1].SumToNow;
         //the current best count for the base crafter
-        let currentSum = _level80CrafterDictionary.find(d => d.BaseCrafter === baseCrafter).CountSum;
+        let currentSum = _crafterDictionary.find(d => d.BaseCrafter === baseCrafter).CountSum;
         
         //if the path being evaluated is better than the current count, or the current count is the same but uses fewer crafters in the paths, save it as the new best
         if((listSum > currentSum) ||
-            (listSum == currentSum && _level80CrafterList.length < _level80CrafterDictionary.find(d => d.BaseCrafter === baseCrafter).CrafterList.length))
+            (listSum == currentSum && _crafterListForCalculation.length < _crafterDictionary.find(d => d.BaseCrafter === baseCrafter).CrafterList.length))
         {
             //create a copy of the crafting list from the current recursion iteration into the dictionary as the new best
-            _level80CrafterDictionary.find(d => d.BaseCrafter === baseCrafter).CrafterList = DeepCopyAnArray(_level80CrafterList);
+            _crafterDictionary.find(d => d.BaseCrafter === baseCrafter).CrafterList = DeepCopyAnArray(_crafterListForCalculation);
             //set the new best count
-            _level80CrafterDictionary.find(d => d.BaseCrafter === baseCrafter).CountSum = listSum;
+            _crafterDictionary.find(d => d.BaseCrafter === baseCrafter).CountSum = listSum;
         }
     }
 
     //restore the materials to the inventory for the next loop and remove the craft from the list
-    UnRemoveLevel80CrafterMaterials(currentCrafter, lowestCount);
-    _level80CrafterList.pop();
+    RemoveOrUnremoveCrafterMaterials(currentCrafter, lowestCount, false);
+    _crafterListForCalculation.pop();
 }
 
-//find which materials are used by a crafter and remove the passed-in value from the inventory
+//find which materials are used by a crafter and remove or unremove the passed-in value from the inventory, based on the passed-in bool
 //it is assumed the inventory has been reduced to 1 material per craft already
 //crafter: a crafter TLA
 //count (int): the number of materials to remove
-function RemoveLevel80CrafterMaterials(crafter, count)
+//isRemoving: flag for if this method is removing or unremoving. true if subtracting from the inventory, false if returning materials to it
+function RemoveOrUnremoveCrafterMaterials(crafter, count, isRemoving)
 {
-    var usedMaterials = GetMaterialsUsedByCraft(GetLevel80CrafterRowFromStringName(crafter));
+    var usedMaterials = GetMaterialsUsedByCraft(GetCrafterRowFromStringName(crafter));
+    let userCraftingInventory;
+    
+    if(_currentTabLevelBracket === "80")
+    {
+        userCraftingInventory = _level80UserCraftingInventory;
+    }
 
-    usedMaterials.forEach(mat => {
-            _level80UserCraftingInventory[mat] -= count;
-    });
-}
-
-//find which materials are used by a crafter and add back the passed-in value from the inventory
-//once again, it is assumed the inventory has been reduced to 1 material per craft already
-//crafter: a crafter TLA
-//count (int): the number of materials to add back
-function UnRemoveLevel80CrafterMaterials(crafter, count)
-{
-    var usedMaterials = GetMaterialsUsedByCraft(GetLevel80CrafterRowFromStringName(crafter));
-
-    usedMaterials.forEach(mat => {
-        _level80UserCraftingInventory[mat] += count;
-    });
+    if(isRemoving)
+    {
+        usedMaterials.forEach(mat => {
+            userCraftingInventory[mat] -= count;
+        });
+    }
+    else
+    {
+        usedMaterials.forEach(mat => {
+            userCraftingInventory[mat] += count;
+        });
+    }
 }
 
 //returns a list of crafter TLAs that can still be crafted based on the state of the UserCraftingInventory
-function GetLevel80CraftersRemaining()
+function GetCraftersRemaining()
 {
     let returnList = [];//list of crafter TLAs
     
-    _level80AllowedCrafters.forEach(crafter => 
+    _allowedCrafters.forEach(crafter => 
     {
-        let mats = GetMaterialsUsedByCraft(GetLevel80CrafterRowFromStringName(crafter));
-        let lowest = GetLevel80LowestMaterialCountByMaterialList(mats);
+        let mats = GetMaterialsUsedByCraft(GetCrafterRowFromStringName(crafter));
+        let lowest = GetLowestMaterialCountByMaterialList(mats);
         
         if(lowest > 0)
         {
@@ -1052,21 +1015,30 @@ function GetLevel80CraftersRemaining()
 
 //returns a crafter row (the crafter TLA, which materials it uses) from the crafter matrix
 //crafterName: a crafter TLA
-function GetLevel80CrafterRowFromStringName(crafterName)
+function GetCrafterRowFromStringName(crafterName)
 {
-    return _level80CrafterMatrix.find(f => f.Crafter === crafterName);
+    if(_currentTabLevelBracket === "80")
+    {
+        return _level80CrafterMatrix.find(f => f.Crafter === crafterName);
+    }
 }
 
 //returns an int that has the lowest count of the passed-in list in the user inventory
 //materialList: a list of materials names matching the key for UserCraftingInventory
-function GetLevel80LowestMaterialCountByMaterialList(materialList)
+function GetLowestMaterialCountByMaterialList(materialList)
 {
     var lowestCount = Number.MAX_SAFE_INTEGER;
+    let craftingInvetory;
+
+    if(_currentTabLevelBracket === "80")
+    {
+        craftingInvetory = _level80UserCraftingInventory;
+    }
 
     materialList.forEach(mat => {
-        if(_level80UserCraftingInventory[mat] < lowestCount)
+        if(craftingInvetory[mat] < lowestCount)
         {
-            lowestCount = _level80UserCraftingInventory[mat];
+            lowestCount = craftingInvetory[mat];
         }
     });
 
