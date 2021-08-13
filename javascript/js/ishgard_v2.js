@@ -545,6 +545,7 @@ let _level20UserCraftingInventory = {
 
 //#endregion
 
+let _currentTabLevelBracket = "80";
 let _allowedCrafters = [];//crafter TLAs
 let _crafterDictionary = [];//a list of CrafterDictionaryItems
 let _crafterListForCalculation = [];//a list of CrafterListItems
@@ -582,10 +583,21 @@ class CrafterDictionaryItem
 
 //#region Web controls
 
-let _currentTabLevelBracket = "80";
-
 let _lvl80InfoTextarea = document.getElementById("lvl80InfoTextArea");
 let _lvl80InfoTextareaDiv = document.getElementById("lvl80InfoTextAreaDiv");
+
+let _lvl70InfoTextarea = document.getElementById("lvl70InfoTextArea");
+let _lvl70InfoTextareaDiv = document.getElementById("lvl70InfoTextAreaDiv");
+
+let _lvl60InfoTextarea = document.getElementById("lvl60InfoTextArea");
+let _lvl60InfoTextareaDiv = document.getElementById("lvl60InfoTextAreaDiv");
+
+let _lvl40InfoTextarea = document.getElementById("lvl40InfoTextArea");
+let _lvl40InfoTextareaDiv = document.getElementById("lvl40InfoTextAreaDiv");
+
+let _lvl20InfoTextarea = document.getElementById("lvl20InfoTextArea");
+let _lvl20InfoTextareaDiv = document.getElementById("lvl20InfoTextAreaDiv");
+
 let _useAllCraftersCheckbox = document.getElementById("checkboxUseAll");
 
 // let _checkboxUseCRP = document.getElementById("checkboxUseCRP");
@@ -606,15 +618,23 @@ OnLoad();//i know i could just have this method's contents here, since i only ca
 function OnLoad()
 {
     document.getElementById("lvl80calculateButton").onclick = CalculateButtonClick;
+    document.getElementById("lvl70calculateButton").onclick = CalculateButtonClick;
+    document.getElementById("lvl60calculateButton").onclick = CalculateButtonClick;
+    document.getElementById("lvl40calculateButton").onclick = CalculateButtonClick;
+    document.getElementById("lvl20calculateButton").onclick = CalculateButtonClick;
+
     document.getElementById("lvl80resetButton").onclick = ResetLevel80Fields;
+    document.getElementById("lvl70resetButton").onclick = ResetLevel70Fields;
+    document.getElementById("lvl60resetButton").onclick = ResetLevel60Fields;
+    document.getElementById("lvl40resetButton").onclick = ResetLevel40Fields;
+    document.getElementById("lvl20resetButton").onclick = ResetLevel20Fields;
+
     _useAllCraftersCheckbox.onclick = ToggleAllCrafterCheckboxes;
     for(let i = 0; i < CRAFTERS.length; i++)
     {
         document.getElementById("checkboxUse" + CRAFTERS[i]).onclick = UpdateUseAllCraftersCheckbox;   
     }
     
-    _lvl80InfoTextareaDiv.style.display = "none";
-
     SetUpTabs();
     
     //put values in the text boxes for testing because im not typing that over and over
@@ -695,10 +715,18 @@ function SetUpTabs()
 function CalculateButtonClick()
 {
     let infoTextArea;
-    
-    if(_currentTabLevelBracket === "80")
+    switch(_currentTabLevelBracket)
     {
-        infoTextArea = _lvl80InfoTextarea;
+        case "80": infoTextArea = _lvl80InfoTextarea;
+            break;
+        case "70": infoTextArea = _lvl70InfoTextarea;
+            break;
+        case "60": infoTextArea = _lvl60InfoTextarea;
+            break;
+        case "40": infoTextArea = _lvl40InfoTextarea;
+            break;
+        case "20": infoTextArea = _lvl20InfoTextarea;
+            break;
     }
 
     if(!GetAndValidateUserInput())
@@ -806,19 +834,42 @@ function GetAndValidateUserInput()
     let invalidValueErrorString = "The following fields are not positive whole numbers:\r\n";
     let tooLargeErrorString = "The following fields are too large.\r\nWhy do you have more than 100,000 of these:\r\n";
     let friendlyMatName = "";
-
-    let userCraftingInventory;
     let levelBracketPrefix = "lvl" + _currentTabLevelBracket;
+
+    //since javascript loves pass by reference, i can create these variables and then assign the appropriate level-bracket variables to them
+    //i use this pattern several times in this script
+    let userCraftingInventory;
     let materialCost;
     let infoTextarea;
     let infoTextareaDiv;
 
-    if(_currentTabLevelBracket === "80")
+    switch(_currentTabLevelBracket)
     {
-        userCraftingInventory = _level80UserCraftingInventory;
-        materialCost = LEVEL_80_MATERIAL_COST;
-        infoTextarea = _lvl80InfoTextarea;
-        infoTextareaDiv = _lvl80InfoTextareaDiv;
+        case "80": userCraftingInventory = _level80UserCraftingInventory;
+            materialCost = LEVEL_80_MATERIAL_COST;
+            infoTextarea = _lvl80InfoTextarea;
+            infoTextareaDiv = _lvl80InfoTextareaDiv;
+            break;
+        case "70": userCraftingInventory = _level70UserCraftingInventory;
+            materialCost = LEVEL_70_MATERIAL_COST;
+            infoTextarea = _lvl70InfoTextarea;
+            infoTextareaDiv = _lvl70InfoTextareaDiv;
+            break;
+        case "60": userCraftingInventory = _level60UserCraftingInventory;
+            materialCost = LEVEL_60_MATERIAL_COST;
+            infoTextarea = _lvl60InfoTextarea;
+            infoTextareaDiv = _lvl60InfoTextareaDiv;
+            break;
+        case "40": userCraftingInventory = _level40UserCraftingInventory;
+            materialCost = LEVEL_40_MATERIAL_COST;
+            infoTextarea = _lvl40InfoTextarea;
+            infoTextareaDiv = _lvl40InfoTextareaDiv;
+            break;
+        case "20": userCraftingInventory = _level20UserCraftingInventory;
+            materialCost = LEVEL_20_MATERIAL_COST;
+            infoTextarea = _lvl20InfoTextarea;
+            infoTextareaDiv = _lvl20InfoTextareaDiv;
+            break;
     }
 
     for(let mat in userCraftingInventory)
@@ -899,6 +950,68 @@ function ResetLevel80Fields()
     document.getElementById("lvl80FinestRockSalt").value = "";
 }
 
+function ResetLevel70Fields()
+{
+    _lvl70InfoTextarea.textContent = "";
+    _lvl70InfoTextareaDiv.style.display = "none";
+
+    //im not making variable names for these because im only addressing them here
+    document.getElementById("lvl70SpruceLogs").value = "";
+    document.getElementById("lvl70Mistletoe").value = "";
+    document.getElementById("lvl70TeaLeaves").value = "";
+    document.getElementById("lvl70Vines").value = "";
+    document.getElementById("lvl70Toads").value = "";
+    document.getElementById("lvl70ElectrumOre").value = "";
+    document.getElementById("lvl70Alumen").value = "";
+    document.getElementById("lvl70SpringWater").value = "";
+    document.getElementById("lvl70GoldSand").value = "";
+    document.getElementById("lvl70Ragstone").value = "";
+}
+
+function ResetLevel60Fields()
+{
+    _lvl60InfoTextarea.textContent = "";
+    _lvl60InfoTextareaDiv.style.display = "none";
+
+    //im not making variable names for these because im only addressing them here
+    document.getElementById("lvl60SpruceLogs").value = "";
+    document.getElementById("lvl60Mistletoe").value = "";
+    document.getElementById("lvl60TeaLeaves").value = "";
+    document.getElementById("lvl60Vines").value = "";
+    document.getElementById("lvl60Toads").value = "";
+    document.getElementById("lvl60ElectrumOre").value = "";
+    document.getElementById("lvl60Alumen").value = "";
+    document.getElementById("lvl60SpringWater").value = "";
+    document.getElementById("lvl60GoldSand").value = "";
+    document.getElementById("lvl60Ragstone").value = "";
+}
+
+function ResetLevel40Fields()
+{
+    _lvl40InfoTextarea.textContent = "";
+    _lvl40InfoTextareaDiv.style.display = "none";
+
+    //im not making variable names for these because im only addressing them here
+    document.getElementById("lvl40MahoganyLogs").value = "";
+    document.getElementById("lvl40CottonBolls").value = "";
+    document.getElementById("lvl40Sesame").value = "";
+    document.getElementById("lvl40Ore").value = "";
+    document.getElementById("lvl40RockSalt").value = "";
+    document.getElementById("lvl40MythriteSand").value = "";
+}
+
+function ResetLevel20Fields()
+{
+    _lvl20InfoTextarea.textContent = "";
+    _lvl20InfoTextareaDiv.style.display = "none";
+
+    //im not making variable names for these because im only addressing them here
+    document.getElementById("lvl20Switch").value = "";
+    document.getElementById("lvl20Hemp").value = "";
+    document.getElementById("lvl20IronOre").value = "";
+    document.getElementById("lvl20IronSand").value = "";
+}
+
 //#region Level 80 Recursive Crafter calculations
 
 //kicks off the recursive search for each of the crafters with selected checkboxes
@@ -975,9 +1088,18 @@ function RemoveOrUnremoveCrafterMaterials(crafter, count, isRemoving)
     var usedMaterials = GetMaterialsUsedByCraft(GetCrafterRowFromStringName(crafter));
     let userCraftingInventory;
     
-    if(_currentTabLevelBracket === "80")
+    switch(_currentTabLevelBracket)
     {
-        userCraftingInventory = _level80UserCraftingInventory;
+        case "80": userCraftingInventory = _level80UserCraftingInventory;
+            break;
+        case "70": userCraftingInventory = _level70UserCraftingInventory;
+            break;
+        case "60": userCraftingInventory = _level60UserCraftingInventory;
+            break;
+        case "40": userCraftingInventory = _level40UserCraftingInventory;
+            break;
+        case "20": userCraftingInventory = _level20UserCraftingInventory;
+            break;
     }
 
     if(isRemoving)
@@ -1017,9 +1139,18 @@ function GetCraftersRemaining()
 //crafterName: a crafter TLA
 function GetCrafterRowFromStringName(crafterName)
 {
-    if(_currentTabLevelBracket === "80")
+    switch(_currentTabLevelBracket)
     {
-        return _level80CrafterMatrix.find(f => f.Crafter === crafterName);
+        case "80":
+            return _level80CrafterMatrix.find(f => f.Crafter === crafterName);
+        case "70":
+            return _level70CrafterMatrix.find(f => f.Crafter === crafterName);
+        case "60":
+            return _level60CrafterMatrix.find(f => f.Crafter === crafterName);
+        case "40":
+            return _level40CrafterMatrix.find(f => f.Crafter === crafterName);
+        case "20":
+            return _level20CrafterMatrix.find(f => f.Crafter === crafterName);
     }
 }
 
@@ -1030,9 +1161,18 @@ function GetLowestMaterialCountByMaterialList(materialList)
     var lowestCount = Number.MAX_SAFE_INTEGER;
     let craftingInvetory;
 
-    if(_currentTabLevelBracket === "80")
+    switch(_currentTabLevelBracket)
     {
-        craftingInvetory = _level80UserCraftingInventory;
+        case "80": craftingInvetory = _level80UserCraftingInventory;
+            break;
+        case "70": craftingInvetory = _level70UserCraftingInventory;
+            break;
+        case "60": craftingInvetory = _level60UserCraftingInventory;
+            break;
+        case "40": craftingInvetory = _level40UserCraftingInventory;
+            break;
+        case "20": craftingInvetory = _level20UserCraftingInventory;
+            break;
     }
 
     materialList.forEach(mat => {

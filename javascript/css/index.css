@@ -32,6 +32,16 @@
 
 .header {
   text-align: center;
+  padding-bottom: 0;
+  margin-bottom: 0;
+}
+
+.subheader {
+  font-size: 12pt;
+  margin-top: 0;
+  padding-top: 0;
+  vertical-align: text-top;
+  text-align: center;
 }
 
 .materials-div {
