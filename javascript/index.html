@@ -3,62 +3,74 @@
   <link href="css/index.css" rel=stylesheet>
 <body>
   <div>
-    
     <h1 class="header">Ishgard Craft Optimizer</h1>
     <h4 class="subheader">By Nimbly Bimbly @ Gilgamesh</h4>
   </div>
   <div style="width: 100%;">
-
-    <div id="crafter-use-div" class="crafter-use-div">
-      <div style="grid-column: span 8; text-align: center;">
-        <div style="display: inline-block;">
-          <label style="grid-column: span 7; padding-right: 5px;">Crafters to use</label>
-          <div class="individual-crafter-use-div" style="float: right;">
-            <input type="checkbox" id="checkboxUseAll" checked>
-            <label for="checkboxUseAll" id="checkboxUseAllLabel">All</label>
+      <div style="margin: 0 auto; width: max-content; display: flex; flex-direction: row; ">
+        <!-- i hate that i have to do this to get things to line up how i want, i'm sure there's another way, but my CSS isn't strong enough to find it -->
+        <button type="button" id="padding-button"></button>
+        <div id="crafter-use-div" >
+          <div style="grid-column: span 8; text-align: center;">
+            <div style="display: inline-block;">
+              <label style="grid-column: span 7; padding-right: 5px;">Crafters to use</label>
+              <div class="individual-crafter-use-div" style="float: right;">
+                <input type="checkbox" id="checkboxUseAll" checked>
+                <label for="checkboxUseAll" id="checkboxUseAllLabel">All</label>
+              </div>
+            </div>
+          </div>
+          <div class="individual-crafter-use-div">
+            <input type="checkbox" id="checkboxUseCRP" checked>
+            <label for="checkboxUseCRP" id="checkboxUseCRPLabel">CRP</label>
+          </div>
+          
+          <div class="individual-crafter-use-div">
+            <input type="checkbox" id="checkboxUseBSM" checked>
+            <label for="checkboxUseBSM" id="checkboxUseBSMLabel">BSM</label>
+          </div>
+          
+          <div class="individual-crafter-use-div">
+            <input type="checkbox" id="checkboxUseARM" checked>
+            <label for="checkboxUseARM" id="checkboxUseARMLabel">ARM</label>
+          </div>
+          
+          <div class="individual-crafter-use-div">
+            <input type="checkbox" id="checkboxUseGSM" checked>
+            <label for="checkboxUseGSM" id="checkboxUseGSMLabel">GSM</label>
+          </div>
+          
+          <div class="individual-crafter-use-div">
+            <input type="checkbox" id="checkboxUseLTW" checked>
+            <label for="checkboxUseLTW" id="checkboxUseLTWLabel">LTW</label>
+          </div>
+          
+          <div class="individual-crafter-use-div">
+            <input type="checkbox" id="checkboxUseWVR" checked>
+            <label for="checkboxUseWVR" id="checkboxUseWVRLabel">WVR</label>
+          </div>
+          
+          <div class="individual-crafter-use-div">
+            <input type="checkbox" id="checkboxUseALC" checked>
+            <label for="checkboxUseALC" id="checkboxUseALCLabel">ALC</label>
+          </div>
+          
+          <div class="individual-crafter-use-div">
+            <input type="checkbox" id="checkboxUseCUL" checked>
+            <label for="checkboxUseCUL" id="checkboxUseCULLabel">CUL</label>
           </div>
         </div>
+        <input id="help-checkbox" type="checkbox">
+        <label id="help-checkbox-label" for="help-checkbox"></label>
+        <div id="help-flyout-div" style="font-family: Arial, Helvetica, sans-serif;">
+          <label style="font-weight: bold;">How To:</label><br>
+          <label>1) Select which crafters you want to use.<br>&emsp;•This will apply to all level brackets.</label><br>
+          <label>2) Select your level bracket.</label><br>
+          <label>3) Enter your material amounts.<br>&emsp;•Empty means 0</label><br>
+          <label>4) Click calculate!</label><br><br>
+          <a href="https://github.com/Ciarenni/IshgardCraftOptimizer#readme" target="_blank">More info & contact me</a>
+        </div>
       </div>
-      <div class="individual-crafter-use-div">
-        <input type="checkbox" id="checkboxUseCRP" checked>
-        <label for="checkboxUseCRP" id="checkboxUseCRPLabel">CRP</label>
-      </div>
-      
-      <div class="individual-crafter-use-div">
-        <input type="checkbox" id="checkboxUseBSM" checked>
-        <label for="checkboxUseBSM" id="checkboxUseBSMLabel">BSM</label>
-      </div>
-      
-      <div class="individual-crafter-use-div">
-        <input type="checkbox" id="checkboxUseARM" checked>
-        <label for="checkboxUseARM" id="checkboxUseARMLabel">ARM</label>
-      </div>
-      
-      <div class="individual-crafter-use-div">
-        <input type="checkbox" id="checkboxUseGSM" checked>
-        <label for="checkboxUseGSM" id="checkboxUseGSMLabel">GSM</label>
-      </div>
-      
-      <div class="individual-crafter-use-div">
-        <input type="checkbox" id="checkboxUseLTW" checked>
-        <label for="checkboxUseLTW" id="checkboxUseLTWLabel">LTW</label>
-      </div>
-      
-      <div class="individual-crafter-use-div">
-        <input type="checkbox" id="checkboxUseWVR" checked>
-        <label for="checkboxUseWVR" id="checkboxUseWVRLabel">WVR</label>
-      </div>
-      
-      <div class="individual-crafter-use-div">
-        <input type="checkbox" id="checkboxUseALC" checked>
-        <label for="checkboxUseALC" id="checkboxUseALCLabel">ALC</label>
-      </div>
-      
-      <div class="individual-crafter-use-div">
-        <input type="checkbox" id="checkboxUseCUL" checked>
-        <label for="checkboxUseCUL" id="checkboxUseCULLabel">CUL</label>
-      </div>
-    </div>
   </div>
   <br>
   <div id="materials-tab-control" class="tab_container">

@@ -629,6 +629,35 @@ function OnLoad()
     document.getElementById("lvl40resetButton").onclick = ResetLevel40Fields;
     document.getElementById("lvl20resetButton").onclick = ResetLevel20Fields;
 
+
+    let helpCheckboxLabelElement = document.getElementById("help-checkbox-label");
+    let helpFlyoutDiv = document.getElementById("help-flyout-div");
+    let helpCheckbox = document.getElementById("help-checkbox");
+    
+    //setting the default left of the help flyout to the width of the crafter checkboxes, plus the width of the "button" plus a margin of 5px
+    //the default top, opacity, and pointer events are set in the CSS because those are not dependent on window size
+    helpFlyoutDiv.style.left = helpCheckboxLabelElement.offsetLeft + helpCheckboxLabelElement.offsetWidth + 5 + "px";
+
+    helpCheckbox.addEventListener("change", function() {
+        helpFlyoutDiv.style.left = helpCheckboxLabelElement.offsetLeft + helpCheckboxLabelElement.offsetWidth + 5 + "px";//update the left position in case of window resize
+
+        //if the checkbox is "checked", the help button has been clicked, so it needs to show the help flyout. otherwise, hide it
+        if(helpCheckbox.checked)
+        {
+            //setting the top of the help flyout to the same Y value as the div that contains the crafter checkboxes
+            helpFlyoutDiv.style.top = document.getElementById("crafter-use-div").offsetTop + "px";
+            helpFlyoutDiv.style.opacity = "100%";
+            helpFlyoutDiv.style.pointerEvents = "all";
+        }
+        else
+        {
+            helpFlyoutDiv.style.top = "0px";
+            helpFlyoutDiv.style.opacity = "0%";
+            helpFlyoutDiv.style.pointerEvents = "none";
+        }
+    });
+
+
     _useAllCraftersCheckbox.onclick = ToggleAllCrafterCheckboxes;
     for(let i = 0; i < CRAFTERS.length; i++)
     {
