@@ -10,7 +10,7 @@ Want to get the most Kupo Stamp bang for your Diadem materials buck? Then this i
 4. Click Calculate!
 
 The box that shows up will tell you the most crafts you can make with the Diadem materials you entered. Each line is a different combination of crafters that will all yield the same number of crafts!
-You can then use those numbers to gather or buy the non-Diadem materials you're missing and get crafting. If seeing non-Diadem materials in the tool is something you'd like, refer down a few sections where I tell you how to let me know that.
+You can then use those numbers to gather or buy the non-Diadem materials you're missing and get crafting. If seeing non-Diadem materials in the tool is something you'd like, refer down a few sections where I tell you how to contact me.
 
 **NOTE**: This is ONLY for Grade 4 Ishgard Restoration crafts. Since the other materials are no longer obtainable (with the exception of expert craft materials), I elected to not implement the other grades.
 
